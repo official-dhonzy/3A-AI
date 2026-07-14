@@ -56,6 +56,17 @@ function askAI() {
     answer.innerHTML = "3A AI is thinking about: " + question;
   }
 }
+<script>
+function askAI() {
+  var question = document.getElementById("question").value;
+  var answer = document.getElementById("answer");
+
+  if (question === "") {
+    answer.innerHTML = "Please ask a question.";
+  } else {
+    answer.innerHTML = "3A AI is thinking about: " + question;
+  }
+}
 </script>
 </body>
 </html>
