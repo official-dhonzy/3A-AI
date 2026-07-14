@@ -20,3 +20,24 @@ button {
   padding: 10px;
   margin: 5px;
 }
+#splash {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: white;
+  text-align: center;
+}
+
+#splash img {
+  width: 150px;
+}
+
+#splash h1 {
+  font-size: 40px;
+}
+
+#splash p {
+  font-size: 18px;
+}
