@@ -1,0 +1,22 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f2f5f3;
+  text-align: center;
+}
+
+.app {
+  margin: 40px auto;
+  max-width: 500px;
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+h1 {
+  color: green;
+}
+
+button {
+  padding: 10px;
+  margin: 5px;
+}
