@@ -1,5 +1,5 @@
 function askAI(topic) {
-  let question = document.getElementById("question").value.toLowerCase();
+let question = topic || document.getElementById("question").value.toLowerCase();
   let answer = document.getElementById("answer");
 
   if (question.includes("farm") || question.includes("agriculture")) {
