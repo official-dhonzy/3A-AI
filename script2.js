@@ -1,4 +1,4 @@
-function askAI() {
+function askAI(topic) {
   let question = document.getElementById("question").value.toLowerCase();
   let answer = document.getElementById("answer");
 
