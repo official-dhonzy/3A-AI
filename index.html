@@ -24,8 +24,23 @@
   <button>🚰 Sanitation</button>
 </div>
 
-<script>
-function askAI() {
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "a-ai-d738d.firebaseapp.com",
+  projectId: "a-ai-d738d",
+  storageBucket: "a-ai-d738d.firebasestorage.app",
+  messagingSenderId: "337673964829",
+  appId: "1:337673964829:web:e0766dc95ad40f6ca7e5f4",
+  measurementId: "G-CBCHD37706"
+};
+
+const app = initializeApp(firebaseConfig);
+
+window.askAI = function () {
   let question = document.getElementById("question").value;
   let answer = document.getElementById("answer");
 
@@ -34,8 +49,7 @@ function askAI() {
   } else {
     answer.innerHTML = "3A AI received: " + question;
   }
-}
+};
 </script>
-
 </body>
 </html>
