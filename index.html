@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>3A AI</title>
-<link rel="stylesheet" href="style.css">
+  <title>3A AI</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body><div id="splash">
-  <img src="3a-logo.png" alt="3A AI Logo">
+<body>
+
+<div class="app">
   <h1>3A AI</h1>
   <p>Accessible • Affordable • African AI</p>
-</div><div id="home">
-  <h1>3A AI</h1>
-  <p>Ask Africa's AI assistant</p>
 
-  <input type="text" placeholder="Ask 3A AI anything...">
+  <input id="question" type="text" placeholder="Ask 3A AI anything...">
 
   <button onclick="askAI()">Ask</button>
-<p id="answer">Your answer will appear here...</p>
+
+  <p id="answer">Your answer will appear here.</p>
+
   <h2>Explore Africa's Solutions</h2>
 
   <button>🌱 Agriculture</button>
@@ -24,57 +24,18 @@
   <button>🚰 Sanitation</button>
 </div>
 
-<div class="app">
-<h1>3A AI</h1>
-<p>Accessible • Affordable • African AI</p>
-
-<input id="question" placeholder="Ask 3A AI anything">
-
-<button onclick="askAI()">Ask</button>
-
-<p id="answer"></p><div class="categories">
-<button onclick="askAI('agriculture')">Agriculture 🌱</button>
-<button onclick="askAI('education')">Education 📚</button>
-<button onclick="askAI('health')">Health 🏥</button>
-<button onclick="askAI('sanitation')">Sanitation 🚰</button>
-</div>
-</div>
-<script>
-function askAI() {
-  alert("Welcome to 3A AI! Your African AI assistant is ready.");
-}
-</script>
-<script src="script2.js"></script>
 <script>
 function askAI() {
   let question = document.getElementById("question").value;
   let answer = document.getElementById("answer");
 
-  if (question === "") {
+  if (question.trim() === "") {
     answer.innerHTML = "Please ask a question.";
   } else {
-    answer.innerHTML = "3A AI is thinking about: " + question;
+    answer.innerHTML = "3A AI received: " + question;
   }
 }
-<script>
-function askAI() {
-  var question = document.getElementById("question").value;
-  var answer = document.getElementById("answer");
-
-  if (question === "") {
-    answer.innerHTML = "Please ask a question.";
-  } else {
-    answer.innerHTML = "3A AI is thinking about: " + question;
-  }
-}console.log("3A AI loaded");
 </script>
+
 </body>
 </html>
-<script>
-function askAI() {
-  let question = document.getElementById("question").value;
-  let answer = document.getElementById("answer");
-
-  answer.innerHTML = "3A AI received: " + question;
-}
-</script>
