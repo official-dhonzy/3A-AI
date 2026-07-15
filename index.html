@@ -40,7 +40,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-window.askAI = function () {
+window.askAI = async function () {
   let question = document.getElementById("question").value;
   let answer = document.getElementById("answer");
 
