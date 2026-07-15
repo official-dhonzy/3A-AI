@@ -1,3 +1,3 @@
 async function ask3AAI(question) {
-  return "3A AI received your question: " + question;
+  return "Hello from 3A AI. You asked: " + question;
 }
