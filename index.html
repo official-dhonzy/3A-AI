@@ -47,7 +47,8 @@ window.askAI = function () {
   if (question.trim() === "") {
     answer.innerHTML = "Please ask a question.";
   } else {
-  answer.innerHTML = "3A AI is thinking...";
+  let result = await ask3AAI(question);
+answer.innerHTML = result;
   }
 };
 </script>
