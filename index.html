@@ -30,19 +30,19 @@
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button onclick="document.getElementById('question').value='Agriculture'">
+  <button onclick="askCategory('Agriculture')">
     🌱 Agriculture
   </button>
 
-  <button onclick="document.getElementById('question').value='Education'">
+  <button onclick="askCategory('Education')">
     📚 Education
   </button>
 
-  <button onclick="document.getElementById('question').value='Health'">
+  <button onclick="askCategory('Health')">
     🏥 Health
   </button>
 
-  <button onclick="document.getElementById('question').value='Sanitation'">
+  <button onclick="askCategory('Sanitation')">
     🚰 Sanitation
   </button>
 
@@ -51,6 +51,15 @@
 <script type="module" src="firebase.js"></script>
 <script type="module" src="ai.js"></script>
 <script src="script.js"></script>
+
+<script>
+function askCategory(topic) {
+  document.getElementById("question").value =
+    "Give me African solutions about " + topic;
+
+  askAI();
+}
+</script>
 
 </body>
 </html>
