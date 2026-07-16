@@ -2,6 +2,7 @@
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
@@ -9,12 +10,14 @@ const firebaseConfig = {
   projectId: "a-ai-d738d",
   storageBucket: "a-ai-d738d.firebasestorage.app",
   messagingSenderId: "337673964829",
-  appId: "1:337673964829:web:748e0ca91bfa340ea7e5f4",
-  measurementId: "G-ZWPYLZ8RND"
+  appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4",
+  measurementId: "G-HHF7M563R0"
 };
 
 const app = initializeApp(firebaseConfig);
 
 getAnalytics(app);
 
-export { app };
+const db = getFirestore(app);
+
+export { app, db };
