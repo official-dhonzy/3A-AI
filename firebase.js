@@ -1,8 +1,9 @@
 // firebase.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-analytics.js";
+
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
@@ -14,10 +15,10 @@ const firebaseConfig = {
   measurementId: "G-HHF7M563R0"
 };
 
+
 const app = initializeApp(firebaseConfig);
 
-getAnalytics(app);
-
 const db = getFirestore(app);
+
 
 export { app, db };
