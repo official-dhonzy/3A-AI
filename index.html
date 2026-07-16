@@ -16,23 +16,23 @@
 
   <button onclick="askAI()">Ask</button>
 
-  <p id="answer">Your answer will appear here.</p>
+  <p id="answer">Hello! I am 3A AI, your African AI assistant.</p>
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button onclick="askCategory('agriculture')">
+  <button onclick="document.getElementById('question').value='Agriculture'">
     🌱 Agriculture
   </button>
 
-  <button onclick="askCategory('education')">
+  <button onclick="document.getElementById('question').value='Education'">
     📚 Education
   </button>
 
-  <button onclick="askCategory('health')">
+  <button onclick="document.getElementById('question').value='Health'">
     🏥 Health
   </button>
 
-  <button onclick="askCategory('sanitation')">
+  <button onclick="document.getElementById('question').value='Sanitation'">
     🚰 Sanitation
   </button>
 
@@ -40,48 +40,8 @@
 
 
 <script type="module" src="firebase.js"></script>
-
-<script type="module" src="ai.js?v=4"></script>
-
-
-<script>
-
-window.askAI = async function () {
-
-  let question = document.getElementById("question").value;
-  let answer = document.getElementById("answer");
-
-  if (question.trim() === "") {
-    answer.innerHTML = "Please ask a question.";
-    return;
-  }
-
-  answer.innerHTML = "3A AI is thinking...";
-
-  try {
-
-    let result = await window.ask3AAI(question);
-
-    answer.innerHTML = result;
-
-  } catch (error) {
-
-    answer.innerHTML = "Error: " + error.message;
-
-  }
-
-};
-
-
-window.askCategory = function(category){
-
-  document.getElementById("question").value = category;
-
-  askAI();
-
-};
-
-</script>
+<script type="module" src="ai.js"></script>
+<script src="script.js"></script>
 
 </body>
 </html>
