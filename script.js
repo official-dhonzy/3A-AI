@@ -2,7 +2,7 @@ async function askAI() {
   const question = document.getElementById("question").value;
   const answer = document.getElementById("answer");
 
-  if (!question) {
+  if (!question.trim()) {
     answer.innerHTML = "Please type a question.";
     return;
   }
