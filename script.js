@@ -1,11 +1,15 @@
-function askAI() {
+async function askAI() {
   let question = document.getElementById("question").value;
-
   let answer = document.getElementById("answer");
 
   if (question === "") {
     answer.innerHTML = "Please ask a question.";
-  } else {
-    answer.innerHTML = "3A AI is thinking about: " + question;
+    return;
   }
+
+  answer.innerHTML = "3A AI is thinking...";
+
+  let response = await ask3AAI(question);
+
+  answer.innerHTML = response;
 }
