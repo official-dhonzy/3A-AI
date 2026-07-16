@@ -1,12 +1,12 @@
 // firebase.js
 
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { initializeAppCheck, ReCaptchaEnterpriseProvider } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app-check.js";
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+  apiKey: "YOUR_FIREBASE_API_KEY",
   authDomain: "a-ai-d738d.firebaseapp.com",
   projectId: "a-ai-d738d",
   storageBucket: "a-ai-d738d.firebasestorage.app",
@@ -16,9 +16,21 @@ const firebaseConfig = {
 };
 
 
+// Enable App Check debug mode for testing
+self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+
+
 const app = initializeApp(firebaseConfig);
+
+
+// App Check setup
+const appCheck = initializeAppCheck(app, {
+  provider: new ReCaptchaEnterpriseProvider("YOUR_RECAPTCHA_SITE_KEY"),
+  isTokenAutoRefreshEnabled: true
+});
+
 
 const db = getFirestore(app);
 
 
-export { app, db };
+export { app, db, appCheck };
