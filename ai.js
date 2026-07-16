@@ -1,6 +1,9 @@
-import { getAI, getGenerativeModel } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
+import { getAI, getGenerativeModel, GoogleAIBackend } 
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
 
-const ai = getAI();
+const ai = getAI({
+  backend: new GoogleAIBackend()
+});
 
 const model = getGenerativeModel(ai, {
   model: "gemini-3.5-flash"
