@@ -1,26 +1,38 @@
+// ai.js
+
+import { db } from "./firebase.js";
+import {
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
 window.ask3AAI = async function(question) {
 
-  let q = question.toLowerCase();
+  let answer = "";
 
-  if (q.includes("agriculture") || q.includes("farming")) {
-    return "Agriculture is the practice of growing crops and raising animals. Farmers can improve production through better seeds, soil improvement, irrigation, and modern farming methods.";
+  if (question.toLowerCase().includes("agriculture")) {
+    answer = "Agriculture can improve through better seeds, soil improvement, irrigation, and modern farming methods.";
+  } 
+  else if (question.toLowerCase().includes("education")) {
+    answer = "Education improves when students have access to quality teachers, learning materials, and technology.";
+  }
+  else if (question.toLowerCase().includes("health")) {
+    answer = "Health improves through good hospitals, prevention, clean water, and access to medical information.";
+  }
+  else if (question.toLowerCase().includes("sanitation")) {
+    answer = "Sanitation improves through clean environments, proper waste disposal, and safe water systems.";
+  }
+  else {
+    answer = "3A AI received your question: " + question;
   }
 
-  if (q.includes("education") || q.includes("school")) {
-    return "Education helps people gain knowledge and skills. Digital learning, technology, and better access to teachers can improve education across Africa.";
-  }
+  // Save chat to Firestore
+  await addDoc(collection(db, "chats"), {
+    question: question,
+    answer: answer,
+    time: serverTimestamp()
+  });
 
-  if (q.includes("health")) {
-    return "Health means keeping people physically and mentally well. Clean water, nutrition, healthcare services, and prevention help communities stay healthy.";
-  }
-
-  if (q.includes("sanitation") || q.includes("water")) {
-    return "Sanitation means keeping communities clean through safe water, proper waste disposal, and good hygiene practices.";
-  }
-
-  if (q.includes("hello") || q.includes("hi")) {
-    return "Hello! I am 3A AI, Accessible • Affordable • African AI.";
-  }
-
-  return "I am 3A AI. Ask me about agriculture, education, health, sanitation, or African solutions.";
+  return answer;
 };
