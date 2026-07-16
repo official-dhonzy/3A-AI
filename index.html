@@ -20,21 +20,36 @@
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button onclick="askCategory('agriculture')">🌱 Agriculture</button>
-  <button onclick="askCategory('education')">📚 Education</button>
-  <button onclick="askCategory('health')">🏥 Health</button>
-  <button onclick="askCategory('sanitation')">🚰 Sanitation</button>
+  <button onclick="askCategory('agriculture')">
+    🌱 Agriculture
+  </button>
+
+  <button onclick="askCategory('education')">
+    📚 Education
+  </button>
+
+  <button onclick="askCategory('health')">
+    🏥 Health
+  </button>
+
+  <button onclick="askCategory('sanitation')">
+    🚰 Sanitation
+  </button>
 
 </div>
 
-<script type="module" src="ai.js"></script>
+
+<script type="module" src="firebase.js"></script>
+
+<script type="module" src="ai.js?v=4"></script>
+
 
 <script>
 
 window.askAI = async function () {
 
-  const question = document.getElementById("question").value;
-  const answer = document.getElementById("answer");
+  let question = document.getElementById("question").value;
+  let answer = document.getElementById("answer");
 
   if (question.trim() === "") {
     answer.innerHTML = "Please ask a question.";
@@ -44,17 +59,26 @@ window.askAI = async function () {
   answer.innerHTML = "3A AI is thinking...";
 
   try {
-    const result = await window.ask3AAI(question);
+
+    let result = await window.ask3AAI(question);
+
     answer.innerHTML = result;
+
   } catch (error) {
+
     answer.innerHTML = "Error: " + error.message;
+
   }
+
 };
 
 
-window.askCategory = function(category) {
+window.askCategory = function(category){
+
   document.getElementById("question").value = category;
+
   askAI();
+
 };
 
 </script>
