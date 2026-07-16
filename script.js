@@ -1,14 +1,21 @@
-window.ask3AAI = async function(question) {
+async function askAI() {
+  const question = document.getElementById("question").value;
+  const answer = document.getElementById("answer");
 
-  if (question.trim() === "") {
-    return "Please enter a question.";
+  if (!question) {
+    answer.innerHTML = "Please type a question.";
+    return;
   }
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  answer.innerHTML = "3A AI is thinking...";
 
-  if (question.toLowerCase().includes("hello")) {
-    return "Hello! I am 3A AI, Accessible • Affordable • African AI.";
+  try {
+    const reply = await window.ask3AAI(question);
+    answer.innerHTML = reply;
+  } catch (error) {
+    console.error(error);
+    answer.innerHTML = "Error connecting to 3A AI.";
   }
+}
 
-  return "You asked: " + question;
-};
+window.askAI = askAI;
