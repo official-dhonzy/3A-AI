@@ -1,17 +1,14 @@
-window.ask3AAI = function() {
-  const question = document.getElementById("question").value;
+window.ask3AAI = async function(question) {
 
   if (question.trim() === "") {
-    alert("Please enter a question");
-    return;
+    return "Please enter a question.";
   }
 
-  document.getElementById("answer").innerHTML =
-    "3A AI is thinking...";
+  await new Promise(resolve => setTimeout(resolve, 1000));
 
-  // Temporary AI response
-  setTimeout(() => {
-    document.getElementById("answer").innerHTML =
-      "You asked: " + question;
-  }, 1000);
+  if (question.toLowerCase().includes("hello")) {
+    return "Hello! I am 3A AI, Accessible • Affordable • African AI.";
+  }
+
+  return "You asked: " + question;
 };
