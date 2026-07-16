@@ -60,12 +60,14 @@ window.askAI = async function () {
   answer.innerHTML = "3A AI is thinking...";
 
   try {
-  let result = await window.ask3AAI(question);
-  answer.innerHTML = result;
-} catch (error) {
-  answer.innerHTML = "Error: " + error.message;
-  console.log(error);
+    let result = await window.ask3AAI(question);
+    answer.innerHTML = result;
+  } catch (error) {
+    answer.innerHTML = "Error: " + error.message;
+    console.log(error);
   }
+
+};
 
 </script>
 
