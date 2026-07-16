@@ -28,6 +28,11 @@
     Hello! I am 3A AI. How can I help you today?
   </div>
 
+  <h2>💬 Chat History</h2>
+
+  <div id="history">
+  </div>
+
   <h2>Explore Africa's Solutions</h2>
 
   <button onclick="askCategory('Agriculture')">
@@ -48,9 +53,11 @@
 
 </div>
 
+
 <script type="module" src="firebase.js"></script>
 <script type="module" src="ai.js"></script>
 <script src="script.js"></script>
+
 
 <script>
 function askCategory(topic) {
@@ -60,6 +67,7 @@ function askCategory(topic) {
   askAI();
 }
 </script>
+
 
 </body>
 </html>
