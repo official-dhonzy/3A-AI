@@ -9,35 +9,41 @@
 
 <div class="app">
 
-  <h1>3A AI</h1>
-  <p>Accessible • Affordable • African AI</p>
+  <h1>🌍 3A AI</h1>
+  <p><b>Accessible • Affordable • African AI</b></p>
+
+  <p>
+    Your AI assistant for African solutions.
+    Ask questions about farming, education, health, sanitation, and more.
+  </p>
 
   <input id="question" type="text" placeholder="Ask 3A AI anything...">
 
   <button onclick="askAI()">Ask</button>
 
-  <p id="answer">Hello! I am 3A AI, your African AI assistant.</p>
+  <div id="answer">
+    Hello! I am 3A AI. How can I help you today?
+  </div>
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button onclick="document.getElementById('question').value='Agriculture'">
+  <button onclick="askAI(); question.value='Agriculture'">
     🌱 Agriculture
   </button>
 
-  <button onclick="document.getElementById('question').value='Education'">
+  <button onclick="askAI(); question.value='Education'">
     📚 Education
   </button>
 
-  <button onclick="document.getElementById('question').value='Health'">
+  <button onclick="askAI(); question.value='Health'">
     🏥 Health
   </button>
 
-  <button onclick="document.getElementById('question').value='Sanitation'">
+  <button onclick="askAI(); question.value='Sanitation'">
     🚰 Sanitation
   </button>
 
 </div>
-
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="ai.js"></script>
