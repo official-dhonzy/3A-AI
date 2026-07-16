@@ -27,28 +27,18 @@ const model = getGenerativeModel(ai, {
 
 window.ask3AAI = async function(question) {
 
-  try {
+  const result = await model.generateContent(question);
 
-    const result = await model.generateContent(question);
-
-    const answer = result.response.text();
+  const answer = result.response.text();
 
 
-    await addDoc(collection(db, "chats"), {
-      question: question,
-      answer: answer,
-      time: serverTimestamp()
-    });
+  await addDoc(collection(db, "chats"), {
+    question: question,
+    answer: answer,
+    time: serverTimestamp()
+  });
 
 
-    return answer;
-
-  } catch (error) {
-
-    console.log("AI Error:", error);
-
-    return "3A AI Error: " + error.message;
-
-  }
+  return answer;
 
 };
