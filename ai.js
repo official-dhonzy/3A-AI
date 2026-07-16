@@ -3,10 +3,10 @@ import { model } from "./firebase.js";
 window.ask3AAI = async function(question) {
   try {
     const result = await model.generateContent(question);
-    const response = result.response;
-    return response.text();
+    return result.response.text();
+
   } catch (error) {
     console.error("AI Error:", error);
-    return "Sorry, 3A AI is having trouble answering right now.";
+    return "AI connection failed. Please try again.";
   }
 };
