@@ -20,32 +20,29 @@
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button>🌱 Agriculture</button>
-  <button>📚 Education</button>
-  <button>🏥 Health</button>
-  <button>🚰 Sanitation</button>
+  <button onclick="document.getElementById('question').value='agriculture'; askAI();">
+    🌱 Agriculture
+  </button>
+
+  <button onclick="document.getElementById('question').value='education'; askAI();">
+    📚 Education
+  </button>
+
+  <button onclick="document.getElementById('question').value='health'; askAI();">
+    🏥 Health
+  </button>
+
+  <button onclick="document.getElementById('question').value='sanitation'; askAI();">
+    🚰 Sanitation
+  </button>
 
 </div>
 
 
-<script type="module" src="ai.js"></script>
+<script type="module" src="ai.js?v=3"></script>
 
-<script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-
-const firebaseConfig = {
-  apiKey: "YOUR_FIREBASE_API_KEY",
-  authDomain: "a-ai-d738d.firebaseapp.com",
-  projectId: "a-ai-d738d",
-  storageBucket: "a-ai-d738d.firebasestorage.app",
-  messagingSenderId: "337673964829",
-  appId: "1:337673964829:web:e0766dc95ad40f6ca7e5f4",
-  measurementId: "G-CBCHD37706"
-};
-
-initializeApp(firebaseConfig);
-
+<script>
 
 window.askAI = async function () {
 
@@ -64,7 +61,6 @@ window.askAI = async function () {
     answer.innerHTML = result;
   } catch (error) {
     answer.innerHTML = "Error: " + error.message;
-    console.log(error);
   }
 
 };
