@@ -1,9 +1,22 @@
 window.ask3AAI = async function(question) {
 
-  // Temporary AI reply (testing)
-  if (question.toLowerCase().includes("hello")) {
-    return "Hello! I am 3A AI, Accessible • Affordable • African AI.";
+  let q = question.toLowerCase();
+
+  if (q.includes("agriculture") || q.includes("farming")) {
+    return "Agriculture is the practice of growing crops and raising animals for food and resources. In Africa, farmers can improve production through better seeds, soil care, irrigation, and modern farming methods.";
   }
 
-  return "3A AI received your question: " + question;
+  if (q.includes("education") || q.includes("school")) {
+    return "Education helps people gain knowledge and skills. Technology, digital learning, and access to quality teachers can improve education across Africa.";
+  }
+
+  if (q.includes("health")) {
+    return "Health means maintaining physical and mental well-being. Access to hospitals, clean water, nutrition, and health information helps communities stay healthier.";
+  }
+
+  if (q.includes("sanitation") || q.includes("water")) {
+    return "Sanitation involves keeping communities clean through safe water, proper waste management, and hygiene practices.";
+  }
+
+  return "I am 3A AI. Ask me about agriculture, education, health, sanitation, or African solutions.";
 };
