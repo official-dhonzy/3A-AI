@@ -6,7 +6,7 @@ window.ask3AAI = async function(question) {
     return result.response.text();
 
   } catch (error) {
-    console.error("FULL AI ERROR:", error);
-    return "ERROR: " + error.message;
+    console.log(error);
+    return "Real error: " + error.message;
   }
 };
