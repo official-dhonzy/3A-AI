@@ -1,86 +1,64 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f2f5f3;
-  text-align: center;
+  background: #f4f7f5;
+  margin: 0;
+  padding: 0;
 }
 
 .app {
-  margin: 40px auto;
   max-width: 500px;
+  margin: 40px auto;
   background: white;
-  padding: 20px;
-  border-radius: 15px;
+  padding: 25px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 h1 {
-  color: green;
+  color: #0b7a3b;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+p {
+  color: #555;
+}
+
+input {
+  width: 90%;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  margin: 15px 0;
 }
 
 button {
-  padding: 10px;
+  background: #0b7a3b;
+  color: white;
+  border: none;
+  padding: 12px 18px;
   margin: 5px;
-}
-#splash {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: white;
-  text-align: center;
-}
-
-#splash img {
-  width: 150px;
-}
-
-#splash h1 {
-  font-size: 40px;
-}
-
-#splash p {
-  font-size: 18px;
-}
-#splash {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: #ffffff;
-  text-align: center;
-}
-
-#splash img {
-  width: 220px;
-  height: auto;
-  margin-bottom: 20px;
-}
-
-#splash h1 {
-  font-size: 45px;
-  margin: 0;
-}
-
-#splash p {
-  font-size: 18px;
-  margin-top: 10px;
-}
-#home {
-  text-align: center;
-  padding: 20px;
-}
-
-#home input {
-  width: 80%;
-  padding: 12px;
-  font-size: 16px;
-  margin: 15px;
-}
-
-#home button {
-  padding: 12px 20px;
-  margin: 8px;
-  font-size: 16px;
+  border-radius: 10px;
+  font-size: 15px;
   cursor: pointer;
+}
+
+button:hover {
+  background: #095c2d;
+}
+
+#answer {
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 12px;
+  text-align: left;
+  min-height: 50px;
+  line-height: 1.5;
+}
+
+h2 {
+  color: #222;
+  margin-top: 30px;
 }
