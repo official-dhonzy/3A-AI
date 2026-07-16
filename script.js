@@ -1,15 +1,17 @@
-async function askAI() {
-  let question = document.getElementById("question").value;
-  let answer = document.getElementById("answer");
+window.ask3AAI = function() {
+  const question = document.getElementById("question").value;
 
-  if (question === "") {
-    answer.innerHTML = "Please ask a question.";
+  if (question.trim() === "") {
+    alert("Please enter a question");
     return;
   }
 
-  answer.innerHTML = "3A AI is thinking...";
+  document.getElementById("answer").innerHTML =
+    "3A AI is thinking...";
 
-  let response = await ask3AAI(question);
-
-  answer.innerHTML = response;
-}
+  // Temporary AI response
+  setTimeout(() => {
+    document.getElementById("answer").innerHTML =
+      "You asked: " + question;
+  }, 1000);
+};
