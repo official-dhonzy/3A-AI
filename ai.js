@@ -7,6 +7,6 @@ window.ask3AAI = async function(question) {
 
   } catch (error) {
     console.log(error);
-    return "Real error: " + error.message;
+    return "3A AI is busy right now. Please try again shortly.";
   }
 };
