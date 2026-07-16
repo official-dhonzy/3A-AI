@@ -1,17 +1,9 @@
-import { getAI, getGenerativeModel, GoogleAIBackend } 
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
+window.ask3AAI = async function(question) {
 
-const ai = getAI({
-  backend: new GoogleAIBackend()
-});
+  // Temporary AI reply (testing)
+  if (question.toLowerCase().includes("hello")) {
+    return "Hello! I am 3A AI, Accessible • Affordable • African AI.";
+  }
 
-const model = getGenerativeModel(ai, {
-  model: "gemini-3.5-flash"
-});
-
-async function ask3AAI(question) {
-  const result = await model.generateContent(question);
-  return result.response.text();
-}
-
-window.ask3AAI = ask3AAI;
+  return "3A AI received your question: " + question;
+};
