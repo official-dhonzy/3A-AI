@@ -4,9 +4,11 @@
   <title>3A AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
 <div class="app">
+
   <h1>3A AI</h1>
   <p>Accessible • Affordable • African AI</p>
 
@@ -22,12 +24,18 @@
   <button>📚 Education</button>
   <button>🏥 Health</button>
   <button>🚰 Sanitation</button>
+
 </div>
+
+
 <script type="module" src="ai.js"></script>
+
+<script type="module">
+
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-import { getAI, getGenerativeModel, GoogleAIBackend } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
+
 const firebaseConfig = {
-  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+  apiKey: "YOUR_FIREBASE_API_KEY",
   authDomain: "a-ai-d738d.firebaseapp.com",
   projectId: "a-ai-d738d",
   storageBucket: "a-ai-d738d.firebasestorage.app",
@@ -36,21 +44,28 @@ const firebaseConfig = {
   measurementId: "G-CBCHD37706"
 };
 
-const app = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
+
 
 window.askAI = async function () {
+
   let question = document.getElementById("question").value;
   let answer = document.getElementById("answer");
 
   if (question.trim() === "") {
     answer.innerHTML = "Please ask a question.";
-  } else {
-  let result = await ask3AAI(question);
-answer.innerHTML = result;
+    return;
   }
+
+  answer.innerHTML = "3A AI is thinking...";
+
+  let result = await window.ask3AAI(question);
+
+  answer.innerHTML = result;
+
 };
+
 </script>
 
-  
 </body>
 </html>
