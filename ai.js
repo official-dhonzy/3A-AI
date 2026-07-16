@@ -15,30 +15,25 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
-// Connect to Gemini Developer API
 const ai = getAI(app, {
   backend: new GoogleAIBackend()
 });
 
 
-// Choose Gemini model
 const model = getGenerativeModel(ai, {
   model: "gemini-3.5-flash"
 });
 
 
-// Function used by your Ask button
 window.ask3AAI = async function(question) {
 
   try {
 
     const result = await model.generateContent(question);
 
-    const response = result.response;
-    const answer = response.text();
+    const answer = result.response.text();
 
 
-    // Save chat to Firestore
     await addDoc(collection(db, "chats"), {
       question: question,
       answer: answer,
@@ -50,9 +45,9 @@ window.ask3AAI = async function(question) {
 
   } catch (error) {
 
-    console.log(error);
+    console.log("AI Error:", error);
 
-    return "Sorry, 3A AI could not answer right now: " + error.message;
+    return "3A AI Error: " + error.message;
 
   }
 
