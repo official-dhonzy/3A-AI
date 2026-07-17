@@ -18,23 +18,37 @@
   <p>Your AI assistant for global and African solutions.</p>
 
 
-  <!-- Question -->
+  <!-- Ask Box -->
 
-  <input 
-    id="question" 
-    type="text" 
-    placeholder="Ask 3A AI anything..."
-  >
+  <div class="ask-box">
+
+    <input
+      id="question"
+      type="text"
+      placeholder="Ask 3A AI anything..."
+    >
+
+    <button onclick="askAI()">
+      Ask
+    </button>
+
+  </div>
 
 
-  <!-- Image -->
+  <!-- Voice -->
 
-  <input 
-    id="imageInput" 
-    type="file" 
+  <button onclick="startVoice()">
+    🎤 Mic
+  </button>
+
+
+  <!-- Image Upload -->
+
+  <input
+    id="imageInput"
+    type="file"
     accept="image/*"
   >
-
 
 
   <!-- AI Mode -->
@@ -52,13 +66,12 @@
   </select>
 
 
-
-
-  <!-- Location -->
+  <!-- Location Selection -->
 
   <div id="locationOptions" style="display:none;">
 
     <h3>🌍 Choose Location</h3>
+
 
     <select id="continent">
 
@@ -101,30 +114,9 @@
 
     </select>
 
-  </div>
-
-
-
-
-  <!-- Buttons -->
-
-  <div>
-
-    <button onclick="startVoice()">
-      🎤
-    </button>
-
-
-    <button onclick="askAI()">
-      Ask
-    </button>
 
   </div>
-
-
-
-
-  <!-- Answer -->
+    <!-- AI Answer -->
 
   <div id="answer">
 
@@ -134,19 +126,7 @@
 
 
 
-
-  <!-- Chat History -->
-
-  <h2>
-    💬 Chat History
-  </h2>
-
-  <div id="history"></div>
-
-
-
-
-  <!-- Solutions -->
+  <!-- Explore Solutions -->
 
   <h2>
     Explore Solutions
@@ -175,6 +155,24 @@
 
 
 
+  <!-- Chat History -->
+
+  <h2>
+    💬 Chat History
+  </h2>
+
+
+  <button onclick="clearHistory()">
+    🗑️ Clear History
+  </button>
+
+
+  <div id="history">
+
+  </div>
+
+
+
 
   <!-- Language -->
 
@@ -185,49 +183,79 @@
 
   <select id="language">
 
+
     <option value="English">
       🇬🇧 English
     </option>
+
 
     <option value="French">
       🇫🇷 French
     </option>
 
-    <option value="Spanish">
-      🇪🇸 Spanish
-    </option>
 
     <option value="Portuguese">
       🇵🇹 Portuguese
     </option>
 
-    <option value="Twi">
-      🇬🇭 Twi
+
+    <option value="Spanish">
+      🇪🇸 Spanish
     </option>
 
-    <option value="Ewe">
-      🇬🇭 Ewe
+
+    <option value="Arabic">
+      🕌 Arabic
     </option>
 
-    <option value="Hausa">
-      🇳🇬 Hausa
-    </option>
 
     <option value="Swahili">
       🇰🇪 Swahili
     </option>
 
+
+    <option value="Hausa">
+      🇳🇬 Hausa
+    </option>
+
+
+    <option value="Twi">
+      🇬🇭 Twi
+    </option>
+
+
+    <option value="Ewe">
+      🇬🇭 Ewe
+    </option>
+
+
     <option value="Zulu">
       🇿🇦 Zulu
     </option>
 
+
+    <option value="Amharic">
+      🇪🇹 Amharic
+    </option>
+
+
+    <option value="Hindi">
+      🇮🇳 Hindi
+    </option>
+
+
+    <option value="Chinese">
+      🇨🇳 Chinese
+    </option>
+
+
+    <option value="Japanese">
+      🇯🇵 Japanese
+    </option>
+
+
   </select>
-
-
-
-
-
-  <!-- Account -->
+    <!-- User Account -->
 
   <section id="account">
 
@@ -271,7 +299,6 @@
 
 
   </section>
-
 
 
 </div>
