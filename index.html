@@ -18,30 +18,18 @@
   <p>Your AI assistant for African solutions.</p>
 
 
-  <input id="question" type="text" placeholder="Ask 3A AI anything...">
+  <!-- Question + AI Type -->
+  <div>
+    <input id="question" type="text" placeholder="Ask 3A AI anything...">
+
+    <select id="answerType">
+      <option value="general">🤖 General AI</option>
+      <option value="location">🌍 Location AI</option>
+    </select>
+  </div>
+
 
   <input id="imageInput" type="file" accept="image/*">
-
-
-  <!-- AI Answer Type -->
-  <select id="answerType">
-    <option value="general">🤖 General AI</option>
-    <option value="location">🌍 Location AI</option>
-  </select>
-
-
-  <!-- Language Selection -->
-  <select id="language">
-    <option value="English">🇬🇧 English</option>
-    <option value="French">🇫🇷 French</option>
-    <option value="Spanish">🇪🇸 Spanish</option>
-    <option value="Portuguese">🇵🇹 Portuguese</option>
-    <option value="Twi">🇬🇭 Twi</option>
-    <option value="Ewe">🇬🇭 Ewe</option>
-    <option value="Hausa">🇳🇬 Hausa</option>
-    <option value="Swahili">🇰🇪 Swahili</option>
-    <option value="Zulu">🇿🇦 Zulu</option>
-  </select>
 
 
   <!-- Location Selection -->
@@ -91,6 +79,22 @@
   <button onclick="askCategory('Sanitation')">🚰 Sanitation</button>
 
 
+  <!-- Language at bottom -->
+  <h3>🌐 Language</h3>
+
+  <select id="language">
+    <option value="English">🇬🇧 English</option>
+    <option value="French">🇫🇷 French</option>
+    <option value="Spanish">🇪🇸 Spanish</option>
+    <option value="Portuguese">🇵🇹 Portuguese</option>
+    <option value="Twi">🇬🇭 Twi</option>
+    <option value="Ewe">🇬🇭 Ewe</option>
+    <option value="Hausa">🇳🇬 Hausa</option>
+    <option value="Swahili">🇰🇪 Swahili</option>
+    <option value="Zulu">🇿🇦 Zulu</option>
+  </select>
+
+
 </div>
 
 
@@ -127,7 +131,6 @@ function startVoice() {
 
   const recognition = new SpeechRecognition();
 
-
   recognition.lang = "en-US";
 
   recognition.start();
@@ -135,9 +138,7 @@ function startVoice() {
 
   recognition.onresult = function(event) {
 
-    const text =
-    event.results[0][0].transcript;
-
+    const text = event.results[0][0].transcript;
 
     document.getElementById("question").value = text;
 
