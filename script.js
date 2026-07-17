@@ -67,3 +67,61 @@ if (imageInput) {
     }
   });
 }
+const answerType = document.getElementById("answerType");
+const locationOptions = document.getElementById("locationOptions");
+const continent = document.getElementById("continent");
+const country = document.getElementById("country");
+
+if (answerType) {
+  answerType.addEventListener("change", function () {
+    if (this.value === "location") {
+      locationOptions.style.display = "block";
+    } else {
+      locationOptions.style.display = "none";
+    }
+  });
+}
+
+const countries = {
+  Africa: [
+    "Ghana 🇬🇭",
+    "Nigeria 🇳🇬",
+    "Kenya 🇰🇪",
+    "South Africa 🇿🇦",
+    "Egypt 🇪🇬",
+    "Ethiopia 🇪🇹"
+  ],
+  Asia: [
+    "Japan 🇯🇵",
+    "China 🇨🇳",
+    "India 🇮🇳"
+  ],
+  Europe: [
+    "United Kingdom 🇬🇧",
+    "France 🇫🇷",
+    "Germany 🇩🇪"
+  ],
+  "North America": [
+    "United States 🇺🇸",
+    "Canada 🇨🇦",
+    "Mexico 🇲🇽"
+  ],
+  "South America": [
+    "Brazil 🇧🇷",
+    "Argentina 🇦🇷"
+  ],
+  Oceania: [
+    "Australia 🇦🇺",
+    "New Zealand 🇳🇿"
+  ]
+};
+
+if (continent) {
+  continent.addEventListener("change", function () {
+    country.innerHTML = '<option value="">Choose Country</option>';
+
+    countries[this.value].forEach(function(place) {
+      country.innerHTML += `<option value="${place}">${place}</option>`;
+    });
+  });
+    }
