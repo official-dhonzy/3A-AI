@@ -15,14 +15,14 @@
 
   <p><b>Accessible • Affordable • African AI</b></p>
 
-  <p>
-    Your AI assistant for African solutions.
-    Ask questions about farming, education, health, sanitation, and more.
-  </p>
+  <p>Your AI assistant for African solutions.</p>
 
   <input id="question" type="text" placeholder="Ask 3A AI anything...">
 
-  <button onclick="askAI()">Ask</button>
+  <div>
+    <button onclick="startVoice()">🎤</button>
+    <button onclick="askAI()">Ask</button>
+  </div>
 
   <div id="answer">
     Hello! I am 3A AI. How can I help you today?
@@ -30,44 +30,48 @@
 
   <h2>💬 Chat History</h2>
 
-  <div id="history">
-  </div>
+  <div id="history"></div>
 
   <h2>Explore Africa's Solutions</h2>
 
-  <button onclick="askCategory('Agriculture')">
-    🌱 Agriculture
-  </button>
-
-  <button onclick="askCategory('Education')">
-    📚 Education
-  </button>
-
-  <button onclick="askCategory('Health')">
-    🏥 Health
-  </button>
-
-  <button onclick="askCategory('Sanitation')">
-    🚰 Sanitation
-  </button>
+  <button onclick="askCategory('Agriculture')">🌱 Agriculture</button>
+  <button onclick="askCategory('Education')">📚 Education</button>
+  <button onclick="askCategory('Health')">🏥 Health</button>
+  <button onclick="askCategory('Sanitation')">🚰 Sanitation</button>
 
 </div>
-
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="ai.js"></script>
 <script src="script.js"></script>
 
-
 <script>
 function askCategory(topic) {
   document.getElementById("question").value =
     "Give me African solutions about " + topic;
-
   askAI();
 }
-</script>
 
+function startVoice() {
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    alert("Voice input is not supported in this browser.");
+    return;
+  }
+
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.start();
+
+  recognition.onresult = function(event) {
+    const text = event.results[0][0].transcript;
+    document.getElementById("question").value = text;
+    askAI();
+  };
+}
+</script>
 
 </body>
 </html>
