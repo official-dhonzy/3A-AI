@@ -12,34 +12,72 @@
   <img src="logo.png" alt="3A AI Logo" width="120">
 
   <h1>🌍 3A AI</h1>
+
   <p><b>Accessible • Affordable • African AI</b></p>
+
   <p>Your AI assistant for global and African solutions.</p>
 
 
-  <!-- User Account -->
-  <section>
-    <button>👤 Login</button>
-    <button>📝 Sign Up</button>
+  <!-- Account -->
+
+  <section id="account">
+
+    <h3>👤 3A AI Account</h3>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button onclick="signUp()">
+      📝 Sign Up
+    </button>
+
+    <button onclick="login()">
+      🔑 Login
+    </button>
+
+    <button onclick="logout()">
+      🚪 Logout
+    </button>
+
+    <p id="userStatus">
+      Not logged in
+    </p>
+
   </section>
 
 
+
   <!-- Question -->
-  <input 
-    id="question" 
-    type="text" 
+
+  <input
+    id="question"
+    type="text"
     placeholder="Ask 3A AI anything..."
   >
 
 
+
   <!-- Image -->
-  <input 
-    id="imageInput" 
-    type="file" 
+
+  <input
+    id="imageInput"
+    type="file"
     accept="image/*"
   >
 
 
+
   <!-- AI Mode -->
+
   <select id="answerType">
 
     <option value="general">
@@ -54,10 +92,13 @@
 
 
 
+
   <!-- Location -->
+
   <div id="locationOptions" style="display:none;">
 
     <h3>🌍 Choose Location</h3>
+
 
     <select id="continent">
 
@@ -105,7 +146,9 @@
 
 
 
+
   <!-- Language -->
+
   <h3>🌐 Language</h3>
 
   <select id="language">
@@ -118,12 +161,12 @@
       🇫🇷 French
     </option>
 
-    <option value="Portuguese">
-      🇵🇹 Portuguese
-    </option>
-
     <option value="Spanish">
       🇪🇸 Spanish
+    </option>
+
+    <option value="Portuguese">
+      🇵🇹 Portuguese
     </option>
 
     <option value="Twi">
@@ -150,7 +193,9 @@
 
 
 
+
   <!-- Buttons -->
+
   <div>
 
     <button onclick="startVoice()">
@@ -165,6 +210,7 @@
 
 
 
+
   <!-- Answer -->
 
   <div id="answer">
@@ -172,6 +218,7 @@
     Hello! I am 3A AI. How can I help you?
 
   </div>
+
 
 
 
@@ -185,27 +232,33 @@
 
 
 
+
   <!-- Categories -->
 
   <h2>
     Explore Solutions
   </h2>
 
+
   <button onclick="askCategory('Agriculture')">
     🌱 Agriculture
   </button>
+
 
   <button onclick="askCategory('Education')">
     📚 Education
   </button>
 
+
   <button onclick="askCategory('Health')">
     🏥 Health
   </button>
 
+
   <button onclick="askCategory('Sanitation')">
     🚰 Sanitation
   </button>
+
 
 
 </div>
@@ -213,7 +266,9 @@
 
 
 <script type="module" src="firebase.js"></script>
+
 <script type="module" src="ai.js"></script>
+
 <script src="script.js"></script>
 
 
