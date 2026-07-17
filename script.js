@@ -1,96 +1,64 @@
-let chatHistory = [];
+let chatHistory = JSON.parse(localStorage.getItem("3AAI_history")) || [];
+
+
+// Ask AI
 
 async function askAI() {
 
-  const questionInput = document.getElementById("question");
+  const question = document.getElementById("question").value;
   const answer = document.getElementById("answer");
   const history = document.getElementById("history");
-  const imageInput = document.getElementById("imageInput");
 
-  const question = questionInput.value;
+  const imageInput = document.getElementById("imageInput");
   const imageFile = imageInput ? imageInput.files[0] : null;
 
 
   if (!question.trim() && !imageFile) {
 
-    answer.innerHTML =
-      "Please type a question or upload an image.";
-
+    answer.innerHTML = "Please type a question or upload an image.";
     return;
 
   }
 
 
-  answer.innerHTML =
-    "3A AI is thinking...";
+  answer.innerHTML = "3A AI is thinking...";
 
 
   try {
 
-
-    if (!window.ask3AAI) {
-
-      answer.innerHTML =
-        "AI is still loading. Refresh and try again.";
-
-      return;
-
-    }
-
-
-    const reply =
-      await window.ask3AAI(question, imageFile);
-
+    const reply = await window.ask3AAI(question, imageFile);
 
 
     answer.innerHTML = reply;
-
-
-
-    chatHistory.push({
-
-      question: question,
-      answer: reply
-
-    });
-
-
-
-    if (history) {
-
-      history.innerHTML += `
-
-      <div>
-
-      <b>You:</b> ${question}
-
-      <br>
-
-      <b>3A AI:</b> ${reply}
-
-      <hr>
-
-      </div>
-
-      `;
-
-    }
-
 
 
     speakAnswer(reply);
 
 
 
-  } catch (error) {
+    chatHistory.push({
+
+      question: question,
+      answer: reply,
+      date: new Date().toLocaleString()
+
+    });
 
 
-    console.log(error);
+    localStorage.setItem(
+      "3AAI_history",
+      JSON.stringify(chatHistory)
+    );
 
 
-    answer.innerHTML =
-      "AI Error: " + error.message;
+    showHistory();
 
+
+
+  } catch(error) {
+
+    answer.innerHTML = 
+    "3A AI Error: " + error.message;
 
   }
 
@@ -98,32 +66,90 @@ async function askAI() {
 
 
 
-window.askAI = askAI;
+// Show saved history
+
+function showHistory(){
+
+  const history = document.getElementById("history");
+
+  if(!history) return;
+
+
+  history.innerHTML = "";
+
+
+  chatHistory.forEach(chat => {
+
+
+    history.innerHTML += `
+
+    <div>
+
+    <b>You:</b> ${chat.question}
+
+    <br>
+
+    <b>3A AI:</b> ${chat.answer}
+
+    <br>
+
+    <small>${chat.date}</small>
+
+    <hr>
+
+    </div>
+
+    `;
+
+
+  });
+
+
+}
 
 
 
+showHistory();
 
-// Voice input
 
-function startVoice() {
+
+// Clear history
+
+function clearHistory(){
+
+  chatHistory = [];
+
+  localStorage.removeItem("3AAI_history");
+
+  showHistory();
+
+}
+
+
+window.clearHistory = clearHistory;
+
+
+
+// Voice
+
+function startVoice(){
 
 
   const SpeechRecognition =
-    window.SpeechRecognition ||
-    window.webkitSpeechRecognition;
+  window.SpeechRecognition ||
+  window.webkitSpeechRecognition;
 
 
-  if (!SpeechRecognition) {
+  if(!SpeechRecognition){
 
-    alert("Voice input is not supported.");
+    alert("Voice is not supported on this browser.");
 
     return;
 
   }
 
 
-  const recognition =
-    new SpeechRecognition();
+  const recognition = new SpeechRecognition();
 
 
   recognition.lang = "en-US";
@@ -133,18 +159,14 @@ function startVoice() {
 
 
 
-  recognition.onresult = function(event) {
+  recognition.onresult = function(event){
 
 
     const text =
-      event.results[0][0].transcript;
+    event.results[0][0].transcript;
 
 
-    document.getElementById("question").value =
-      text;
-
-
-    askAI();
+    document.getElementById("question").value = text;
 
 
   };
@@ -157,14 +179,30 @@ window.startVoice = startVoice;
 
 
 
+// Read answer aloud
 
-// Category buttons
+function speakAnswer(text){
 
-function askCategory(topic) {
+  const speech =
+  new SpeechSynthesisUtterance(text);
+
+
+  speech.lang = "en-US";
+
+
+  window.speechSynthesis.speak(speech);
+
+}
+
+
+
+// Solution buttons
+
+function askCategory(topic){
 
 
   document.getElementById("question").value =
-    "Give me solutions about " + topic;
+  "Give me solutions about " + topic;
 
 
   askAI();
@@ -178,89 +216,20 @@ window.askCategory = askCategory;
 
 
 
-// AI voice response
-
-function speakAnswer(text) {
-
-
-  if ("speechSynthesis" in window) {
-
-
-    const speech =
-      new SpeechSynthesisUtterance(text);
-
-
-    speech.lang =
-      "en-US";
-
-
-    window.speechSynthesis.speak(speech);
-
-
-  }
-
-}
-
-
-
-
-// Location selector
-
-const answerType =
-document.getElementById("answerType");
-
-
-const locationOptions =
-document.getElementById("locationOptions");
-
-
-if (answerType) {
-
-
-  answerType.addEventListener("change", function(){
-
-
-    if (this.value === "location") {
-
-      locationOptions.style.display =
-        "block";
-
-    } else {
-
-      locationOptions.style.display =
-        "none";
-
-    }
-
-
-  });
-
-
-}
-
-
-
-
-// Countries
+// Location AI
 
 const countries = {
 
 
-Africa: [
+Africa:[
 "Ghana 🇬🇭",
 "Nigeria 🇳🇬",
 "Kenya 🇰🇪",
-"South Africa 🇿🇦",
-"Egypt 🇪🇬",
-"Ethiopia 🇪🇹",
-"Tanzania 🇹🇿",
-"Uganda 🇺🇬",
-"Rwanda 🇷🇼",
-"Morocco 🇲🇦"
+"South Africa 🇿🇦"
 ],
 
 
-Asia: [
+Asia:[
 "China 🇨🇳",
 "India 🇮🇳",
 "Japan 🇯🇵",
@@ -268,34 +237,48 @@ Asia: [
 ],
 
 
-Europe: [
+Europe:[
 "United Kingdom 🇬🇧",
 "France 🇫🇷",
-"Germany 🇩🇪"
+"Germany 🇩🇪",
+"Italy 🇮🇹"
 ],
 
 
-"North America": [
-"USA 🇺🇸",
+"North America":[
+"United States 🇺🇸",
 "Canada 🇨🇦",
-"Mexico 🇲🇽"
+"Mexico 🇲🇽",
+"Cuba 🇨🇺"
 ],
 
 
-"South America": [
+"South America":[
 "Brazil 🇧🇷",
-"Argentina 🇦🇷"
+"Argentina 🇦🇷",
+"Chile 🇨🇱",
+"Colombia 🇨🇴"
 ],
 
 
-Oceania: [
+Oceania:[
 "Australia 🇦🇺",
-"New Zealand 🇳🇿"
+"New Zealand 🇳🇿",
+"Fiji 🇫🇯",
+"Samoa 🇼🇸"
 ]
 
 
 };
 
+
+
+const answerType =
+document.getElementById("answerType");
+
+
+const locationOptions =
+document.getElementById("locationOptions");
 
 
 const continent =
@@ -307,31 +290,53 @@ document.getElementById("country");
 
 
 
-if (continent) {
+if(answerType){
 
 
-  continent.addEventListener("change", function(){
+answerType.addEventListener("change",()=>{
 
 
-    country.innerHTML =
-      '<option value="">Choose Country</option>';
+if(answerType.value==="location"){
+
+locationOptions.style.display="block";
+
+}else{
+
+locationOptions.style.display="none";
+
+}
+
+
+});
+
+
+}
 
 
 
-    countries[this.value].forEach(function(place){
+if(continent){
 
 
-      country.innerHTML +=
-
-      `<option value="${place}">
-      ${place}
-      </option>`;
+continent.addEventListener("change",()=>{
 
 
-    });
+country.innerHTML =
+'<option value="">Choose Country</option>';
 
 
-  });
+countries[continent.value].forEach(place=>{
+
+
+country.innerHTML +=
+`<option value="${place}">
+${place}
+</option>`;
+
+
+});
+
+
+});
 
 
 }
