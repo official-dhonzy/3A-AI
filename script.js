@@ -1,6 +1,5 @@
 let chatHistory = [];
 
-// Ask AI
 async function askAI() {
 
   const question = document.getElementById("question").value;
@@ -12,57 +11,37 @@ async function askAI() {
 
 
   if (!question.trim() && !imageFile) {
-
-    answer.innerHTML =
-      "Please type a question or upload an image.";
-
+    answer.innerHTML = "Please type a question or upload an image.";
     return;
-
   }
 
 
-  answer.innerHTML =
-    "3A AI is thinking...";
+  answer.innerHTML = "3A AI is thinking...";
 
 
   try {
 
-
-    const reply =
-      await window.ask3AAI(question, imageFile);
-
+    const reply = await window.ask3AAI(question, imageFile);
 
     answer.innerHTML = reply;
-
 
     speakAnswer(reply);
 
 
     chatHistory.push({
-
       question: question,
       answer: reply
-
     });
-
 
 
     if (history) {
 
       history.innerHTML += `
-
       <div>
-
-      <b>You:</b> ${question}
-
-      <br>
-
-      <b>3A AI:</b> ${reply}
-
-      <hr>
-
+        <b>You:</b> ${question}<br>
+        <b>3A AI:</b> ${reply}
+        <hr>
       </div>
-
       `;
 
     }
@@ -70,39 +49,29 @@ async function askAI() {
 
   } catch(error) {
 
-
     console.log(error);
-
 
     answer.innerHTML =
       "3A AI error: " + error.message;
-
 
   }
 
 }
 
 
-
 window.askAI = askAI;
 
 
 
-// Voice input
-
 function startVoice() {
-
 
   if (!("webkitSpeechRecognition" in window ||
         "SpeechRecognition" in window)) {
 
-
     alert("Voice is not supported.");
 
     return;
-
   }
-
 
 
   const SpeechRecognition =
@@ -110,10 +79,7 @@ function startVoice() {
     window.webkitSpeechRecognition;
 
 
-
-  const recognition =
-    new SpeechRecognition();
-
+  const recognition = new SpeechRecognition();
 
 
   recognition.lang = "en-US";
@@ -122,37 +88,52 @@ function startVoice() {
   recognition.start();
 
 
-
   recognition.onresult = function(event) {
-
 
     const text =
       event.results[0][0].transcript;
 
 
-    document.getElementById("question").value =
-      text;
+    document.getElementById("question").value = text;
 
 
     askAI();
 
-
   };
 
-
 }
-
 
 
 window.startVoice = startVoice;
 
 
 
-
-// Categories
-
 function askCategory(topic) {
 
-
   document.getElementById("question").value =
-    "Give me solutions about
+    "Give me solutions about " + topic;
+
+  askAI();
+
+}
+
+
+window.askCategory = askCategory;
+
+
+
+function speakAnswer(text) {
+
+  const speech =
+    new SpeechSynthesisUtterance(text);
+
+  speech.lang = "en-US";
+
+  speech.rate = 1;
+
+  speech.pitch = 1;
+
+
+  window.speechSynthesis.speak(speech);
+
+}
