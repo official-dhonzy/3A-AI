@@ -8,6 +8,22 @@ async function askAI() {
   const answer = document.getElementById("answer");
   const history = document.getElementById("history");
 
+  const answerType = document.getElementById("answerType");
+  const continent = document.getElementById("continent");
+  const country = document.getElementById("country");
+
+  let modePrompt = "";
+
+  if (answerType && answerType.value === "location") {
+    modePrompt =
+      "Give an answer based on this location: " +
+      continent.value +
+      ", " +
+      country.value;
+  } else {
+    modePrompt = "Give a general AI answer.";
+  }
+
   if (!question.trim() && !imageFile) {
     answer.innerHTML = "Please type a question or select an image.";
     return;
@@ -16,11 +32,12 @@ async function askAI() {
   answer.innerHTML = "3A AI is thinking...";
 
   try {
-    const reply = await window.ask3AAI(question, imageFile);
+    const fullQuestion = modePrompt + "\n\nUser question: " + question;
+
+    const reply = await window.ask3AAI(fullQuestion, imageFile);
 
     answer.innerHTML = reply;
 
-    // 🔊 Read AI answer aloud
     speakAnswer(reply);
 
     chatHistory.push({
@@ -44,6 +61,7 @@ async function askAI() {
   }
 }
 
+
 function speakAnswer(text) {
   const speech = new SpeechSynthesisUtterance(text);
   speech.lang = "en-US";
@@ -53,8 +71,11 @@ function speakAnswer(text) {
   window.speechSynthesis.speak(speech);
 }
 
+
 window.askAI = askAI;
 
+
+// Image selection message
 const imageInput = document.getElementById("imageInput");
 
 if (imageInput) {
@@ -67,61 +88,94 @@ if (imageInput) {
     }
   });
 }
+
+
+// AI mode selector
 const answerType = document.getElementById("answerType");
 const locationOptions = document.getElementById("locationOptions");
 const continent = document.getElementById("continent");
 const country = document.getElementById("country");
 
+
 if (answerType) {
   answerType.addEventListener("change", function () {
+
     if (this.value === "location") {
       locationOptions.style.display = "block";
     } else {
       locationOptions.style.display = "none";
     }
+
   });
 }
 
+
+// Countries database
 const countries = {
+
   Africa: [
     "Ghana 🇬🇭",
     "Nigeria 🇳🇬",
     "Kenya 🇰🇪",
     "South Africa 🇿🇦",
     "Egypt 🇪🇬",
-    "Ethiopia 🇪🇹"
+    "Ethiopia 🇪🇹",
+    "Tanzania 🇹🇿",
+    "Uganda 🇺🇬"
   ],
+
   Asia: [
     "Japan 🇯🇵",
     "China 🇨🇳",
-    "India 🇮🇳"
+    "India 🇮🇳",
+    "South Korea 🇰🇷"
   ],
+
   Europe: [
     "United Kingdom 🇬🇧",
     "France 🇫🇷",
-    "Germany 🇩🇪"
+    "Germany 🇩🇪",
+    "Italy 🇮🇹"
   ],
+
   "North America": [
     "United States 🇺🇸",
     "Canada 🇨🇦",
     "Mexico 🇲🇽"
   ],
+
   "South America": [
     "Brazil 🇧🇷",
-    "Argentina 🇦🇷"
+    "Argentina 🇦🇷",
+    "Colombia 🇨🇴"
   ],
+
   Oceania: [
     "Australia 🇦🇺",
     "New Zealand 🇳🇿"
   ]
+
 };
 
-if (continent) {
-  continent.addEventListener("change", function () {
-    country.innerHTML = '<option value="">Choose Country</option>';
 
-    countries[this.value].forEach(function(place) {
-      country.innerHTML += `<option value="${place}">${place}</option>`;
-    });
-  });
+if (continent) {
+
+  continent.addEventListener("change", function () {
+
+    country.innerHTML =
+      '<option value="">Choose Country</option>';
+
+    if (countries[this.value]) {
+
+      countries[this.value].forEach(function(place) {
+
+        country.innerHTML +=
+          `<option value="${place}">${place}</option>`;
+
+      });
+
     }
+
+  });
+
+}
