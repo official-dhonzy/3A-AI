@@ -1,35 +1,48 @@
 let chatHistory = JSON.parse(localStorage.getItem("3AAI_history")) || [];
 
 
-// Ask AI
+// =====================
+// ASK AI
+// =====================
 
 async function askAI() {
 
-  const question = document.getElementById("question").value;
-  const answer = document.getElementById("answer");
-  const history = document.getElementById("history");
+  const question =
+  document.getElementById("question").value;
 
-  const imageInput = document.getElementById("imageInput");
-  const imageFile = imageInput ? imageInput.files[0] : null;
+  const answer =
+  document.getElementById("answer");
+
+  const imageInput =
+  document.getElementById("imageInput");
+
+  const imageFile =
+  imageInput ? imageInput.files[0] : null;
 
 
   if (!question.trim() && !imageFile) {
 
-    answer.innerHTML = "Please type a question or upload an image.";
+    answer.innerHTML =
+    "Please type a question or upload an image.";
+
     return;
 
   }
 
 
-  answer.innerHTML = "3A AI is thinking...";
+  answer.innerHTML =
+  "3A AI is thinking...";
 
 
   try {
 
-    const reply = await window.ask3AAI(question, imageFile);
+
+    const reply =
+    await window.ask3AAI(question, imageFile);
 
 
-    answer.innerHTML = reply;
+    answer.innerHTML =
+    reply;
 
 
     speakAnswer(reply);
@@ -39,10 +52,13 @@ async function askAI() {
     chatHistory.push({
 
       question: question,
+
       answer: reply,
+
       date: new Date().toLocaleString()
 
     });
+
 
 
     localStorage.setItem(
@@ -57,20 +73,32 @@ async function askAI() {
 
   } catch(error) {
 
-    answer.innerHTML = 
+
+    answer.innerHTML =
     "3A AI Error: " + error.message;
 
+
   }
+
 
 }
 
 
+window.askAI = askAI;
 
-// Show saved history
+
+
+// =====================
+// CHAT HISTORY
+// =====================
+
 
 function showHistory(){
 
-  const history = document.getElementById("history");
+
+  const history =
+  document.getElementById("history");
+
 
   if(!history) return;
 
@@ -78,7 +106,7 @@ function showHistory(){
   history.innerHTML = "";
 
 
-  chatHistory.forEach(chat => {
+  chatHistory.forEach(chat=>{
 
 
     history.innerHTML += `
@@ -108,20 +136,23 @@ function showHistory(){
 }
 
 
-
 showHistory();
 
 
 
-// Clear history
-
 function clearHistory(){
+
 
   chatHistory = [];
 
-  localStorage.removeItem("3AAI_history");
+
+  localStorage.removeItem(
+    "3AAI_history"
+  );
+
 
   showHistory();
+
 
 }
 
@@ -130,7 +161,11 @@ window.clearHistory = clearHistory;
 
 
 
-// Voice
+
+// =====================
+// VOICE INPUT
+// =====================
+
 
 function startVoice(){
 
@@ -140,33 +175,43 @@ function startVoice(){
   window.webkitSpeechRecognition;
 
 
+
   if(!SpeechRecognition){
 
-    alert("Voice is not supported on this browser.");
+    alert(
+    "Voice input is not supported on this device."
+    );
 
     return;
 
   }
 
 
-  const recognition = new SpeechRecognition();
+
+  const recognition =
+  new SpeechRecognition();
 
 
-  recognition.lang = "en-US";
+
+  recognition.lang =
+  "en-US";
+
 
 
   recognition.start();
 
 
 
-  recognition.onresult = function(event){
+  recognition.onresult =
+  function(event){
 
 
     const text =
     event.results[0][0].transcript;
 
 
-    document.getElementById("question").value = text;
+    document.getElementById("question").value =
+    text;
 
 
   };
@@ -179,24 +224,45 @@ window.startVoice = startVoice;
 
 
 
-// Read answer aloud
+// =====================
+// VOICE ANSWER FIX
+// =====================
+
 
 function speakAnswer(text){
 
-  const speech =
-  new SpeechSynthesisUtterance(text);
+
+  if(
+    "speechSynthesis" in window &&
+    "SpeechSynthesisUtterance" in window
+  ){
 
 
-  speech.lang = "en-US";
+    const speech =
+    new SpeechSynthesisUtterance(text);
 
 
-  window.speechSynthesis.speak(speech);
+    speech.lang =
+    "en-US";
+
+
+    window.speechSynthesis.speak(
+      speech
+    );
+
+
+  }
+
 
 }
 
 
 
-// Solution buttons
+
+// =====================
+// SOLUTION BUTTONS
+// =====================
+
 
 function askCategory(topic){
 
@@ -216,56 +282,89 @@ window.askCategory = askCategory;
 
 
 
-// Location AI
+// =====================
+// LOCATION COUNTRIES
+// =====================
+
 
 const countries = {
 
 
 Africa:[
+
 "Ghana 🇬🇭",
+
 "Nigeria 🇳🇬",
+
 "Kenya 🇰🇪",
+
 "South Africa 🇿🇦"
+
 ],
 
 
 Asia:[
+
 "China 🇨🇳",
+
 "India 🇮🇳",
+
 "Japan 🇯🇵",
+
 "South Korea 🇰🇷"
+
 ],
 
 
 Europe:[
+
 "United Kingdom 🇬🇧",
+
 "France 🇫🇷",
+
 "Germany 🇩🇪",
+
 "Italy 🇮🇹"
+
 ],
 
 
 "North America":[
-"United States 🇺🇸",
+
+"USA 🇺🇸",
+
 "Canada 🇨🇦",
+
 "Mexico 🇲🇽",
+
 "Cuba 🇨🇺"
+
 ],
 
 
 "South America":[
+
 "Brazil 🇧🇷",
+
 "Argentina 🇦🇷",
+
 "Chile 🇨🇱",
+
 "Colombia 🇨🇴"
+
 ],
 
 
 Oceania:[
+
 "Australia 🇦🇺",
+
 "New Zealand 🇳🇿",
+
 "Fiji 🇫🇯",
+
 "Samoa 🇼🇸"
+
 ]
 
 
@@ -281,28 +380,25 @@ const locationOptions =
 document.getElementById("locationOptions");
 
 
-const continent =
-document.getElementById("continent");
-
-
-const country =
-document.getElementById("country");
-
-
-
 if(answerType){
 
 
-answerType.addEventListener("change",()=>{
+answerType.addEventListener(
+"change",
+()=>{
 
 
-if(answerType.value==="location"){
+if(answerType.value === "location"){
 
-locationOptions.style.display="block";
+locationOptions.style.display =
+"block";
+
 
 }else{
 
-locationOptions.style.display="none";
+locationOptions.style.display =
+"none";
+
 
 }
 
@@ -314,20 +410,33 @@ locationOptions.style.display="none";
 
 
 
+const continent =
+document.getElementById("continent");
+
+
+const country =
+document.getElementById("country");
+
+
+
 if(continent){
 
 
-continent.addEventListener("change",()=>{
+continent.addEventListener(
+"change",
+()=>{
 
 
 country.innerHTML =
 '<option value="">Choose Country</option>';
 
 
+
 countries[continent.value].forEach(place=>{
 
 
 country.innerHTML +=
+
 `<option value="${place}">
 ${place}
 </option>`;
@@ -339,4 +448,4 @@ ${place}
 });
 
 
-}
+  }
