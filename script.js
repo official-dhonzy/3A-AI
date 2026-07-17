@@ -17,48 +17,37 @@ async function askAI() {
 
     answer.innerHTML = reply;
 
+    // 🔊 Read AI answer aloud
+    speakAnswer(reply);
+
     chatHistory.push({
       question: question,
       answer: reply
     });
 
-    history.innerHTML += `
-      <div>
-        <b>You:</b> ${question}<br>
-        <b>3A AI:</b> ${reply}
-        <hr>
-      </div>
-    `;
+    if (history) {
+      history.innerHTML += `
+        <div>
+          <b>You:</b> ${question}<br>
+          <b>3A AI:</b> ${reply}
+          <hr>
+        </div>
+      `;
+    }
 
   } catch (error) {
     console.error(error);
-    answer.innerHTML = "Error connecting to 3A AI.";
+    answer.innerHTML = "3A AI is busy right now. Please try again shortly.";
   }
+}
+
+function speakAnswer(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "en-US";
+  speech.rate = 1;
+  speech.pitch = 1;
+
+  window.speechSynthesis.speak(speech);
 }
 
 window.askAI = askAI;
-
-
-function startVoice() {
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    alert("Voice input is not supported on this browser.");
-    return;
-  }
-
-  const recognition = new SpeechRecognition();
-
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
-    document.getElementById("question").value = text;
-    askAI();
-  };
-
-  recognition.start();
-}
