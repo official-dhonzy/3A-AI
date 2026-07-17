@@ -51,3 +51,15 @@ function speakAnswer(text) {
 }
 
 window.askAI = askAI;
+const imageInput = document.getElementById("imageInput");
+
+if (imageInput) {
+  imageInput.addEventListener("change", function () {
+    const file = this.files[0];
+
+    if (file) {
+      document.getElementById("answer").innerHTML =
+        "Image selected: " + file.name + ". Now ask 3A AI about it.";
+    }
+  });
+}
