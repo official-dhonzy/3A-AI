@@ -2,18 +2,21 @@ let chatHistory = [];
 
 async function askAI() {
   const question = document.getElementById("question").value;
+  const imageInput = document.getElementById("imageInput");
+  const imageFile = imageInput ? imageInput.files[0] : null;
+
   const answer = document.getElementById("answer");
   const history = document.getElementById("history");
 
-  if (!question.trim()) {
-    answer.innerHTML = "Please type a question.";
+  if (!question.trim() && !imageFile) {
+    answer.innerHTML = "Please type a question or select an image.";
     return;
   }
 
   answer.innerHTML = "3A AI is thinking...";
 
   try {
-    const reply = await window.ask3AAI(question);
+    const reply = await window.ask3AAI(question, imageFile);
 
     answer.innerHTML = reply;
 
@@ -51,6 +54,7 @@ function speakAnswer(text) {
 }
 
 window.askAI = askAI;
+
 const imageInput = document.getElementById("imageInput");
 
 if (imageInput) {
@@ -59,7 +63,7 @@ if (imageInput) {
 
     if (file) {
       document.getElementById("answer").innerHTML =
-        "Image selected: " + file.name + ". Now ask 3A AI about it.";
+        "Image selected: " + file.name + ". Ask 3A AI about it.";
     }
   });
 }
