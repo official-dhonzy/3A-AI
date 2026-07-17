@@ -18,59 +18,20 @@
   <p>Your AI assistant for global and African solutions.</p>
 
 
-  <!-- Account -->
-
-  <section id="account">
-
-    <h3>👤 3A AI Account</h3>
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Email"
-    >
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
-
-    <button onclick="signUp()">
-      📝 Sign Up
-    </button>
-
-    <button onclick="login()">
-      🔑 Login
-    </button>
-
-    <button onclick="logout()">
-      🚪 Logout
-    </button>
-
-    <p id="userStatus">
-      Not logged in
-    </p>
-
-  </section>
-
-
-
   <!-- Question -->
 
-  <input
-    id="question"
-    type="text"
+  <input 
+    id="question" 
+    type="text" 
     placeholder="Ask 3A AI anything..."
   >
 
 
-
   <!-- Image -->
 
-  <input
-    id="imageInput"
-    type="file"
+  <input 
+    id="imageInput" 
+    type="file" 
     accept="image/*"
   >
 
@@ -98,7 +59,6 @@
   <div id="locationOptions" style="display:none;">
 
     <h3>🌍 Choose Location</h3>
-
 
     <select id="continent">
 
@@ -141,15 +101,87 @@
 
     </select>
 
+  </div>
+
+
+
+
+  <!-- Buttons -->
+
+  <div>
+
+    <button onclick="startVoice()">
+      🎤
+    </button>
+
+
+    <button onclick="askAI()">
+      Ask
+    </button>
 
   </div>
 
 
 
 
+  <!-- Answer -->
+
+  <div id="answer">
+
+    Hello! I am 3A AI. How can I help you?
+
+  </div>
+
+
+
+
+  <!-- Chat History -->
+
+  <h2>
+    💬 Chat History
+  </h2>
+
+  <div id="history"></div>
+
+
+
+
+  <!-- Solutions -->
+
+  <h2>
+    Explore Solutions
+  </h2>
+
+
+  <button onclick="askCategory('Agriculture')">
+    🌱 Agriculture
+  </button>
+
+
+  <button onclick="askCategory('Education')">
+    📚 Education
+  </button>
+
+
+  <button onclick="askCategory('Health')">
+    🏥 Health
+  </button>
+
+
+  <button onclick="askCategory('Sanitation')">
+    🚰 Sanitation
+  </button>
+
+
+
+
+
   <!-- Language -->
 
-  <h3>🌐 Language</h3>
+  <h3>
+    🌐 Language
+  </h3>
+
 
   <select id="language">
 
@@ -194,70 +226,51 @@
 
 
 
-  <!-- Buttons -->
 
-  <div>
+  <!-- Account -->
 
-    <button onclick="startVoice()">
-      🎤
+  <section id="account">
+
+    <h3>
+      👤 3A AI Account
+    </h3>
+
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
+
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+
+    <button onclick="signUp()">
+      📝 Sign Up
     </button>
 
-    <button onclick="askAI()">
-      Ask
+
+    <button onclick="login()">
+      🔑 Login
     </button>
 
-  </div>
+
+    <button onclick="logout()">
+      🚪 Logout
+    </button>
 
 
+    <p id="userStatus">
+      Not logged in
+    </p>
 
 
-  <!-- Answer -->
-
-  <div id="answer">
-
-    Hello! I am 3A AI. How can I help you?
-
-  </div>
-
-
-
-
-  <!-- History -->
-
-  <h2>
-    💬 Chat History
-  </h2>
-
-  <div id="history"></div>
-
-
-
-
-  <!-- Categories -->
-
-  <h2>
-    Explore Solutions
-  </h2>
-
-
-  <button onclick="askCategory('Agriculture')">
-    🌱 Agriculture
-  </button>
-
-
-  <button onclick="askCategory('Education')">
-    📚 Education
-  </button>
-
-
-  <button onclick="askCategory('Health')">
-    🏥 Health
-  </button>
-
-
-  <button onclick="askCategory('Sanitation')">
-    🚰 Sanitation
-  </button>
+  </section>
 
 
 
