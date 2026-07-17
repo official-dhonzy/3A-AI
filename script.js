@@ -2,76 +2,110 @@ let chatHistory = [];
 
 async function askAI() {
 
-  const question = document.getElementById("question").value;
+  const questionInput = document.getElementById("question");
   const answer = document.getElementById("answer");
   const history = document.getElementById("history");
-
   const imageInput = document.getElementById("imageInput");
+
+  const question = questionInput.value;
   const imageFile = imageInput ? imageInput.files[0] : null;
 
 
   if (!question.trim() && !imageFile) {
-    answer.innerHTML = "Please type a question or upload an image.";
+
+    answer.innerHTML =
+      "Please type a question or upload an image.";
+
     return;
+
   }
 
 
-  answer.innerHTML = "3A AI is thinking...";
+  answer.innerHTML =
+    "3A AI is thinking...";
 
 
   try {
 
-    const reply = await window.ask3AAI(question, imageFile);
+
+    if (!window.ask3AAI) {
+
+      answer.innerHTML =
+        "AI is still loading. Refresh and try again.";
+
+      return;
+
+    }
+
+
+    const reply =
+      await window.ask3AAI(question, imageFile);
+
+
 
     answer.innerHTML = reply;
 
-    speakAnswer(reply);
 
 
     chatHistory.push({
+
       question: question,
       answer: reply
+
     });
+
 
 
     if (history) {
 
       history.innerHTML += `
+
       <div>
-        <b>You:</b> ${question}<br>
-        <b>3A AI:</b> ${reply}
-        <hr>
+
+      <b>You:</b> ${question}
+
+      <br>
+
+      <b>3A AI:</b> ${reply}
+
+      <hr>
+
       </div>
+
       `;
 
     }
 
 
-  } catch(error) {
+
+    speakAnswer(reply);
+
+
+
+  } catch (error) {
+
 
     console.log(error);
 
+
     answer.innerHTML =
-      "3A AI error: " + error.message;
+      "AI Error: " + error.message;
+
 
   }
 
 }
 
 
+
 window.askAI = askAI;
 
 
 
+
+// Voice input
+
 function startVoice() {
-
-  if (!("webkitSpeechRecognition" in window ||
-        "SpeechRecognition" in window)) {
-
-    alert("Voice is not supported.");
-
-    return;
-  }
 
 
   const SpeechRecognition =
@@ -79,7 +113,17 @@ function startVoice() {
     window.webkitSpeechRecognition;
 
 
-  const recognition = new SpeechRecognition();
+  if (!SpeechRecognition) {
+
+    alert("Voice input is not supported.");
+
+    return;
+
+  }
+
+
+  const recognition =
+    new SpeechRecognition();
 
 
   recognition.lang = "en-US";
@@ -88,18 +132,23 @@ function startVoice() {
   recognition.start();
 
 
+
   recognition.onresult = function(event) {
+
 
     const text =
       event.results[0][0].transcript;
 
 
-    document.getElementById("question").value = text;
+    document.getElementById("question").value =
+      text;
 
 
     askAI();
 
+
   };
+
 
 }
 
@@ -108,12 +157,18 @@ window.startVoice = startVoice;
 
 
 
+
+// Category buttons
+
 function askCategory(topic) {
+
 
   document.getElementById("question").value =
     "Give me solutions about " + topic;
 
+
   askAI();
+
 
 }
 
@@ -122,18 +177,161 @@ window.askCategory = askCategory;
 
 
 
+
+// AI voice response
+
 function speakAnswer(text) {
 
-  const speech =
-    new SpeechSynthesisUtterance(text);
 
-  speech.lang = "en-US";
-
-  speech.rate = 1;
-
-  speech.pitch = 1;
+  if ("speechSynthesis" in window) {
 
 
-  window.speechSynthesis.speak(speech);
+    const speech =
+      new SpeechSynthesisUtterance(text);
+
+
+    speech.lang =
+      "en-US";
+
+
+    window.speechSynthesis.speak(speech);
+
+
+  }
+
+}
+
+
+
+
+// Location selector
+
+const answerType =
+document.getElementById("answerType");
+
+
+const locationOptions =
+document.getElementById("locationOptions");
+
+
+if (answerType) {
+
+
+  answerType.addEventListener("change", function(){
+
+
+    if (this.value === "location") {
+
+      locationOptions.style.display =
+        "block";
+
+    } else {
+
+      locationOptions.style.display =
+        "none";
+
+    }
+
+
+  });
+
+
+}
+
+
+
+
+// Countries
+
+const countries = {
+
+
+Africa: [
+"Ghana 🇬🇭",
+"Nigeria 🇳🇬",
+"Kenya 🇰🇪",
+"South Africa 🇿🇦",
+"Egypt 🇪🇬",
+"Ethiopia 🇪🇹",
+"Tanzania 🇹🇿",
+"Uganda 🇺🇬",
+"Rwanda 🇷🇼",
+"Morocco 🇲🇦"
+],
+
+
+Asia: [
+"China 🇨🇳",
+"India 🇮🇳",
+"Japan 🇯🇵",
+"South Korea 🇰🇷"
+],
+
+
+Europe: [
+"United Kingdom 🇬🇧",
+"France 🇫🇷",
+"Germany 🇩🇪"
+],
+
+
+"North America": [
+"USA 🇺🇸",
+"Canada 🇨🇦",
+"Mexico 🇲🇽"
+],
+
+
+"South America": [
+"Brazil 🇧🇷",
+"Argentina 🇦🇷"
+],
+
+
+Oceania: [
+"Australia 🇦🇺",
+"New Zealand 🇳🇿"
+]
+
+
+};
+
+
+
+const continent =
+document.getElementById("continent");
+
+
+const country =
+document.getElementById("country");
+
+
+
+if (continent) {
+
+
+  continent.addEventListener("change", function(){
+
+
+    country.innerHTML =
+      '<option value="">Choose Country</option>';
+
+
+
+    countries[this.value].forEach(function(place){
+
+
+      country.innerHTML +=
+
+      `<option value="${place}">
+      ${place}
+      </option>`;
+
+
+    });
+
+
+  });
+
 
 }
