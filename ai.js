@@ -1,94 +1,166 @@
 import { model } from "./firebase.js";
 
+
 window.ask3AAI = async function(question, imageFile = null) {
+
   try {
 
-    const languageElement = document.getElementById("language");
-    const selectedLanguage = languageElement
-      ? languageElement.value
-      : "English";
 
-    const answerTypeElement = document.getElementById("answerType");
-    const continentElement = document.getElementById("continent");
-    const countryElement = document.getElementById("country");
-
-    let locationInfo = "";
-
-    if (
-      answerTypeElement &&
-      answerTypeElement.value === "location"
-    ) {
-      locationInfo =
-        "Answer based on this location: " +
-        continentElement.value +
-        ", " +
-        countryElement.value;
-    }
+    const language =
+      document.getElementById("language")?.value || "English";
 
 
-    const prompt = `
-You are 3A AI, an intelligent assistant.
+    const mode =
+      document.getElementById("answerType")?.value || "general";
 
-Answer language: ${selectedLanguage}
 
-${locationInfo}
+    const continent =
+      document.getElementById("continent")?.value || "";
 
-Give helpful, accurate answers.
-Consider local culture, resources, and solutions when location is selected.
 
-User question:
-${question}
+    const country =
+      document.getElementById("country")?.value || "";
+
+
+
+    let instructions = `
+
+You are 3A AI.
+
+You are an assistant for global and African solutions.
+
+Reply in ${language}.
+
 `;
 
 
-    if (imageFile) {
 
-      const imageBase64 = await fileToBase64(imageFile);
+    if(mode === "location") {
 
-      const result = await model.generateContent([
-        {
-          text: prompt
-        },
-        {
-          inlineData: {
-            data: imageBase64.split(",")[1],
-            mimeType: imageFile.type
-          }
-        }
-      ]);
+      instructions += `
 
-      return result.response.text();
+Give answers based on:
+
+Continent: ${continent}
+
+Country: ${country}
+
+Consider local culture, resources, and conditions.
+
+`;
 
     }
 
 
-    const result = await model.generateContent(prompt);
+
+    instructions += `
+
+User question:
+
+${question}
+
+`;
+
+
+
+
+    if(imageFile){
+
+
+      const image =
+        await fileToBase64(imageFile);
+
+
+
+      const result =
+      await model.generateContent([
+
+
+        {
+
+          text: instructions
+
+        },
+
+
+        {
+
+          inlineData: {
+
+            data: image.split(",")[1],
+
+            mimeType: imageFile.type
+
+          }
+
+        }
+
+
+      ]);
+
+
+
+      return result.response.text();
+
+
+
+    }
+
+
+
+
+
+    const result =
+    await model.generateContent(instructions);
+
+
 
     return result.response.text();
 
 
-  } catch (error) {
+
+  } catch(error) {
+
 
     console.log(error);
 
-    return "3A AI is busy right now. Please try again shortly.";
+
+    return "AI Error: " + error.message;
+
 
   }
+
+
 };
 
 
-function fileToBase64(file) {
 
-  return new Promise((resolve, reject) => {
 
-    const reader = new FileReader();
+function fileToBase64(file){
 
-    reader.onload = () => resolve(reader.result);
 
-    reader.onerror = reject;
+return new Promise((resolve,reject)=>{
 
-    reader.readAsDataURL(file);
 
-  });
+const reader =
+new FileReader();
 
-      }
+
+reader.onload =
+()=>resolve(reader.result);
+
+
+
+reader.onerror =
+reject;
+
+
+
+reader.readAsDataURL(file);
+
+
+
+});
+
+
+}
