@@ -17,20 +17,58 @@
 
   <p>Your AI assistant for African solutions.</p>
 
+
   <input id="question" type="text" placeholder="Ask 3A AI anything...">
-<input id="imageInput" type="file" accept="image/*">
+
+
+  <input id="imageInput" type="file" accept="image/*">
+
+
+  <!-- AI Answer Type -->
+  <select id="answerType">
+    <option value="general">🤖 General AI</option>
+    <option value="location">🌍 Location AI</option>
+  </select>
+
+
+  <!-- Location Selection -->
+  <div id="locationOptions" style="display:none;">
+
+    <h3>🌍 Choose Location</h3>
+
+    <select id="continent">
+      <option value="">Choose Continent</option>
+      <option value="Africa">🌍 Africa</option>
+      <option value="Asia">🌏 Asia</option>
+      <option value="Europe">🌍 Europe</option>
+      <option value="North America">🌎 North America</option>
+      <option value="South America">🌎 South America</option>
+      <option value="Oceania">🌏 Oceania</option>
+    </select>
+
+
+    <select id="country">
+      <option value="">Choose Country</option>
+    </select>
+
+  </div>
+
+
   <div>
     <button onclick="startVoice()">🎤</button>
     <button onclick="askAI()">Ask</button>
   </div>
 
+
   <div id="answer">
     Hello! I am 3A AI. How can I help you today?
   </div>
 
+
   <h2>💬 Chat History</h2>
 
   <div id="history"></div>
+
 
   <h2>Explore Africa's Solutions</h2>
 
@@ -39,61 +77,66 @@
   <button onclick="askCategory('Health')">🏥 Health</button>
   <button onclick="askCategory('Sanitation')">🚰 Sanitation</button>
 
+
 </div>
+
 
 <script type="module" src="firebase.js"></script>
 <script type="module" src="ai.js"></script>
 <script src="script.js"></script>
 
+
 <script>
+
 function askCategory(topic) {
+
   document.getElementById("question").value =
-    "Give me African solutions about " + topic;
+  "Give me solutions about " + topic;
+
   askAI();
+
 }
+
 
 function startVoice() {
+
   if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+
     alert("Voice input is not supported in this browser.");
     return;
+
   }
 
+
   const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  window.SpeechRecognition || window.webkitSpeechRecognition;
+
 
   const recognition = new SpeechRecognition();
+
+
   recognition.lang = "en-US";
+
   recognition.start();
 
+
   recognition.onresult = function(event) {
-    const text = event.results[0][0].transcript;
+
+    const text =
+    event.results[0][0].transcript;
+
+
     document.getElementById("question").value = text;
+
     askAI();
+
   };
+
 }
+
+
 </script>
+
 
 </body>
 </html>
-<select id="answerType">
-  <option value="general">🤖 General AI</option>
-  <option value="location">🌍 Location AI</option>
-</select>
-
-<div id="locationOptions" style="display:none;">
-
-  <select id="continent">
-    <option value="">Choose Continent</option>
-    <option value="Africa">🌍 Africa</option>
-    <option value="Asia">🌏 Asia</option>
-    <option value="Europe">🌍 Europe</option>
-    <option value="North America">🌎 North America</option>
-    <option value="South America">🌎 South America</option>
-    <option value="Oceania">🌏 Oceania</option>
-  </select>
-
-  <select id="country">
-    <option value="">Choose Country</option>
-  </select>
-
-</div>
