@@ -7,45 +7,47 @@ window.ask3AAI = async function(question, imageFile = null) {
 
 
     const language =
-      document.getElementById("language")?.value || "English";
+    document.getElementById("language")?.value || "English";
 
 
     const mode =
-      document.getElementById("answerType")?.value || "general";
+    document.getElementById("answerType")?.value || "general";
 
 
     const continent =
-      document.getElementById("continent")?.value || "";
+    document.getElementById("continent")?.value || "";
 
 
     const country =
-      document.getElementById("country")?.value || "";
+    document.getElementById("country")?.value || "";
 
 
 
-    let instructions = `
+    let prompt = `
 
 You are 3A AI.
 
-You are an assistant for global and African solutions.
+You are an African and global AI assistant.
 
-Reply in ${language}.
+Answer in ${language}.
+
+Be helpful, clear, and practical.
 
 `;
 
 
 
-    if(mode === "location") {
+    if(mode === "location"){
 
-      instructions += `
+      prompt += `
 
-Give answers based on:
+The user selected this location:
 
 Continent: ${continent}
 
 Country: ${country}
 
-Consider local culture, resources, and conditions.
+Give answers that consider this location.
 
 `;
 
@@ -53,7 +55,7 @@ Consider local culture, resources, and conditions.
 
 
 
-    instructions += `
+    prompt += `
 
 User question:
 
@@ -64,44 +66,34 @@ ${question}
 
 
 
+
     if(imageFile){
 
 
       const image =
-        await fileToBase64(imageFile);
+      await fileToBase64(imageFile);
 
 
 
       const result =
       await model.generateContent([
 
-
         {
-
-          text: instructions
-
+          text: prompt
         },
 
 
         {
-
-          inlineData: {
-
-            data: image.split(",")[1],
-
-            mimeType: imageFile.type
-
+          inlineData:{
+            data:image.split(",")[1],
+            mimeType:imageFile.type
           }
-
         }
-
 
       ]);
 
 
-
       return result.response.text();
-
 
 
     }
@@ -109,9 +101,8 @@ ${question}
 
 
 
-
     const result =
-    await model.generateContent(instructions);
+    await model.generateContent(prompt);
 
 
 
@@ -119,13 +110,13 @@ ${question}
 
 
 
-  } catch(error) {
+  } catch(error){
 
 
     console.log(error);
 
 
-    return "AI Error: " + error.message;
+    return "3A AI Error: " + error.message;
 
 
   }
@@ -142,18 +133,15 @@ function fileToBase64(file){
 return new Promise((resolve,reject)=>{
 
 
-const reader =
-new FileReader();
+const reader = new FileReader();
 
 
 reader.onload =
 ()=>resolve(reader.result);
 
 
-
 reader.onerror =
 reject;
-
 
 
 reader.readAsDataURL(file);
