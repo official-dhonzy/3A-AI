@@ -187,4 +187,8 @@ sendMessage();
 };
 
 }
-window.startVoice = startVoice;
+function startVoice(){
+
+alert("🎤 Microphone button clicked!");
+
+}
