@@ -6,6 +6,7 @@ import {
   GoogleAIBackend
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
 
+
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -14,6 +15,17 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+
+
+// Firebase Configuration
 
 const firebaseConfig = {
 
@@ -33,7 +45,13 @@ appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 
 
 
+
+
+// Initialize Firebase
+
 const app = initializeApp(firebaseConfig);
+
+
 
 
 
@@ -43,7 +61,20 @@ const auth = getAuth(app);
 
 
 
+
+
+// Firestore Database
+
+const db = getFirestore(app);
+
+
+
+
+
+// Sign Up
+
 window.signUp = async function(){
+
 
 const email =
 document.getElementById("email").value;
@@ -53,7 +84,9 @@ const password =
 document.getElementById("password").value;
 
 
+
 try{
+
 
 await createUserWithEmailAndPassword(
 auth,
@@ -62,21 +95,31 @@ password
 );
 
 
-alert("Account created!");
+alert("Account created successfully!");
+
+
 
 }
+
 
 catch(error){
 
+
 alert(error.message);
 
+
 }
+
 
 };
 
 
 
 
+
+
+
+// Login
 
 window.login = async function(){
 
@@ -102,6 +145,7 @@ password
 
 alert("Login successful!");
 
+
 location.href="home.html";
 
 
@@ -110,7 +154,9 @@ location.href="home.html";
 
 catch(error){
 
+
 alert(error.message);
+
 
 }
 
@@ -122,13 +168,21 @@ alert(error.message);
 
 
 
+
+// Logout
+
 window.logout = async function(){
+
 
 await signOut(auth);
 
+
 location.href="login.html";
 
+
 };
+
+
 
 
 
@@ -144,6 +198,7 @@ backend: new GoogleAIBackend()
 
 
 
+
 const model = getGenerativeModel(ai, {
 
 model: "gemini-3.5-flash"
@@ -152,4 +207,54 @@ model: "gemini-3.5-flash"
 
 
 
-export { model };
+
+
+
+
+// Save chats
+
+window.saveChat = async function(question, answer){
+
+
+try{
+
+
+await addDoc(collection(db, "chats"), {
+
+
+question: question,
+
+
+answer: answer,
+
+
+time: serverTimestamp()
+
+
+});
+
+
+console.log("Chat saved");
+
+
+}
+
+
+catch(error){
+
+
+console.log("Save error:", error);
+
+
+}
+
+
+};
+
+
+
+
+
+
+
+export { model, db };
