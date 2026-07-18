@@ -11,7 +11,8 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut
+  signOut,
+  onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
@@ -21,7 +22,6 @@ import {
   addDoc,
   serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
-
 
 
 
@@ -45,13 +45,9 @@ appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 
 
 
-
-
 // Initialize Firebase
 
 const app = initializeApp(firebaseConfig);
-
-
 
 
 
@@ -61,12 +57,9 @@ const auth = getAuth(app);
 
 
 
-
-
-// Firestore Database
+// Firestore
 
 const db = getFirestore(app);
-
 
 
 
@@ -75,18 +68,14 @@ const db = getFirestore(app);
 
 window.signUp = async function(){
 
-
 const email =
 document.getElementById("email").value;
-
 
 const password =
 document.getElementById("password").value;
 
 
-
 try{
-
 
 await createUserWithEmailAndPassword(
 auth,
@@ -97,22 +86,18 @@ password
 
 alert("Account created successfully!");
 
+location.href="home.html";
 
 
 }
-
 
 catch(error){
 
-
 alert(error.message);
-
 
 }
 
-
 };
-
 
 
 
@@ -123,10 +108,8 @@ alert(error.message);
 
 window.login = async function(){
 
-
 const email =
 document.getElementById("email").value;
-
 
 const password =
 document.getElementById("password").value;
@@ -145,21 +128,16 @@ password
 
 alert("Login successful!");
 
-
 location.href="home.html";
 
 
 }
 
-
 catch(error){
-
 
 alert(error.message);
 
-
 }
-
 
 };
 
@@ -173,14 +151,52 @@ alert(error.message);
 
 window.logout = async function(){
 
-
 await signOut(auth);
-
 
 location.href="login.html";
 
-
 };
+
+
+
+
+
+
+
+// User status
+
+onAuthStateChanged(auth,(user)=>{
+
+
+const status =
+document.getElementById("userStatus");
+
+
+if(status){
+
+
+if(user){
+
+status.innerHTML =
+"Logged in: " + user.email;
+
+
+}
+
+else{
+
+
+status.innerHTML =
+"Guest";
+
+
+}
+
+
+}
+
+
+});
 
 
 
@@ -211,7 +227,7 @@ model: "gemini-3.5-flash"
 
 
 
-// Save chats
+// Save user chats
 
 window.saveChat = async function(question, answer){
 
@@ -219,7 +235,11 @@ window.saveChat = async function(question, answer){
 try{
 
 
-await addDoc(collection(db, "chats"), {
+const user = auth.currentUser;
+
+
+
+await addDoc(collection(db,"chats"),{
 
 
 question: question,
@@ -228,10 +248,14 @@ question: question,
 answer: answer,
 
 
+userId: user ? user.uid : "guest",
+
+
 time: serverTimestamp()
 
 
 });
+
 
 
 console.log("Chat saved");
@@ -256,5 +280,4 @@ console.log("Save error:", error);
 
 
 
-
-export { model, db };
+export { model, db, auth };
