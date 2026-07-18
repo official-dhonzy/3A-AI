@@ -10,38 +10,41 @@ function sendMessage() {
     }
 
 
-    // Show user's message
-    const userMessage = document.createElement("div");
-    userMessage.className = "user-message";
-    userMessage.innerHTML = question;
+    // User message
+    const user = document.createElement("div");
+    user.className = "user-message";
+    user.innerHTML = question;
 
-    chatBox.appendChild(userMessage);
+    chatBox.appendChild(user);
 
 
     input.value = "";
 
 
-    // AI thinking message
-    const thinking = document.createElement("div");
-    thinking.className = "ai-message";
-    thinking.innerHTML = "3A AI is thinking...";
+    // AI typing
+    const ai = document.createElement("div");
+    ai.className = "ai-message";
+    ai.innerHTML = "3A AI is thinking...";
 
-    chatBox.appendChild(thinking);
+    chatBox.appendChild(ai);
 
 
-    // Ask AI
-    setTimeout(async () => {
+    chatBox.scrollTop = chatBox.scrollHeight;
 
-        if (window.ask3AAI) {
+
+
+    setTimeout(async function(){
+
+        if(window.ask3AAI){
 
             const answer = await window.ask3AAI(question);
 
-            thinking.innerHTML = answer;
+            ai.innerHTML = answer;
 
         } else {
 
-            thinking.innerHTML =
-            "Welcome to 3A AI. My AI system is connecting...";
+            ai.innerHTML =
+            "🌍 3A AI is connecting. Please try again.";
 
         }
 
@@ -49,6 +52,30 @@ function sendMessage() {
         chatBox.scrollTop = chatBox.scrollHeight;
 
 
-    }, 1000);
+    },1000);
+
+}
+
+
+
+
+function newChat(){
+
+    const chatBox = document.getElementById("chat-box");
+
+
+    chatBox.innerHTML = `
+
+    <div class="ai-message">
+
+    👋 New chat started.
+
+    <br><br>
+
+    How can I help you today?
+
+    </div>
+
+    `;
 
 }
