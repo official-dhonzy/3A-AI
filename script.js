@@ -151,3 +151,39 @@ How can I help you today?
 
 
 }
+function startVoice(){
+
+const SpeechRecognition =
+window.SpeechRecognition || window.webkitSpeechRecognition;
+
+
+if(!SpeechRecognition){
+
+alert("Voice input is not supported on this browser.");
+
+return;
+
+}
+
+
+const recognition = new SpeechRecognition();
+
+recognition.lang = "en-US";
+
+recognition.start();
+
+
+recognition.onresult = function(event){
+
+const text =
+event.results[0][0].transcript;
+
+
+document.getElementById("question").value = text;
+
+
+sendMessage();
+
+};
+
+}
