@@ -1,198 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
 
-<head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+body {
+    background: #111;
+    color: white;
+    min-height: 100vh;
+}
 
-<title>3A AI Home</title>
 
-<link rel="stylesheet" href="style.css">
+/* 3A AI COLORS */
 
-</head>
+.red {
+    color: #e63946;
+}
 
+.yellow {
+    color: #f1c40f;
+}
 
-<body>
+.green {
+    color: #2ecc71;
+}
 
 
-<header class="top-bar">
+/* HEADER */
 
-<h1>
-🌍 <span class="red">3</span><span class="yellow">A</span><span class="green">AI</span>
-</h1>
+.top-bar {
 
+    height: 60px;
 
-<button onclick="location.href='menu.html'">
-☰
-</button>
+    display: flex;
 
+    align-items: center;
 
-</header>
+    justify-content: space-between;
 
+    padding: 0 20px;
 
+    background: #181818;
 
+    border-bottom: 1px solid #333;
 
-<section class="welcome">
+}
 
-<h2>Hello 👋</h2>
 
-<p>
-What can 3A AI help you with today?
-</p>
+.top-bar h1 {
+    font-size: 24px;
+}
 
-</section>
 
+button {
 
+    background: #e63946;
 
+    color: white;
 
+    border: none;
 
-<section class="features">
+    padding: 10px 15px;
 
+    border-radius: 10px;
 
-<div class="card" onclick="location.href='chat.html'">
+    cursor: pointer;
 
-💬
+}
 
-<h3>AI Chat</h3>
 
-<p>
-Ask anything
-</p>
+/* HOME */
 
-</div>
+.page {
 
+    padding: 20px;
 
+}
 
 
-<div class="card" onclick="location.href='agriculture.html'">
+.card {
 
-🌱
+    background: #1e1e1e;
 
-<h3>Agriculture</h3>
+    margin: 15px 0;
 
-<p>
-Farming solutions
-</p>
+    padding: 20px;
 
-</div>
+    border-radius: 15px;
 
+    border-left: 5px solid #f1c40f;
 
+}
 
 
+.card:hover {
 
-<div class="card" onclick="location.href='education.html'">
+    transform: scale(1.02);
 
-📚
+}
 
-<h3>Education</h3>
 
-<p>
-Learn better
-</p>
+/* CHAT */
 
-</div>
+#chat-box {
 
+    height: calc(100vh - 130px);
 
+    overflow-y: auto;
 
+    padding: 20px;
 
+}
 
-<div class="card" onclick="location.href='health.html'">
 
-🏥
+.ai-message {
 
-<h3>Health</h3>
+    background: #222;
 
-<p>
-Health information
-</p>
+    padding: 15px;
 
-</div>
+    border-radius: 15px;
 
+    max-width: 85%;
 
+    margin: 15px 0;
 
+    line-height: 1.5;
 
+}
 
-<div class="card" onclick="location.href='sanitation.html'">
 
-🚰
 
-<h3>Sanitation</h3>
+.user-message {
 
-<p>
-Clean communities
-</p>
+    background: #2ecc71;
 
-</div>
+    color: black;
 
+    padding: 15px;
 
+    border-radius: 15px;
 
+    max-width: 85%;
 
+    margin: 15px 0 15px auto;
 
-<div class="card" onclick="location.href='business.html'">
+}
 
-💼
 
-<h3>Business</h3>
 
-<p>
-Ideas and growth
-</p>
+/* CHAT INPUT */
 
-</div>
+.chat-input {
 
+    position: fixed;
 
+    bottom: 0;
 
+    width: 100%;
 
+    display: flex;
 
-<div class="card" onclick="location.href='technology.html'">
+    gap: 8px;
 
-💻
+    padding: 10px;
 
-<h3>Technology</h3>
+    background: #181818;
 
-<p>
-Tech support
-</p>
+}
 
-</div>
 
 
+.chat-input input {
 
-</section>
+    flex: 1;
 
+    padding: 14px;
 
+    border-radius: 25px;
 
+    border: none;
 
+}
 
-<nav class="bottom-nav">
 
+/* MENU */
 
-<button onclick="location.href='home.html'">
-🏠 Home
-</button>
+.menu {
 
+    padding: 20px;
 
-<button onclick="location.href='chat.html'">
-💬 Chat
-</button>
+}
 
 
-<button onclick="location.href='history.html'">
-📜 History
-</button>
+.menu button {
 
+    display: block;
 
-<button onclick="location.href='profile.html'">
-👤 Profile
-</button>
+    width: 100%;
 
+    margin: 10px 0;
 
-</nav>
+    text-align: left;
 
+}
 
 
+/* LOGIN */
 
-</body>
+.login-box {
 
-</html>
+    padding: 30px;
+
+}
+
+
+.login-box input {
+
+    width: 100%;
+
+    padding: 15px;
+
+    margin: 10px 0;
+
+    border-radius: 10px;
+
+    border: none;
+
+}
+
+
+/* BOTTOM NAV */
+
+.bottom-nav {
+
+    position: fixed;
+
+    bottom: 0;
+
+    width: 100%;
+
+    display: flex;
+
+    justify-content: space-around;
+
+    background: #181818;
+
+    padding: 10px;
+
+}
