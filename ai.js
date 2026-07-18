@@ -1,135 +1,37 @@
-console.log("3A AI loaded");
+import { model } from "./firebase.js";
 
 
-window.ask3AAI = async function(question) {
-
-    const text = question.toLowerCase();
+window.ask3AAI = async function(question){
 
 
-    if (text.includes("hello") || text.includes("hi")) {
-
-        return `
-        👋 Hello! I am 3A AI.
-
-        Accessible • Affordable • African AI.
-
-        How can I help you today?
-        `;
-
-    }
+try{
 
 
-    if (text.includes("agriculture") || text.includes("farm") || text.includes("crop")) {
-
-        return `
-        🌱 Agriculture AI
-
-        Agriculture is the practice of growing crops and raising animals.
-
-        Farmers can improve production through:
-        • Better seeds
-        • Good soil management
-        • Irrigation
-        • Pest control
-        • Modern farming methods
-        `;
-
-    }
+const result = await model.generateContent(question);
 
 
-    if (text.includes("education") || text.includes("school") || text.includes("learn")) {
 
-        return `
-        📚 Education AI
-
-        Education helps people gain knowledge and skills.
-
-        I can help with:
-        • Learning explanations
-        • Study tips
-        • School subjects
-        • Digital learning
-        `;
-
-    }
+const response = result.response;
 
 
-    if (text.includes("health") || text.includes("healthy")) {
 
-        return `
-        🏥 Health AI
-
-        Healthy living includes:
-        • Good nutrition
-        • Clean water
-        • Hygiene
-        • Exercise
-        • Proper medical support
-
-        For serious medical concerns, contact a health professional.
-        `;
-
-    }
+return response.text();
 
 
-    if (text.includes("sanitation") || text.includes("water") || text.includes("waste")) {
 
-        return `
-        🚰 Sanitation AI
-
-        Clean communities need:
-        • Safe water
-        • Proper waste management
-        • Good hygiene
-        • Environmental care
-        `;
-
-    }
+}
 
 
-    if (text.includes("business") || text.includes("money") || text.includes("startup")) {
-
-        return `
-        💼 Business AI
-
-        I can help with:
-        • Business ideas
-        • Planning
-        • Entrepreneurship
-        • Growth strategies
-        `;
-
-    }
+catch(error){
 
 
-    if (text.includes("technology") || text.includes("coding") || text.includes("computer")) {
-
-        return `
-        💻 Technology AI
-
-        I can help with:
-        • Coding
-        • Apps
-        • Digital skills
-        • Artificial Intelligence
-        `;
-
-    }
+console.log(error);
 
 
-    return `
-    🌍 I am 3A AI.
+return "🌍 3A AI is having trouble connecting. Please try again.";
 
-    I can help you with:
 
-    🌱 Agriculture
-    📚 Education
-    🏥 Health
-    🚰 Sanitation
-    💼 Business
-    💻 Technology
+}
 
-    Ask me a question.
-    `;
 
 };
