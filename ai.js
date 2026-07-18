@@ -1,154 +1,85 @@
-import { model } from "./firebase.js";
+window.ask3AAI = async function(question) {
+
+    const text = question.toLowerCase();
 
 
-window.ask3AAI = async function(question, imageFile = null) {
+    if (text.includes("agriculture") || text.includes("farm")) {
 
-  try {
+        return `
+        🌱 Agriculture
 
+        Farming can improve with:
+        - Better seeds
+        - Good soil management
+        - Proper irrigation
+        - Pest control
+        - Modern farming methods
 
-    const language =
-    document.getElementById("language")?.value || "English";
-
-
-    const mode =
-    document.getElementById("answerType")?.value || "general";
-
-
-    const continent =
-    document.getElementById("continent")?.value || "";
-
-
-    const country =
-    document.getElementById("country")?.value || "";
-
-
-
-    let prompt = `
-
-You are 3A AI.
-
-You are an African and global AI assistant.
-
-Answer in ${language}.
-
-Be helpful, clear, and practical.
-
-`;
-
-
-
-    if(mode === "location"){
-
-      prompt += `
-
-The user selected this location:
-
-Continent: ${continent}
-
-Country: ${country}
-
-Give answers that consider this location.
-
-`;
+        Ask me more about farming.
+        `;
 
     }
 
 
+    if (text.includes("education") || text.includes("school")) {
 
-    prompt += `
+        return `
+        📚 Education
 
-User question:
-
-${question}
-
-`;
-
-
-
-
-
-    if(imageFile){
-
-
-      const image =
-      await fileToBase64(imageFile);
-
-
-
-      const result =
-      await model.generateContent([
-
-        {
-          text: prompt
-        },
-
-
-        {
-          inlineData:{
-            data:image.split(",")[1],
-            mimeType:imageFile.type
-          }
-        }
-
-      ]);
-
-
-      return result.response.text();
-
+        Learning improves through:
+        - Access to books and technology
+        - Good teaching methods
+        - Practice and curiosity
+        - Digital learning tools
+        `;
 
     }
 
 
+    if (text.includes("health")) {
+
+        return `
+        🏥 Health
+
+        Staying healthy includes:
+        - Eating balanced meals
+        - Clean water
+        - Hygiene
+        - Regular health checkups
+
+        For medical concerns, consult a qualified health professional.
+        `;
+
+    }
 
 
-    const result =
-    await model.generateContent(prompt);
+    if (text.includes("sanitation") || text.includes("water")) {
+
+        return `
+        🚰 Sanitation
+
+        Clean communities need:
+        - Safe drinking water
+        - Proper waste management
+        - Good hygiene practices
+        - Clean environments
+        `;
+
+    }
 
 
+    return `
+    🌍 Hello! I am 3A AI.
 
-    return result.response.text();
+    I can help with:
+    🌱 Agriculture
+    📚 Education
+    🏥 Health
+    🚰 Sanitation
+    💼 Business
+    💻 Technology
 
-
-
-  } catch(error){
-
-
-    console.log(error);
-
-
-    return "3A AI Error: " + error.message;
-
-
-  }
-
+    What would you like to know?
+    `;
 
 };
-
-
-
-
-function fileToBase64(file){
-
-
-return new Promise((resolve,reject)=>{
-
-
-const reader = new FileReader();
-
-
-reader.onload =
-()=>resolve(reader.result);
-
-
-reader.onerror =
-reject;
-
-
-reader.readAsDataURL(file);
-
-
-
-});
-
-
-}
