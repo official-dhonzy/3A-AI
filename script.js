@@ -39,20 +39,24 @@ input.value = "";
 
 
 
-// AI loading message
+
+// AI loading
 
 const aiMessage = document.createElement("div");
 
 aiMessage.className = "ai-message";
 
-aiMessage.innerHTML = "🌍 3A AI is thinking...";
+aiMessage.innerHTML =
+"🌍 3A AI is thinking...";
 
 
 chatBox.appendChild(aiMessage);
 
 
 
-chatBox.scrollTop = chatBox.scrollHeight;
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
 
 
 
@@ -66,7 +70,8 @@ if(window.ask3AAI){
 
 
 
-const answer = await window.ask3AAI(question);
+const answer =
+await window.ask3AAI(question);
 
 
 
@@ -74,13 +79,31 @@ aiMessage.innerHTML = answer;
 
 
 
+
+
+// Save conversation
+
+if(window.saveChat){
+
+
+window.saveChat(
+question,
+answer
+);
+
+
 }
+
+
+
+}
+
 
 else{
 
 
 aiMessage.innerHTML =
-"3A AI connection not ready.";
+"🌍 3A AI connection not ready.";
 
 
 }
@@ -97,6 +120,8 @@ chatBox.scrollHeight;
 
 
 }
+
+
 
 
 
@@ -123,7 +148,6 @@ How can I help you today?
 </div>
 
 `;
-
 
 
 }
