@@ -18,26 +18,29 @@
 
 <header class="top-bar">
 
+
+<button onclick="location.href='menu.html'">
+☰
+</button>
+
+
+
 <h1>
-🌍 <span class="red">3</span><span class="yellow">A</span><span class="green">AI</span>
+🌍
+<span class="red">3</span>
+<span class="yellow">A</span>
+<span class="green">AI</span>
 </h1>
 
-
-<div>
-
-<button onclick="location.href='home.html'">
-←
-</button>
 
 
 <button onclick="newChat()">
 +
 </button>
 
-</div>
-
 
 </header>
+
 
 
 
@@ -55,20 +58,32 @@ Your African AI assistant.
 
 <br><br>
 
-Ask me about:
-<br>
+Ask me anything about:
+
+<br><br>
+
 🌱 Agriculture
+
 <br>
 📚 Education
+
 <br>
 🏥 Health
+
 <br>
 🚰 Sanitation
+
+<br>
+💼 Business
+
+<br>
+💻 Technology
 
 </div>
 
 
 </main>
+
 
 
 
@@ -81,17 +96,25 @@ Ask me about:
 </button>
 
 
+
 <button>
 🎤
 </button>
 
 
 
-<input 
+
+<input
+
 id="question"
+
 type="text"
+
 placeholder="Ask 3A AI anything..."
+
 >
+
+
 
 
 <button onclick="sendMessage()">
@@ -99,12 +122,14 @@ placeholder="Ask 3A AI anything..."
 </button>
 
 
+
 </footer>
 
 
 
 
-<script src="ai.js"></script>
+
+<script type="module" src="ai.js"></script>
 
 <script src="script.js"></script>
 
