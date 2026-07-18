@@ -1,85 +1,36 @@
 window.ask3AAI = async function(question) {
 
-    const text = question.toLowerCase();
+    let text = question.toLowerCase();
 
 
     if (text.includes("agriculture") || text.includes("farm")) {
 
-        return `
-        🌱 Agriculture
-
-        Farming can improve with:
-        - Better seeds
-        - Good soil management
-        - Proper irrigation
-        - Pest control
-        - Modern farming methods
-
-        Ask me more about farming.
-        `;
+        return "🌱 Agriculture AI\n\nAgriculture is the practice of growing crops and raising animals. Farmers can improve production through better seeds, soil improvement, irrigation, and modern farming methods.";
 
     }
 
 
     if (text.includes("education") || text.includes("school")) {
 
-        return `
-        📚 Education
-
-        Learning improves through:
-        - Access to books and technology
-        - Good teaching methods
-        - Practice and curiosity
-        - Digital learning tools
-        `;
+        return "📚 Education AI\n\nEducation helps people gain knowledge and skills. 3A AI can help with learning, explanations, and study support.";
 
     }
 
 
     if (text.includes("health")) {
 
-        return `
-        🏥 Health
-
-        Staying healthy includes:
-        - Eating balanced meals
-        - Clean water
-        - Hygiene
-        - Regular health checkups
-
-        For medical concerns, consult a qualified health professional.
-        `;
+        return "🏥 Health AI\n\nHealth includes taking care of the body through good nutrition, hygiene, exercise, and proper medical support.";
 
     }
 
 
     if (text.includes("sanitation") || text.includes("water")) {
 
-        return `
-        🚰 Sanitation
-
-        Clean communities need:
-        - Safe drinking water
-        - Proper waste management
-        - Good hygiene practices
-        - Clean environments
-        `;
+        return "🚰 Sanitation AI\n\nClean water, proper waste management, and good hygiene help create healthier communities.";
 
     }
 
 
-    return `
-    🌍 Hello! I am 3A AI.
-
-    I can help with:
-    🌱 Agriculture
-    📚 Education
-    🏥 Health
-    🚰 Sanitation
-    💼 Business
-    💻 Technology
-
-    What would you like to know?
-    `;
+    return "🌍 I am 3A AI, your African AI assistant. Ask me about Agriculture, Education, Health, Sanitation, Business, or Technology.";
 
 };
