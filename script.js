@@ -93,6 +93,8 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 
 
+
+
 function newChat(){
 
 const chatBox =
@@ -133,11 +135,9 @@ window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if(!SpeechRecognition){
 
-
 alert("🎤 Voice input is not supported on this browser.");
 
 return;
-
 
 }
 
@@ -193,6 +193,6 @@ alert("Microphone error: " + event.error);
 
 
 
-// Make button able to access function
+// Make microphone button work
 
 window.startVoice = startVoice;
