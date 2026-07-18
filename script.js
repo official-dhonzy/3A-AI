@@ -187,3 +187,4 @@ sendMessage();
 };
 
 }
+window.startVoice = startVoice;
