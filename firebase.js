@@ -10,28 +10,24 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
+  signOut
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
-// Firebase Configuration
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
 
-  authDomain: "a-ai-d738d.firebaseapp.com",
+authDomain: "a-ai-d738d.firebaseapp.com",
 
-  projectId: "a-ai-d738d",
+projectId: "a-ai-d738d",
 
-  storageBucket: "a-ai-d738d.firebasestorage.app",
+storageBucket: "a-ai-d738d.firebasestorage.app",
 
-  messagingSenderId: "337673964829",
+messagingSenderId: "337673964829",
 
-  appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4",
-
-  measurementId: "G-HHF7M563R0"
+appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 
 };
 
@@ -41,93 +37,82 @@ const app = initializeApp(firebaseConfig);
 
 
 
-// =====================
-// USER ACCOUNT
-// =====================
-
+// Authentication
 
 const auth = getAuth(app);
 
 
 
-// Sign Up
-
 window.signUp = async function(){
 
-
-  const email =
-  document.getElementById("email").value;
-
-
-  const password =
-  document.getElementById("password").value;
+const email =
+document.getElementById("email").value;
 
 
-
-  try {
-
-
-    await createUserWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
+const password =
+document.getElementById("password").value;
 
 
-    alert("Account created successfully!");
+try{
+
+await createUserWithEmailAndPassword(
+auth,
+email,
+password
+);
 
 
+alert("Account created!");
 
-  } catch(error){
+}
 
+catch(error){
 
-    alert(error.message);
+alert(error.message);
 
-
-  }
-
+}
 
 };
 
 
 
 
-
-// Login
 
 window.login = async function(){
 
 
-  const email =
-  document.getElementById("email").value;
+const email =
+document.getElementById("email").value;
 
 
-  const password =
-  document.getElementById("password").value;
-
-
-
-  try {
-
-
-    await signInWithEmailAndPassword(
-      auth,
-      email,
-      password
-    );
-
-
-    alert("Login successful!");
+const password =
+document.getElementById("password").value;
 
 
 
-  } catch(error){
+try{
 
 
-    alert(error.message);
+await signInWithEmailAndPassword(
+auth,
+email,
+password
+);
 
 
-  }
+alert("Login successful!");
+
+location.href="home.html";
+
+
+}
+
+
+catch(error){
+
+alert(error.message);
+
+}
 
 
 };
@@ -136,16 +121,12 @@ window.login = async function(){
 
 
 
-// Logout
 
 window.logout = async function(){
 
+await signOut(auth);
 
-  await signOut(auth);
-
-
-  alert("Logged out");
-
+location.href="login.html";
 
 };
 
@@ -153,54 +134,11 @@ window.logout = async function(){
 
 
 
-// User Status
-
-onAuthStateChanged(auth, (user)=>{
-
-
-  const status =
-  document.getElementById("userStatus");
-
-
-
-  if(status){
-
-
-    if(user){
-
-
-      status.innerHTML =
-      "Logged in: " + user.email;
-
-
-
-    } else {
-
-
-      status.innerHTML =
-      "Not logged in";
-
-
-    }
-
-
-  }
-
-
-});
-
-
-
-
-
-// =====================
-// 3A AI MODEL
-// =====================
-
+// Gemini AI
 
 const ai = getAI(app, {
 
-  backend: new GoogleAIBackend()
+backend: new GoogleAIBackend()
 
 });
 
@@ -208,14 +146,10 @@ const ai = getAI(app, {
 
 const model = getGenerativeModel(ai, {
 
-
-  model: "gemini-3.5-flash"
-
+model: "gemini-3.5-flash"
 
 });
 
 
 
-
-
-export { ai, model };
+export { model };
