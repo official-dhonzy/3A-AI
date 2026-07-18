@@ -18,7 +18,6 @@
 
 <header class="top-bar">
 
-
 <button onclick="location.href='menu.html'">
 ☰
 </button>
@@ -31,42 +30,35 @@
 <span class="green">AI</span>
 </h1>
 
-
 </header>
-
 
 
 
 
 <div class="page">
 
-
 <h2>
 📜 Chat History
 </h2>
 
 
-
 <div id="history">
 
-<p>
-Loading conversations...
-</p>
-
+<p>Loading...</p>
 
 </div>
 
 
-
 </div>
-
-
-
 
 
 
 
 <script type="module">
+
+
+import { initializeApp } 
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 
 import {
@@ -75,28 +67,15 @@ getFirestore,
 
 collection,
 
-getDocs,
+getDocs
 
-orderBy,
+}
 
-query
-
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
-
-
-
-import {
-
-initializeApp
-
-} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-
-
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 
 
 const firebaseConfig = {
-
 
 apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
 
@@ -114,6 +93,115 @@ appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 
 
 
+const app = initializeApp(firebaseConfig);
 
 
-const app = initialize
+const db = getFirestore(app);
+
+
+
+const historyBox =
+document.getElementById("history");
+
+
+
+
+async function loadChats(){
+
+
+try{
+
+
+const snapshot =
+await getDocs(collection(db,"chats"));
+
+
+
+historyBox.innerHTML = "";
+
+
+
+if(snapshot.empty){
+
+
+historyBox.innerHTML =
+"No conversations yet.";
+
+
+return;
+
+
+}
+
+
+
+snapshot.forEach((doc)=>{
+
+
+const chat = doc.data();
+
+
+
+historyBox.innerHTML += `
+
+<div class="card">
+
+<h3>
+You:
+</h3>
+
+<p>
+${chat.question}
+</p>
+
+
+<h3>
+🌍 3A AI:
+</h3>
+
+<p>
+${chat.answer}
+</p>
+
+
+</div>
+
+`;
+
+
+
+});
+
+
+
+}
+
+catch(error){
+
+
+historyBox.innerHTML =
+"Error loading history";
+
+
+console.log(error);
+
+
+}
+
+
+
+}
+
+
+
+loadChats();
+
+
+
+</script>
+
+
+
+</body>
+
+</html>
