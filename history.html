@@ -44,7 +44,9 @@
 
 <div id="history">
 
-<p>Loading...</p>
+<p>
+Loading history...
+</p>
 
 </div>
 
@@ -57,7 +59,7 @@
 <script type="module">
 
 
-import { initializeApp } 
+import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 
@@ -67,11 +69,30 @@ getFirestore,
 
 collection,
 
-getDocs
+getDocs,
+
+query,
+
+where,
+
+orderBy
 
 }
 
 from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+
+import {
+
+getAuth,
+
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+
+
 
 
 
@@ -93,10 +114,15 @@ appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 
 
 
+
+
 const app = initializeApp(firebaseConfig);
 
 
 const db = getFirestore(app);
+
+
+const auth = getAuth(app);
 
 
 
@@ -106,14 +132,37 @@ document.getElementById("history");
 
 
 
-async function loadChats(){
 
 
-try{
+onAuthStateChanged(auth, async(user)=>{
+
+
+if(!user){
+
+
+historyBox.innerHTML =
+"Please login to see your history.";
+
+
+return;
+
+
+}
+
+
+
+const q = query(
+
+collection(db,"chats"),
+
+where("userId","==",user.uid)
+
+);
+
 
 
 const snapshot =
-await getDocs(collection(db,"chats"));
+await getDocs(q);
 
 
 
@@ -132,6 +181,8 @@ return;
 
 
 }
+
+
 
 
 
@@ -174,27 +225,7 @@ ${chat.answer}
 
 
 
-}
-
-catch(error){
-
-
-historyBox.innerHTML =
-"Error loading history";
-
-
-console.log(error);
-
-
-}
-
-
-
-}
-
-
-
-loadChats();
+});
 
 
 
