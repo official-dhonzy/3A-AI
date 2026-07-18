@@ -1,316 +1,41 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>3A AI</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3A AI</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        // Go to the login page after 3 seconds
+        setTimeout(function () {
+            window.location.href = "login.html";
+        }, 3000);
+    </script>
 </head>
 
 <body>
 
-<div class="app">
+<div class="splash">
 
-  <img src="logo.png" alt="3A AI Logo" width="120">
+    <div class="logo">
+        🌍
+    </div>
 
-  <h1>🌍 3A AI</h1>
+    <h1>
+        <span class="red">3</span>
+        <span class="yellow">A</span>
+        <span class="green">AI</span>
+    </h1>
 
-  <p><b>Accessible • Affordable • African AI</b></p>
+    <h3>Accessible • Affordable • African AI</h3>
 
-  <p>Your AI assistant for global and African solutions.</p>
+    <p>Building Africa's Intelligent Future</p>
 
-
-  <!-- Ask Box -->
-
-  <div class="ask-box">
-
-    <input
-      id="question"
-      type="text"
-      placeholder="Ask 3A AI anything..."
-    >
-
-    <button onclick="askAI()">
-      Ask
-    </button>
-
-  </div>
-
-
-  <!-- Voice -->
-
-  <button onclick="startVoice()">
-    🎤 Mic
-  </button>
-
-
-  <!-- Image Upload -->
-
-  <input
-    id="imageInput"
-    type="file"
-    accept="image/*"
-  >
-
-
-  <!-- AI Mode -->
-
-  <select id="answerType">
-
-    <option value="general">
-      🤖 General AI
-    </option>
-
-    <option value="location">
-      🌍 Location AI
-    </option>
-
-  </select>
-
-
-  <!-- Location Selection -->
-
-  <div id="locationOptions" style="display:none;">
-
-    <h3>🌍 Choose Location</h3>
-
-
-    <select id="continent">
-
-      <option value="">
-        Choose Continent
-      </option>
-
-      <option value="Africa">
-        🌍 Africa
-      </option>
-
-      <option value="Asia">
-        🌏 Asia
-      </option>
-
-      <option value="Europe">
-        🌍 Europe
-      </option>
-
-      <option value="North America">
-        🌎 North America
-      </option>
-
-      <option value="South America">
-        🌎 South America
-      </option>
-
-      <option value="Oceania">
-        🌏 Oceania
-      </option>
-
-    </select>
-
-
-    <select id="country">
-
-      <option value="">
-        Choose Country
-      </option>
-
-    </select>
-
-
-  </div>
-    <!-- AI Answer -->
-
-  <div id="answer">
-
-    Hello! I am 3A AI. How can I help you?
-
-  </div>
-
-
-
-  <!-- Explore Solutions -->
-
-  <h2>
-    Explore Solutions
-  </h2>
-
-
-  <button onclick="askCategory('Agriculture')">
-    🌱 Agriculture
-  </button>
-
-
-  <button onclick="askCategory('Education')">
-    📚 Education
-  </button>
-
-
-  <button onclick="askCategory('Health')">
-    🏥 Health
-  </button>
-
-
-  <button onclick="askCategory('Sanitation')">
-    🚰 Sanitation
-  </button>
-
-
-
-
-  <!-- Chat History -->
-
-  <h2>
-    💬 Chat History
-  </h2>
-
-
-  <button onclick="clearHistory()">
-    🗑️ Clear History
-  </button>
-
-
-  <div id="history">
-
-  </div>
-
-
-
-
-  <!-- Language -->
-
-  <h3>
-    🌐 Language
-  </h3>
-
-
-  <select id="language">
-
-
-    <option value="English">
-      🇬🇧 English
-    </option>
-
-
-    <option value="French">
-      🇫🇷 French
-    </option>
-
-
-    <option value="Portuguese">
-      🇵🇹 Portuguese
-    </option>
-
-
-    <option value="Spanish">
-      🇪🇸 Spanish
-    </option>
-
-
-    <option value="Arabic">
-      🕌 Arabic
-    </option>
-
-
-    <option value="Swahili">
-      🇰🇪 Swahili
-    </option>
-
-
-    <option value="Hausa">
-      🇳🇬 Hausa
-    </option>
-
-
-    <option value="Twi">
-      🇬🇭 Twi
-    </option>
-
-
-    <option value="Ewe">
-      🇬🇭 Ewe
-    </option>
-
-
-    <option value="Zulu">
-      🇿🇦 Zulu
-    </option>
-
-
-    <option value="Amharic">
-      🇪🇹 Amharic
-    </option>
-
-
-    <option value="Hindi">
-      🇮🇳 Hindi
-    </option>
-
-
-    <option value="Chinese">
-      🇨🇳 Chinese
-    </option>
-
-
-    <option value="Japanese">
-      🇯🇵 Japanese
-    </option>
-
-
-  </select>
-    <!-- User Account -->
-
-  <section id="account">
-
-    <h3>
-      👤 3A AI Account
-    </h3>
-
-
-    <input
-      id="email"
-      type="email"
-      placeholder="Email"
-    >
-
-
-    <input
-      id="password"
-      type="password"
-      placeholder="Password"
-    >
-
-
-    <button onclick="signUp()">
-      📝 Sign Up
-    </button>
-
-
-    <button onclick="login()">
-      🔑 Login
-    </button>
-
-
-    <button onclick="logout()">
-      🚪 Logout
-    </button>
-
-
-    <p id="userStatus">
-      Not logged in
-    </p>
-
-
-  </section>
-
+    <div class="loader"></div>
 
 </div>
-
-
-
-<script type="module" src="firebase.js"></script>
-
-<script type="module" src="ai.js"></script>
-
-<script src="script.js"></script>
-
 
 </body>
 </html>
