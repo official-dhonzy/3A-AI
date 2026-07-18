@@ -1,81 +1,129 @@
-function sendMessage() {
-
-    const input = document.getElementById("question");
-    const chatBox = document.getElementById("chat-box");
-
-    const question = input.value.trim();
-
-    if (question === "") {
-        return;
-    }
+function sendMessage(){
 
 
-    // User message
-    const user = document.createElement("div");
-    user.className = "user-message";
-    user.innerHTML = question;
+const input = document.getElementById("question");
 
-    chatBox.appendChild(user);
+const chatBox = document.getElementById("chat-box");
 
 
-    input.value = "";
-
-
-    // AI typing
-    const ai = document.createElement("div");
-    ai.className = "ai-message";
-    ai.innerHTML = "3A AI is thinking...";
-
-    chatBox.appendChild(ai);
-
-
-    chatBox.scrollTop = chatBox.scrollHeight;
+const question = input.value.trim();
 
 
 
-    setTimeout(async function(){
+if(question === ""){
 
-        if(window.ask3AAI){
-
-            const answer = await window.ask3AAI(question);
-
-            ai.innerHTML = answer;
-
-        } else {
-
-            ai.innerHTML =
-            "🌍 3A AI is connecting. Please try again.";
-
-        }
-
-
-        chatBox.scrollTop = chatBox.scrollHeight;
-
-
-    },1000);
+return;
 
 }
 
 
 
 
+
+// User message
+
+const userMessage = document.createElement("div");
+
+userMessage.className = "user-message";
+
+userMessage.innerHTML = question;
+
+
+chatBox.appendChild(userMessage);
+
+
+
+input.value = "";
+
+
+
+
+
+// AI loading message
+
+const aiMessage = document.createElement("div");
+
+aiMessage.className = "ai-message";
+
+aiMessage.innerHTML = "🌍 3A AI is thinking...";
+
+
+chatBox.appendChild(aiMessage);
+
+
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+
+
+
+
+setTimeout(async()=>{
+
+
+
+if(window.ask3AAI){
+
+
+
+const answer = await window.ask3AAI(question);
+
+
+
+aiMessage.innerHTML = answer;
+
+
+
+}
+
+else{
+
+
+aiMessage.innerHTML =
+"3A AI connection not ready.";
+
+
+}
+
+
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+
+
+},500);
+
+
+
+}
+
+
+
+
+
 function newChat(){
 
-    const chatBox = document.getElementById("chat-box");
+
+const chatBox =
+document.getElementById("chat-box");
 
 
-    chatBox.innerHTML = `
 
-    <div class="ai-message">
+chatBox.innerHTML = `
 
-    👋 New chat started.
+<div class="ai-message">
 
-    <br><br>
+👋 New chat started.
 
-    How can I help you today?
+<br><br>
 
-    </div>
+How can I help you today?
 
-    `;
+</div>
+
+`;
+
+
 
 }
