@@ -18,7 +18,6 @@
 
 <header class="top-bar">
 
-
 <button onclick="location.href='menu.html'">
 ☰
 </button>
@@ -36,10 +35,7 @@
 +
 </button>
 
-
 </header>
-
-
 
 
 
@@ -85,7 +81,6 @@ Ask me anything about:
 
 
 
-
 <footer class="chat-input">
 
 
@@ -94,11 +89,9 @@ Ask me anything about:
 </button>
 
 
-
 <button onclick="startVoice()">
 🎤
 </button>
-
 
 
 
@@ -113,14 +106,85 @@ placeholder="Ask 3A AI anything..."
 >
 
 
+
 <button onclick="sendMessage()">
 ➤
 </button>
 
 
-
 </footer>
 
+
+
+
+<script type="module">
+
+import { saveChat } from "./firebase.js";
+
+
+window.sendMessage = async function(){
+
+
+const input =
+document.getElementById("question");
+
+
+const question =
+input.value;
+
+
+if(!question) return;
+
+
+
+const chatBox =
+document.getElementById("chat-box");
+
+
+
+chatBox.innerHTML += `
+
+<div class="user-message">
+
+${question}
+
+</div>
+
+`;
+
+
+
+input.value = "";
+
+
+
+const answer =
+await window.ask3AAI(question);
+
+
+
+chatBox.innerHTML += `
+
+<div class="ai-message">
+
+${answer}
+
+</div>
+
+`;
+
+
+
+await saveChat(question, answer);
+
+
+chatBox.scrollTop = chatBox.scrollHeight;
+
+
+};
+
+
+</script>
 
 
 
