@@ -10,6 +10,11 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- 3A AI App Installation -->
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#008000">
+
 </head>
 
 
@@ -49,6 +54,34 @@ Get Started
 
 
 </div>
+
+
+
+<script>
+
+if ("serviceWorker" in navigator) {
+
+window.addEventListener("load", () => {
+
+navigator.serviceWorker.register("service-worker.js")
+
+.then(() => {
+
+console.log("3A AI service worker registered");
+
+})
+
+.catch(error => {
+
+console.log("Service worker error:", error);
+
+});
+
+});
+
+}
+
+</script>
 
 
 
