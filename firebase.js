@@ -6,7 +6,6 @@ import {
   GoogleAIBackend
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-ai.js";
 
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -14,7 +13,6 @@ import {
   signOut,
   onAuthStateChanged
 } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
 
 import {
   getFirestore,
@@ -28,7 +26,7 @@ import {
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+  apiKey: "YOUR_FIREBASE_API_KEY",
 
   authDomain: "a-ai-d738d.firebaseapp.com",
 
@@ -55,7 +53,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 
-// Firestore
+// Database
 
 const db = getFirestore(app);
 
@@ -68,7 +66,7 @@ const ai = getAI(app, {
 
 
 const model = getGenerativeModel(ai, {
-  model: "gemini-2.0-flash"
+  model: "gemini-2.5-flash"
 });
 
 
