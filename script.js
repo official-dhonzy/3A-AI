@@ -26,7 +26,6 @@ chatBox.appendChild(userMessage);
 input.value = "";
 
 
-
 // AI loading
 
 const aiMessage = document.createElement("div");
@@ -45,6 +44,9 @@ chatBox.scrollTop = chatBox.scrollHeight;
 setTimeout(async()=>{
 
 
+try{
+
+
 if(window.ask3AAI){
 
 
@@ -52,7 +54,6 @@ const answer = await window.ask3AAI(question);
 
 
 aiMessage.innerHTML = answer;
-
 
 
 // Save conversation
@@ -73,7 +74,21 @@ else{
 
 
 aiMessage.innerHTML =
-"🌍 3A AI connection not ready.";
+"🌍 3A AI is not connected yet.";
+
+}
+
+
+}
+
+catch(error){
+
+
+console.error("Chat Error:", error);
+
+
+aiMessage.innerHTML =
+"ERROR: " + error.message;
 
 
 }
@@ -83,12 +98,10 @@ aiMessage.innerHTML =
 chatBox.scrollTop = chatBox.scrollHeight;
 
 
-
 },500);
 
 
 }
-
 
 
 
@@ -122,14 +135,14 @@ How can I help you today?
 
 
 
-
 // 🎤 Voice Assistant
 
 function startVoice(){
 
 
 const SpeechRecognition =
-window.SpeechRecognition || window.webkitSpeechRecognition;
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
 
 
 
@@ -182,9 +195,7 @@ sendMessage();
 
 recognition.onerror = function(event){
 
-
 alert("Microphone error: " + event.error);
-
 
 };
 
@@ -193,6 +204,10 @@ alert("Microphone error: " + event.error);
 
 
 
-// Make microphone button work
+// Buttons
+
+window.sendMessage = sendMessage;
+
+window.newChat = newChat;
 
 window.startVoice = startVoice;
