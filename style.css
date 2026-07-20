@@ -92,6 +92,8 @@ button {
 
     border-left: 5px solid #f1c40f;
 
+    transition: transform 0.15s ease;
+
 }
 
 
@@ -251,9 +253,11 @@ button {
     padding: 10px;
 
 }
-/* --- Append this to the bottom of your existing style.css --- */
 
-/* Markdown formatting inside AI messages */
+/* ===================================================== */
+/* NEW: chat markdown formatting, typing indicator, etc.  */
+/* ===================================================== */
+
 .ai-message strong { font-weight: 700; color: #fff; }
 .ai-message em { font-style: italic; }
 .ai-message ul { margin: 8px 0; padding-left: 20px; }
@@ -280,7 +284,6 @@ button {
   color: #2ecc71;
 }
 
-/* Typing indicator (three bouncing dots) */
 .ai-message.typing {
   display: flex;
   gap: 4px;
@@ -303,14 +306,8 @@ button {
   30% { transform: translateY(-4px); opacity: 1; }
 }
 
-/* Disabled input state while waiting for a response */
 .chat-input input:disabled,
 .chat-input button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-/* Cards had a hover scale but no transition, so it just snapped */
-.card {
-  transition: transform 0.15s ease;
 }
