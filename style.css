@@ -251,3 +251,66 @@ button {
     padding: 10px;
 
 }
+/* --- Append this to the bottom of your existing style.css --- */
+
+/* Markdown formatting inside AI messages */
+.ai-message strong { font-weight: 700; color: #fff; }
+.ai-message em { font-style: italic; }
+.ai-message ul { margin: 8px 0; padding-left: 20px; }
+.ai-message li { margin: 4px 0; }
+.ai-message code {
+  background: #333;
+  color: #f1c40f;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+.ai-message pre {
+  background: #000;
+  border: 1px solid #333;
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+  margin: 10px 0;
+}
+.ai-message pre code {
+  background: none;
+  padding: 0;
+  color: #2ecc71;
+}
+
+/* Typing indicator (three bouncing dots) */
+.ai-message.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: fit-content;
+}
+.ai-message.typing .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #f1c40f;
+  opacity: 0.5;
+  animation: bounce 1.2s infinite;
+}
+.ai-message.typing .dot:nth-child(2) { animation-delay: 0.2s; }
+.ai-message.typing .dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* Disabled input state while waiting for a response */
+.chat-input input:disabled,
+.chat-input button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Cards had a hover scale but no transition, so it just snapped */
+.card {
+  transition: transform 0.15s ease;
+}
