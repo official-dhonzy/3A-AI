@@ -10,6 +10,49 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+.quick-btn {
+  background: #1e1e1e;
+  border: 1px solid #f1c40f;
+  color: white;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+  background: #2a2a2a;
+  border-color: #f1c40f;
+  transform: translateX(4px);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.feature-box {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 3px solid #2ecc71;
+}
+
+.feature-box p {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #ccc;
+}
+</style>
+
 </head>
 
 
@@ -20,7 +63,7 @@
 
 
 <button onclick="location.href='home.html'">
-←
+☰
 </button>
 
 
@@ -60,27 +103,32 @@ Learning Assistant
 </p>
 
 
-<br>
+<div class="feature-grid">
 
+<div class="feature-box">
+📖
+<p>Study Explanations</p>
+</div>
 
-<p>
-📖 Study explanations</p>
+<div class="feature-box">
+✏️
+<p>Homework Support</p>
+</div>
 
-<p>
-✏️ Homework support</p>
+<div class="feature-box">
+🧠
+<p>Learning Tips</p>
+</div>
 
-<p>
-🧠 Learning tips</p>
-
-<p>
-🌍 Educational resources</p>
-
-<p>
-💡 Skill development</p>
-
+<div class="feature-box">
+💡
+<p>Skill Development</p>
+</div>
 
 </div>
 
+
+</div>
 
 
 
@@ -89,26 +137,36 @@ Learning Assistant
 
 
 <h3>
-Ask Education AI
+Common Questions
 </h3>
 
 
-<p>
-Examples:
-</p>
+<p>Try asking:</p>
 
 
-<br>
+<button class="quick-btn" onclick="askQuestion('Explain photosynthesis in simple terms')">
+📖 Explain photosynthesis in simple terms
+</button>
 
+<button class="quick-btn" onclick="askQuestion('Help me understand fractions')">
+📐 Help me understand fractions
+</button>
 
-<p>
-"Explain mathematics"</p>
+<button class="quick-btn" onclick="askQuestion('What is African history?')">
+🌍 What is African history?
+</button>
 
-<p>
-"Help me study science"</p>
+<button class="quick-btn" onclick="askQuestion('Create a study plan for mathematics')">
+📋 Create a study plan for mathematics
+</button>
 
-<p>
-"Create a learning plan"</p>
+<button class="quick-btn" onclick="askQuestion('Explain the water cycle')">
+💧 Explain the water cycle
+</button>
+
+<button class="quick-btn" onclick="askQuestion('How do I write better essays?')">
+✍️ How do I write better essays?
+</button>
 
 
 </div>
@@ -116,8 +174,8 @@ Examples:
 
 
 
-<button onclick="location.href='chat.html'">
-Ask 3A AI
+<button onclick="location.href='chat.html'" style="background: #2ecc71; margin-bottom: 60px;">
+💬 Ask Education AI
 </button>
 
 
@@ -125,7 +183,10 @@ Ask 3A AI
 </div>
 
 
+<nav class="bottom-nav">
 
-</body>
+<button onclick="location.href='home.html'">
+🏠
+</button>
 
-</html>
+<button
