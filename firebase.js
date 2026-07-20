@@ -26,7 +26,7 @@ import {
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+  apiKey: "YOUR_API_KEY",
 
   authDomain: "a-ai-d738d.firebaseapp.com",
 
@@ -53,7 +53,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 
-// Database
+// Firestore Database
 
 const db = getFirestore(app);
 
@@ -66,7 +66,7 @@ const ai = getAI(app, {
 
 
 const model = getGenerativeModel(ai, {
-  model: "gemini-2.5-flash"
+  model: "gemini-2.0-flash"
 });
 
 
@@ -144,7 +144,7 @@ location.href = "login.html";
 
 
 
-// User Status
+// Check User
 
 onAuthStateChanged(auth,(user)=>{
 
