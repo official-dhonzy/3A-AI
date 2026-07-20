@@ -50,17 +50,46 @@
 
 
 <h3>
-Welcome to 3A AI
+Account
 </h3>
 
 
-<p id="userStatus">
-Guest User
+<p>
+<strong>Email:</strong> <span id="userEmail">Loading...</span>
+</p>
+
+<p>
+<strong>Status:</strong> <span id="userAccountStatus">Loading...</span>
+</p>
+
+<p>
+<strong>Member Since:</strong> <span id="memberDate">Loading...</span>
 </p>
 
 
 </div>
 
+
+
+
+<div class="card">
+
+
+<h3>
+Chat Statistics
+</h3>
+
+
+<p>
+<strong>Total Conversations:</strong> <span id="chatCount">Loading...</span>
+</p>
+
+<p>
+<strong>Last Chat:</strong> <span id="lastChat">Loading...</span>
+</p>
+
+
+</div>
 
 
 
@@ -74,7 +103,7 @@ About 3A AI
 
 
 <p>
-Accessible • Affordable • African AI
+<strong>Accessible • Affordable • African AI</strong>
 </p>
 
 
@@ -82,15 +111,24 @@ Accessible • Affordable • African AI
 Your AI assistant for African and global solutions.
 </p>
 
+<p>
+Get help with Agriculture, Education, Health, Sanitation, Business, and Technology.
+</p>
+
 
 </div>
 
 
 
 
+<button onclick="location.href='chat.html'" style="background: #2ecc71; margin-bottom: 60px;">
+💬 Start Chatting
+</button>
 
-<button onclick="logout()">
-Logout
+
+
+<button onclick="logout()" style="background: #e63946;">
+🚪 Logout
 </button>
 
 
@@ -98,8 +136,85 @@ Logout
 </div>
 
 
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
 
 <script type="module" src="firebase.js"></script>
+
+<script>
+// Load user profile data
+import { auth, db } from "./firebase.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
+import { collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+  if (user) {
+    // Display user email
+    document.getElementById("userEmail").textContent = user.email;
+    document.getElementById("userAccountStatus").textContent = "Active";
+    
+    // Display member since date
+    const createdDate = new Date(user.metadata.creationTime).toLocaleDateString();
+    document.getElementById("memberDate").textContent = createdDate;
+    
+    // Get chat count for this user
+    try {
+      const chatsRef = collection(db, "chats");
+      const q = query(chatsRef, where("userId", "==", user.uid));
+      const querySnapshot = await getDocs(q);
+      const chatCount = querySnapshot.size;
+      
+      document.getElementById("chatCount").textContent = chatCount;
+      
+      // Get last chat timestamp
+      if (chatCount > 0) {
+        const chats = querySnapshot.docs.map(doc => ({
+          ...doc.data(),
+          id: doc.id
+        }));
+        
+        // Sort by time (most recent first)
+        chats.sort((a, b) => b.time - a.time);
+        const lastChatTime = new Date(chats[0].time.toDate()).toLocaleDateString();
+        document.getElementById("lastChat").textContent = lastChatTime;
+      } else {
+        document.getElementById("lastChat").textContent = "No chats yet";
+      }
+      
+    } catch (error) {
+      console.log("Error loading chat stats:", error);
+      document.getElementById("chatCount").textContent = "0";
+      document.getElementById("lastChat").textContent = "No chats yet";
+    }
+    
+  } else {
+    // Guest user
+    document.getElementById("userEmail").textContent = "Guest (not logged in)";
+    document.getElementById("userAccountStatus").textContent = "Guest";
+    document.getElementById("memberDate").textContent = "N/A";
+    document.getElementById("chatCount").textContent = "0";
+    document.getElementById("lastChat").textContent = "N/A";
+  }
+});
+</script>
 
 
 </body>
