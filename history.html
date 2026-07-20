@@ -10,6 +10,65 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+.history-item {
+  background: #1e1e1e;
+  border-left: 4px solid #f1c40f;
+  margin: 12px 0;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.history-item .question {
+  background: #2ecc71;
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  font-weight: 500;
+}
+
+.history-item .answer {
+  background: #222;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.history-item .timestamp {
+  font-size: 12px;
+  color: #999;
+  margin-top: 8px;
+}
+
+.history-item .delete-btn {
+  background: #e63946;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.history-item .delete-btn:hover {
+  opacity: 0.8;
+}
+
+.history-empty {
+  text-align: center;
+  color: #999;
+  padding: 40px 20px;
+}
+
+.clear-all-btn {
+  background: #e63946;
+  margin-bottom: 60px;
+}
+</style>
+
 </head>
 
 
@@ -41,17 +100,46 @@
 📜 Chat History
 </h2>
 
+<p id="historyCount" style="color: #999; font-size: 14px; margin-bottom: 15px;">
+Loading...
+</p>
 
 <div id="history">
 
-<p>
+<p class="history-empty">
 Loading history...
 </p>
 
 </div>
 
+<button onclick="clearAllHistory()" class="clear-all-btn">
+🗑️ Clear All History
+</button>
 
 </div>
+
+
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
 
 
 
@@ -59,180 +147,38 @@ Loading history...
 <script type="module">
 
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js";
 
 import {
-
-getFirestore,
-
-collection,
-
-getDocs,
-
-query,
-
-where,
-
-orderBy
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
-
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+  orderBy,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 import {
-
-getAuth,
-
-onAuthStateChanged
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
-
-
+  getAuth,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js";
 
 
 
 const firebaseConfig = {
-
-apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
-
-authDomain: "a-ai-d738d.firebaseapp.com",
-
-projectId: "a-ai-d738d",
-
-storageBucket: "a-ai-d738d.firebasestorage.app",
-
-messagingSenderId: "337673964829",
-
-appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
-
+  apiKey: "AIzaSyDcY0jmGCWwGlbjtgKvwAGx--YzXdal2wY",
+  authDomain: "a-ai-d738d.firebaseapp.com",
+  projectId: "a-ai-d738d",
+  storageBucket: "a-ai-d738d.firebasestorage.app",
+  messagingSenderId: "337673964829",
+  appId: "1:337673964829:web:f10a8f1f8af9cae2a7e5f4"
 };
 
 
-
-
-
 const app = initializeApp(firebaseConfig);
-
-
 const db = getFirestore(app);
-
-
 const auth = getAuth(app);
 
-
-
-const historyBox =
-document.getElementById("history");
-
-
-
-
-
-
-onAuthStateChanged(auth, async(user)=>{
-
-
-if(!user){
-
-
-historyBox.innerHTML =
-"Please login to see your history.";
-
-
-return;
-
-
-}
-
-
-
-const q = query(
-
-collection(db,"chats"),
-
-where("userId","==",user.uid)
-
-);
-
-
-
-const snapshot =
-await getDocs(q);
-
-
-
-historyBox.innerHTML = "";
-
-
-
-if(snapshot.empty){
-
-
-historyBox.innerHTML =
-"No conversations yet.";
-
-
-return;
-
-
-}
-
-
-
-
-
-snapshot.forEach((doc)=>{
-
-
-const chat = doc.data();
-
-
-
-historyBox.innerHTML += `
-
-<div class="card">
-
-<h3>
-You:
-</h3>
-
-<p>
-${chat.question}
-</p>
-
-
-<h3>
-🌍 3A AI:
-</h3>
-
-<p>
-${chat.answer}
-</p>
-
-
-</div>
-
-`;
-
-
-
-});
-
-
-
-});
-
-
-
-</script>
-
-
-
-</body>
-
-</html>
+const historyBox = document.getEl
