@@ -16,35 +16,41 @@
 <body>
 
 
-<div class="app">
+<header class="top-bar">
 
-
-<header>
+<button onclick="location.href='menu.html'">
+☰
+</button>
 
 <h1>
-🌍 
+🌍
 <span class="red">3</span>
 <span class="yellow">A</span>
 <span class="green">AI</span>
 </h1>
-
-<p>Settings</p>
 
 </header>
 
 
 
 
-<div class="settings-box">
+<div class="page">
 
 
-<h2>⚙️ Settings</h2>
+<h2>
+⚙️ Settings
+</h2>
 
 
 
-<label>
-🌍 Country
-</label>
+<div class="card">
+
+<h3>
+🌍 Region & Language
+</h3>
+
+
+<label>Country</label>
 
 <select id="country">
 
@@ -58,6 +64,10 @@
 
 <option>Egypt</option>
 
+<option>Ethiopia</option>
+
+<option>Uganda</option>
+
 <option>United States</option>
 
 <option>United Kingdom</option>
@@ -69,10 +79,7 @@
 
 
 
-
-<label>
-🗣️ Language
-</label>
+<label>Language</label>
 
 
 <select id="language">
@@ -89,64 +96,79 @@
 
 <option>Ewe</option>
 
+<option>Yoruba</option>
+
 </select>
 
-
-
-
-
-<label>
-🤖 AI Model
-</label>
-
-
-<div class="setting-card">
-
-Gemini AI
-
-<br>
-
-3A AI Assistant
-
 </div>
 
 
 
 
+<div class="card">
 
-<label>
+<h3>
 🎨 Theme
+</h3>
+
+
+<label>
+<input type="checkbox" id="darkMode" checked> Dark Mode (Currently On)
 </label>
 
-
-<div class="setting-card">
-
-🔴 Red  
-🟡 Yellow  
-🟢 Green  
-
-<br>
-
-African Theme
+<p style="font-size: 12px; color: #999; margin-top: 8px;">
+🔴 Red • 🟡 Yellow • 🟢 Green (African Colors)
+</p>
 
 </div>
 
 
 
 
+<div class="card">
 
-<button onclick="saveSettings()">
+<h3>
+🤖 AI Model
+</h3>
 
-Save Settings
 
+<p>
+<strong>Current Model:</strong> Gemini 2.0 Flash Lite
+</p>
+
+<p style="font-size: 12px; color: #999; margin-top: 8px;">
+3A AI Assistant powered by Google Gemini
+</p>
+
+</div>
+
+
+
+
+<div class="card">
+
+<h3>
+🔔 Notifications
+</h3>
+
+
+<label>
+<input type="checkbox" id="notifications" checked> Enable Chat Notifications
+</label>
+
+</div>
+
+
+
+
+<button onclick="saveSettings()" style="background: #2ecc71; margin-bottom: 60px;">
+💾 Save Settings
 </button>
 
 
 
 <button onclick="location.href='home.html'">
-
-Back Home
-
+🏠 Back Home
 </button>
 
 
@@ -154,8 +176,26 @@ Back Home
 </div>
 
 
-</div>
 
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
 
 
 
@@ -163,38 +203,85 @@ Back Home
 <script>
 
 
-function saveSettings(){
+// Load settings on page load
+window.addEventListener('DOMContentLoaded', function() {
+  
+  const savedCountry = localStorage.getItem('country');
+  const savedLanguage = localStorage.getItem('language');
+  const savedDarkMode = localStorage.getItem('darkMode');
+  const savedNotifications = localStorage.getItem('notifications');
+  
+  if (savedCountry) {
+    document.getElementById('country').value = savedCountry;
+  }
+  
+  if (savedLanguage) {
+    document.getElementById('language').value = savedLanguage;
+  }
+  
+  // Dark mode defaults to true if not set
+  const darkModeCheckbox = document.getElementById('darkMode');
+  if (savedDarkMode === 'false') {
+    darkModeCheckbox.checked = false;
+  } else {
+    darkModeCheckbox.checked = true;
+  }
+  
+  if (savedNotifications === 'false') {
+    document.getElementById('notifications').checked = false;
+  } else {
+    document.getElementById('notifications').checked = true;
+  }
+  
+  // Apply dark mode on load
+  applyDarkMode(darkModeCheckbox.checked);
+  
+});
 
 
-const country =
-document.getElementById("country").value;
+// Dark mode toggle listener
+document.addEventListener('DOMContentLoaded', function() {
+  const darkModeCheckbox = document.getElementById('darkMode');
+  darkModeCheckbox.addEventListener('change', function() {
+    applyDarkMode(this.checked);
+  });
+});
 
 
-const language =
-document.getElementById("language").value;
-
-
-
-localStorage.setItem(
-"country",
-country
-);
-
-
-localStorage.setItem(
-"language",
-language
-);
-
-
-
-alert(
-"✅ Settings saved!"
-);
-
-
+// Apply dark mode styling
+function applyDarkMode(isDark) {
+  const body = document.body;
+  
+  if (isDark) {
+    body.style.background = '#111';
+    body.style.color = 'white';
+    document.documentElement.style.setProperty('--bg-primary', '#111');
+    document.documentElement.style.setProperty('--bg-secondary', '#1e1e1e');
+  } else {
+    body.style.background = '#f5f5f5';
+    body.style.color = '#333';
+    document.documentElement.style.setProperty('--bg-primary', '#f5f5f5');
+    document.documentElement.style.setProperty('--bg-secondary', '#ffffff');
+  }
 }
 
+
+function saveSettings() {
+  
+  const country = document.getElementById('country').value;
+  const language = document.getElementById('language').value;
+  const darkMode = document.getElementById('darkMode').checked;
+  const notifications = document.getElementById('notifications').checked;
+  
+  // Save to localStorage
+  localStorage.setItem('country', country);
+  localStorage.setItem('language', language);
+  localStorage.setItem('darkMode', darkMode);
+  localStorage.setItem('notifications', notifications);
+  
+  alert('✅ Settings saved!');
+  
+}
 
 
 </script>
