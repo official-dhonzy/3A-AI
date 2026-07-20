@@ -66,7 +66,7 @@ const ai = getAI(app, {
 
 
 const model = getGenerativeModel(ai, {
-  model: "gemini-2.5-flash"
+  model: "gemini-2.0-flash-lite"
 });
 
 
