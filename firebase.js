@@ -74,129 +74,115 @@ const model = getGenerativeModel(ai, {
 
 window.signUp = async function(){
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
+  try {
 
-try {
+    await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-await createUserWithEmailAndPassword(
-auth,
-email,
-password
-);
+    alert("Account created successfully!");
 
-alert("Account created successfully!");
+    location.href = "home.html";
 
-location.href = "home.html";
+  } catch(error){
 
+    alert(error.message);
 
-} catch(error){
-
-alert(error.message);
-
-}
+  }
 
 };
-
 
 
 // Login
 
 window.login = async function(){
 
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
+  try {
 
-try {
+    await signInWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
 
-await signInWithEmailAndPassword(
-auth,
-email,
-password
-);
+    alert("Login successful!");
 
-alert("Login successful!");
+    location.href = "home.html";
 
-location.href = "home.html";
+  } catch(error){
 
+    alert(error.message);
 
-} catch(error){
-
-alert(error.message);
-
-}
+  }
 
 };
-
 
 
 // Logout
 
 window.logout = async function(){
 
-await signOut(auth);
+  await signOut(auth);
 
-location.href = "login.html";
+  location.href = "login.html";
 
 };
 
 
-
-// User status
+// User Status
 
 onAuthStateChanged(auth,(user)=>{
 
-const status =
-document.getElementById("userStatus");
+  const status = document.getElementById("userStatus");
 
+  if(status){
 
-if(status){
+    status.innerHTML = user
+    ? "Logged in: " + user.email
+    : "Guest";
 
-status.innerHTML = user
-? "Logged in: " + user.email
-: "Guest";
-
-}
+  }
 
 });
-
 
 
 // Save Chat
 
 window.saveChat = async function(question, answer){
 
-try {
+  try {
 
-const user = auth.currentUser;
+    const user = auth.currentUser;
 
+    await addDoc(collection(db,"chats"),{
 
-await addDoc(collection(db,"chats"),{
+      question: question,
 
-question: question,
+      answer: answer,
 
-answer: answer,
+      userId: user ? user.uid : "guest",
 
-userId: user ? user.uid : "guest",
+      time: serverTimestamp()
 
-time: serverTimestamp()
+    });
 
-});
+    console.log("Chat saved");
 
+  } catch(error){
 
-console.log("Chat saved");
+    console.log("Save error:", error);
 
-
-} catch(error){
-
-console.log("Save error:", error);
-
-}
+  }
 
 };
-
 
 
 export { model, db, auth };
