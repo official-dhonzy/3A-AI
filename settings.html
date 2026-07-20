@@ -16,252 +16,188 @@
 <body>
 
 
-<header class="top-bar">
+<div class="app">
 
-<button onclick="location.href='menu.html'">
-☰
-</button>
 
+<header>
 
 <h1>
-🌍
+🌍 
 <span class="red">3</span>
 <span class="yellow">A</span>
 <span class="green">AI</span>
 </h1>
+
+<p>Settings</p>
 
 </header>
 
 
 
 
-<div class="page">
+<div class="settings-box">
 
 
-<h2>
-⚙️ Settings
-</h2>
-
-
-
-<div class="card">
-
-<h3>
-Theme
-</h3>
-
-<p>
-🔴🟡🟢 3A AI African Theme
-</p>
-
-</div>
+<h2>⚙️ Settings</h2>
 
 
 
-
-<div class="card">
-
-<h3>
-Language
-</h3>
-
-<p>
-English
-</p>
-
-</div>
-
-
-
-
-<div class="card">
-
-<h3>
-AI Model
-</h3>
-
-<p>
-Gemini AI
-</p>
-
-</div>
-
-
-
-
-
-<div class="card">
-
-<h3>
-🌍 Continent
-</h3>
-
-
-<select id="continent" onchange="changeCountries()">
-
-<option>Africa</option>
-
-<option>Asia</option>
-
-<option>Europe</option>
-
-<option>North America</option>
-
-<option>South America</option>
-
-<option>Oceania</option>
-
-
-</select>
-
-
-</div>
-
-
-
-
-
-
-<div class="card">
-
-<h3>
-🌎 Country
-</h3>
-
+<label>
+🌍 Country
+</label>
 
 <select id="country">
 
-
 <option>Ghana</option>
-
 
 <option>Nigeria</option>
 
-
 <option>Kenya</option>
-
 
 <option>South Africa</option>
 
-
 <option>Egypt</option>
 
+<option>United States</option>
+
+<option>United Kingdom</option>
+
+<option>Other</option>
 
 </select>
 
 
+
+
+
+<label>
+🗣️ Language
+</label>
+
+
+<select id="language">
+
+<option>English</option>
+
+<option>French</option>
+
+<option>Arabic</option>
+
+<option>Swahili</option>
+
+<option>Twi</option>
+
+<option>Ewe</option>
+
+</select>
+
+
+
+
+
+<label>
+🤖 AI Model
+</label>
+
+
+<div class="setting-card">
+
+Gemini AI
+
+<br>
+
+3A AI Assistant
+
 </div>
 
 
 
 
 
+<label>
+🎨 Theme
+</label>
+
+
+<div class="setting-card">
+
+🔴 Red  
+🟡 Yellow  
+🟢 Green  
+
+<br>
+
+African Theme
+
 </div>
+
+
+
+
+
+<button onclick="saveSettings()">
+
+Save Settings
+
+</button>
+
+
+
+<button onclick="location.href='home.html'">
+
+Back Home
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
 
 
 
 
 <script>
 
-function changeCountries(){
+
+function saveSettings(){
 
 
-let continent =
-document.getElementById("continent").value;
+const country =
+document.getElementById("country").value;
 
 
-let country =
-document.getElementById("country");
-
-
-
-country.innerHTML = "";
+const language =
+document.getElementById("language").value;
 
 
 
-let countries = {
+localStorage.setItem(
+"country",
+country
+);
+
+
+localStorage.setItem(
+"language",
+language
+);
 
 
 
-"Africa":[
-"Ghana",
-"Nigeria",
-"Kenya",
-"South Africa",
-"Egypt",
-"Ethiopia",
-"Tanzania",
-"Uganda"
-],
-
-
-
-"Asia":[
-"China",
-"India",
-"Japan",
-"South Korea",
-"Indonesia"
-],
-
-
-
-"Europe":[
-"United Kingdom",
-"Germany",
-"France",
-"Italy",
-"Spain"
-],
-
-
-
-"North America":[
-"United States",
-"Canada",
-"Mexico"
-],
-
-
-
-"South America":[
-"Brazil",
-"Argentina",
-"Colombia"
-],
-
-
-
-"Oceania":[
-"Australia",
-"New Zealand"
-]
-
-};
-
-
-
-countries[continent].forEach(function(name){
-
-
-let option =
-document.createElement("option");
-
-
-option.text =
-name;
-
-
-country.add(option);
-
-
-});
+alert(
+"✅ Settings saved!"
+);
 
 
 }
 
-</script>
 
+
+</script>
 
 
 </body>
