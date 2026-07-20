@@ -1,3 +1,28 @@
+function formatAnswer(text){
+
+return text
+
+// Bold text between ** **
+.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+
+// Numbered lists
+.replace(/(\d+\.)/g, "<br><br><strong>$1</strong>")
+
+// Bullet points
+.replace(/[-•]/g, "<br>•")
+
+// Paragraph spacing
+.replace(/\n\n/g, "<br><br>")
+
+// New lines
+.replace(/\n/g, "<br>");
+
+}
+
+
+
+
+
 function sendMessage(){
 
 const input = document.getElementById("question");
@@ -26,7 +51,8 @@ chatBox.appendChild(userMessage);
 input.value = "";
 
 
-// AI loading
+
+// AI loading message
 
 const aiMessage = document.createElement("div");
 
@@ -38,6 +64,7 @@ chatBox.appendChild(aiMessage);
 
 
 chatBox.scrollTop = chatBox.scrollHeight;
+
 
 
 
@@ -53,7 +80,10 @@ if(window.ask3AAI){
 const answer = await window.ask3AAI(question);
 
 
-aiMessage.innerHTML = answer;
+// Formatted AI answer
+
+aiMessage.innerHTML = formatAnswer(answer);
+
 
 
 // Save conversation
@@ -74,9 +104,10 @@ else{
 
 
 aiMessage.innerHTML =
-"🌍 3A AI is not connected yet.";
+"🌍 3A AI connection not ready.";
 
 }
+
 
 
 }
@@ -88,7 +119,7 @@ console.error("Chat Error:", error);
 
 
 aiMessage.innerHTML =
-"ERROR: " + error.message;
+"⚠️ Error: " + error.message;
 
 
 }
@@ -98,10 +129,13 @@ aiMessage.innerHTML =
 chatBox.scrollTop = chatBox.scrollHeight;
 
 
+
 },500);
 
 
 }
+
+
 
 
 
@@ -129,6 +163,8 @@ How can I help you today?
 `;
 
 }
+
+
 
 
 
@@ -195,7 +231,9 @@ sendMessage();
 
 recognition.onerror = function(event){
 
+
 alert("Microphone error: " + event.error);
+
 
 };
 
@@ -204,7 +242,10 @@ alert("Microphone error: " + event.error);
 
 
 
-// Buttons
+
+
+
+// Make buttons work
 
 window.sendMessage = sendMessage;
 
