@@ -1,20 +1,10 @@
 function formatAnswer(text){
 
 return text
-
-// Bold text between ** **
 .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
-
-// Numbered lists
 .replace(/(\d+\.)/g, "<br><br><strong>$1</strong>")
-
-// Bullet points
 .replace(/[-•]/g, "<br>•")
-
-// Paragraph spacing
 .replace(/\n\n/g, "<br><br>")
-
-// New lines
 .replace(/\n/g, "<br>");
 
 }
@@ -23,7 +13,38 @@ return text
 
 
 
-function sendMessage(){
+function typeText(element, text){
+
+let index = 0;
+
+element.innerHTML = "";
+
+let timer = setInterval(()=>{
+
+element.innerHTML += text[index];
+
+index++;
+
+
+if(index >= text.length){
+
+clearInterval(timer);
+
+}
+
+},20);
+
+
+}
+
+
+
+
+
+
+
+async function sendMessage(){
+
 
 const input = document.getElementById("question");
 
@@ -32,9 +53,14 @@ const chatBox = document.getElementById("chat-box");
 const question = input.value.trim();
 
 
+
 if(question === ""){
+
 return;
+
 }
+
+
 
 
 // User message
@@ -48,27 +74,27 @@ userMessage.innerHTML = question;
 chatBox.appendChild(userMessage);
 
 
+
 input.value = "";
 
 
 
-// AI loading message
+
+// AI message
 
 const aiMessage = document.createElement("div");
 
 aiMessage.className = "ai-message";
 
-aiMessage.innerHTML = "🌍 3A AI is thinking...";
+aiMessage.innerHTML = "🌍 3A AI is typing...";
 
 chatBox.appendChild(aiMessage);
+
 
 
 chatBox.scrollTop = chatBox.scrollHeight;
 
 
-
-
-setTimeout(async()=>{
 
 
 try{
@@ -80,13 +106,14 @@ if(window.ask3AAI){
 const answer = await window.ask3AAI(question);
 
 
-// Formatted AI answer
 
-aiMessage.innerHTML = formatAnswer(answer);
-
+const formatted = formatAnswer(answer);
 
 
-// Save conversation
+
+typeText(aiMessage, formatted);
+
+
 
 if(window.saveChat){
 
@@ -104,7 +131,7 @@ else{
 
 
 aiMessage.innerHTML =
-"🌍 3A AI connection not ready.";
+"🌍 3A AI is not connected yet.";
 
 }
 
@@ -115,22 +142,18 @@ aiMessage.innerHTML =
 catch(error){
 
 
-console.error("Chat Error:", error);
-
-
 aiMessage.innerHTML =
-"⚠️ Error: " + error.message;
+"⚠️ Something went wrong.";
+
+console.log(error);
 
 
 }
 
 
 
-chatBox.scrollTop = chatBox.scrollHeight;
-
-
-
-},500);
+chatBox.scrollTop =
+chatBox.scrollHeight;
 
 
 }
@@ -143,6 +166,7 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 
 function newChat(){
+
 
 const chatBox =
 document.getElementById("chat-box");
@@ -171,8 +195,6 @@ How can I help you today?
 
 
 
-// 🎤 Voice Assistant
-
 function startVoice(){
 
 
@@ -184,7 +206,7 @@ window.webkitSpeechRecognition;
 
 if(!SpeechRecognition){
 
-alert("🎤 Voice input is not supported on this browser.");
+alert("🎤 Voice input is not supported.");
 
 return;
 
@@ -192,34 +214,25 @@ return;
 
 
 
-const recognition = new SpeechRecognition();
+const recognition =
+new SpeechRecognition();
 
 
-recognition.lang = "en-US";
+recognition.lang="en-US";
 
 
 recognition.start();
 
 
 
-recognition.onstart = function(){
-
-console.log("Listening...");
-
-};
-
-
-
-recognition.onresult = function(event){
+recognition.onresult=function(event){
 
 
 const text =
 event.results[0][0].transcript;
 
 
-
-document.getElementById("question").value = text;
-
+document.getElementById("question").value=text;
 
 
 sendMessage();
@@ -228,24 +241,12 @@ sendMessage();
 };
 
 
-
-recognition.onerror = function(event){
-
-
-alert("Microphone error: " + event.error);
-
-
-};
-
-
 }
 
 
 
 
 
-
-// Make buttons work
 
 window.sendMessage = sendMessage;
 
