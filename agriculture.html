@@ -10,6 +10,49 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+.quick-btn {
+  background: #1e1e1e;
+  border: 1px solid #2ecc71;
+  color: white;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+  background: #2a2a2a;
+  border-color: #2ecc71;
+  transform: translateX(4px);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.feature-box {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 3px solid #2ecc71;
+}
+
+.feature-box p {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #ccc;
+}
+</style>
+
 </head>
 
 
@@ -20,7 +63,7 @@
 
 
 <button onclick="location.href='home.html'">
-←
+☰
 </button>
 
 
@@ -59,81 +102,36 @@ Smart Farming Solutions
 </p>
 
 
-<br>
+<div class="feature-grid">
 
-
-<p>
-🌱 Better seeds
-</p>
-
-
-<p>
-💧 Irrigation methods
-</p>
-
-
-<p>
-🌍 Soil improvement
-</p>
-
-
-<p>
-🐛 Pest control
-</p>
-
-
-<p>
-📈 Modern farming techniques
-</p>
-
-
+<div class="feature-box">
+🌱
+<p>Better Seeds</p>
 </div>
 
-
-
-
-
-<div class="card">
-
-
-<h3>
-Ask Agriculture AI
-</h3>
-
-
-<p>
-Go to chat and ask questions like:
-</p>
-
-
-<br>
-
-
-<p>
-"How can I improve my farm?"
-</p>
-
-
-<p>
-"What crops grow well in Ghana?"
-</p>
-
-
+<div class="feature-box">
+💧
+<p>Irrigation</p>
 </div>
 
-
-
-
-<button onclick="location.href='chat.html'">
-Ask 3A AI
-</button>
-
-
-
+<div class="feature-box">
+🌍
+<p>Soil Care</p>
 </div>
 
+<div class="feature-box">
+🐛
+<p>Pest Control</p>
+</div>
 
+<div class="feature-box">
+📈
+<p>Modern Techniques</p>
+</div>
 
-</body>
+<div class="feature-box">
+🌾
+<p>Crop Planning</p>
+</div>
 
-</html>
+</
