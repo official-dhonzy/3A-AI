@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Menu</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+<button onclick="location.href='home.html'">
+←
+</button>
+
+<h1>
+Menu
+</h1>
+
+<button onclick="location.href='home.html'">
+✕
+</button>
+
+</header>
+
+
+<div class="page" style="padding-top: 20px;">
+
+<button class="menu-button" onclick="location.href='search.html'">
+🔍 Search
+</button>
+
+<button class="menu-button" onclick="location.href='favorites.html'">
+⭐ Favorites
+</button>
+
+<button class="menu-button" onclick="location.href='history.html'">
+📜 History
+</button>
+
+<button class="menu-button" onclick="location.href='profile.html'">
+👤 Profile
+</button>
+
+<button class="menu-button" onclick="location.href='settings.html'">
+⚙️ Settings
+</button>
+
+<button class="menu-button" onclick="logout()">
+🚪 Logout
+</button>
+
+</div>
+
+
+<script type="module" src="firebase.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
+
+
+</body>
+
+</html>
