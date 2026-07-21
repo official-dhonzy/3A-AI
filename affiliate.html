@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>3A AI - Affiliates</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+
+<style>
+.affiliate-container {
+  padding: 20px;
+}
+
+.affiliate-card {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 4px solid #f1c40f;
+}
+
+.affiliate-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+}
+
+.affiliate-card p {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.link-box {
+  background: #333;
+  padding: 12px;
+  border-radius: 8px;
+  word-break: break-all;
+  font-size: 12px;
+  font-family: monospace;
+  margin-bottom: 10px;
+}
+
+.copy-btn {
+  width: 100%;
+  padding: 10px;
+  background: #2ecc71;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.stats {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  color: #999;
+  font-size: 13px;
+}
+
+.stat-value {
+  font-weight: bold;
+  color: #2ecc71;
+}
+
+.info-box {
+  background: #222;
+  border-left: 4px solid #f1c40f;
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+<button onclick="location.href='menu.html'">
+☰
+</button>
+
+<h1>
+💰 Affiliates
+</h1>
+
+<button onclick="location.href='home.html'">
+✕
+</button>
+
+</header>
+
+
+<div class="page">
+
+<div class="affiliate-container">
+
+<h2>Earn Money with 3A AI</h2>
+
+<p>Promote 3A AI and earn 30% commission</p>
+
+<div class="stats">
+
+<div class="stat-item">
+<span class="stat-label">Your Referral Code</span>
+<span class="stat-value">3AAI-HAPPY001</span>
+</div>
+
+<div class="stat-item">
+<span class="stat-label">People Referred</span>
+<span class="stat-value" id="referredCount">0</span>
+</div>
+
+<div class="stat-item">
+<span class="stat-label">Earnings This Month</span>
+<span class="stat-value">$0.00</span>
+</div>
+
+<div class="stat-item">
+<span class="stat-label">Total Earnings</span>
+<span class="stat-value">$0.00</span>
+</div>
+
+</div>
+
+<div class="affiliate-card">
+
+<h3>📱 Share Your Link</h3>
+
+<p>Get 30% commission from each premium signup</p>
+
+<div class="link-box">
+https://official-dhonzy.github.io/3A-AI/?ref=3AAI-HAPPY001
+</div>
+
+<button class="copy-btn" onclick="copyLink()">
+📋 Copy Link
+</button>
+
+<button class="copy-btn" style="background: #2ecc71;" onclick="shareLink()">
+📤 Share Link
+</button>
+
+</div>
+
+<div class="affiliate-card">
+
+<h3>🌾 Agriculture Products</h3>
+
+<p>Earn 20% on farming tools & seeds</p>
+
+<a href="https://example.com/farming?aff=3AAI-HAPPY001" style="color: #2ecc71; text-decoration: none;">
+View Products →
+</a>
+
+</div>
+
+<div class="affiliate-card">
+
+<h3>📚 Education Courses</h3>
+
+<p>Earn 15% on online courses</p>
+
+<a href="https://example.com/courses?aff=3AAI-HAPPY001" style="color: #2ecc71; text-decoration: none;">
+View Courses →
+</a>
+
+</div>
+
+<div class="affiliate-card">
+
+<h3>💊 Health Products</h3>
+
+<p>Earn 20% on vitamins & health items</p>
+
+<a href="https://example.com/health?aff=3AAI-HAPPY001" style="color: #2ecc71; text-decoration: none;">
+View Products →
+</a>
+
+</div>
+
+<div class="info-box">
+
+<strong>How it works:</strong>
+
+1. Share your unique referral link
+2. Friends click and signup for premium
+3. You earn 30% commission instantly
+4. Track earnings in real-time
+
+Payment via PayPal or Mobile Money every month.
+
+</div>
+
+</div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+function copyLink() {
+  const link = 'https://official-dhonzy.github.io/3A-AI/?ref=3AAI-HAPPY001';
+  navigator.clipboard.writeText(link);
+  alert('✅ Link copied to clipboard!');
+}
+
+function shareLink() {
+  const link = 'https://official-dhonzy.github.io/3A-AI/?ref=3AAI-HAPPY001';
+  const text = 'Join 3A AI - African AI Assistant! https://official-dhonzy.github.io/3A-AI/?ref=3AAI-HAPPY001';
+  
+  if (navigator.share) {
+    navigator.share({
+      title: '3A AI',
+      text: text,
+      url: link
+    });
+  } else {
+    alert('Share this link:\n' + link);
+  }
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
