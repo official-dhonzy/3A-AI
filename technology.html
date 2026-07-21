@@ -10,6 +10,49 @@
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+.quick-btn {
+  background: #1e1e1e;
+  border: 1px solid #f1c40f;
+  color: white;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.quick-btn:hover {
+  background: #2a2a2a;
+  border-color: #f1c40f;
+  transform: translateX(4px);
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.feature-box {
+  background: #1e1e1e;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  border-left: 3px solid #f1c40f;
+}
+
+.feature-box p {
+  font-size: 12px;
+  margin-top: 5px;
+  color: #ccc;
+}
+</style>
+
 </head>
 
 
@@ -20,7 +63,7 @@
 
 
 <button onclick="location.href='home.html'">
-←
+☰
 </button>
 
 
@@ -33,7 +76,6 @@
 
 
 </header>
-
 
 
 
@@ -57,31 +99,46 @@ Technology Assistant
 
 
 <p>
-3A AI helps people with:
+3A AI helps people with technology learning and support:
 </p>
 
 
-<br>
+<div class="feature-grid">
 
+<div class="feature-box">
+💻
+<p>Computer Skills</p>
+</div>
 
-<p>
-💻 Computer knowledge</p>
+<div class="feature-box">
+📱
+<p>Digital Literacy</p>
+</div>
 
-<p>
-📱 Digital skills</p>
+<div class="feature-box">
+🌐
+<p>Internet Learning</p>
+</div>
 
-<p>
-🌐 Internet learning</p>
+<div class="feature-box">
+⚙️
+<p>Tech Explanations</p>
+</div>
 
-<p>
-⚙️ Technology explanations</p>
+<div class="feature-box">
+🚀
+<p>Innovation Ideas</p>
+</div>
 
-<p>
-🚀 Innovation ideas</p>
-
+<div class="feature-box">
+🔧
+<p>Tech Support</p>
+</div>
 
 </div>
 
+
+</div>
 
 
 
@@ -90,26 +147,36 @@ Technology Assistant
 
 
 <h3>
-Ask Technology AI
+Common Questions
 </h3>
 
 
-<p>
-Examples:
-</p>
+<p>Try asking:</p>
 
 
-<br>
+<button class="quick-btn" onclick="askQuestion('How does artificial intelligence work?')">
+🤖 How does artificial intelligence work?
+</button>
 
+<button class="quick-btn" onclick="askQuestion('What are the basics of coding?')">
+💾 What are the basics of coding?
+</button>
 
-<p>
-"How does AI work?"</p>
+<button class="quick-btn" onclick="askQuestion('How to stay safe online?')">
+🔒 How to stay safe online?
+</button>
 
-<p>
-"Teach me coding"</p>
+<button class="quick-btn" onclick="askQuestion('What is cloud computing?')">
+☁️ What is cloud computing?
+</button>
 
-<p>
-"Explain technology simply"</p>
+<button class="quick-btn" onclick="askQuestion('How to use technology for business?')">
+📊 How to use technology for business?
+</button>
+
+<button class="quick-btn" onclick="askQuestion('What is cybersecurity?')">
+🛡️ What is cybersecurity?
+</button>
 
 
 </div>
@@ -117,13 +184,56 @@ Examples:
 
 
 
-<button onclick="location.href='chat.html'">
-Ask 3A AI
+<button onclick="location.href='chat.html'" style="background: #2ecc71; margin-bottom: 60px;">
+💬 Ask Technology AI
 </button>
 
 
 
 </div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+
+
+<script>
+
+function askQuestion(question) {
+  // Store the question and navigate to chat
+  localStorage.setItem('pendingQuestion', question);
+  location.href = 'chat.html';
+}
+
+// On chat.html, load the pending question if it exists
+window.addEventListener('load', function() {
+  const pendingQuestion = localStorage.getItem('pendingQuestion');
+  if (pendingQuestion && document.getElementById('question')) {
+    document.getElementById('question').value = pendingQuestion;
+    localStorage.removeItem('pendingQuestion');
+  }
+});
+
+</script>
 
 
 
