@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>3A AI - Search</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+
+<style>
+.search-container {
+  padding: 20px;
+  background: #222;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.search-box {
+  display: flex;
+  gap: 10px;
+}
+
+.search-box input {
+  flex: 1;
+  padding: 12px;
+  background: #333;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.search-box button {
+  padding: 12px 20px;
+  background: #2ecc71;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.search-results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
+}
+
+.result-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  border-left: 4px solid #2ecc71;
+}
+
+.result-card h3 {
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+
+.result-card p {
+  margin: 0;
+  font-size: 13px;
+  color: #999;
+}
+
+.result-card:active {
+  opacity: 0.8;
+}
+
+.no-results {
+  text-align: center;
+  color: #999;
+  padding: 40px 20px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+<button onclick="location.href='menu.html'">
+☰
+</button>
+
+<h1>
+🔍 Search
+</h1>
+
+<button onclick="location.href='home.html'">
+✕
+</button>
+
+</header>
+
+
+<div class="page">
+
+<div class="search-container">
+
+<div class="search-box">
+
+<input 
+id="searchInput"
+type="text"
+placeholder="Search topics..."
+>
+
+<button onclick="performSearch()">
+Search
+</button>
+
+</div>
+
+</div>
+
+<div id="searchResults" class="search-results"></div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+const topics = [
+  { emoji: '🌱', title: 'Agriculture', category: 'Farming solutions', questions: ['How to improve crop yield', 'Pest control methods', 'Soil preparation'] },
+  { emoji: '📚', title: 'Education', category: 'Learning better', questions: ['Study techniques', 'Online learning resources', 'Child education'] },
+  { emoji: '🏥', title: 'Health', category: 'Wellness info', questions: ['Malaria prevention', 'Nutrition tips', 'First aid'] },
+  { emoji: '🚰', title: 'Sanitation', category: 'Clean communities', questions: ['Clean water access', 'Waste disposal', 'Hygiene practices'] },
+  { emoji: '💼', title: 'Business', category: 'Entrepreneurship', questions: ['Start a business', 'Marketing strategies', 'Financial management'] },
+  { emoji: '💻', title: 'Technology', category: 'Tech support', questions: ['Learn coding', 'Internet basics', 'Phone apps'] }
+];
+
+function performSearch() {
+  const query = document.getElementById('searchInput').value.toLowerCase().trim();
+  const resultsDiv = document.getElementById('searchResults');
+  
+  if (!query) {
+    resultsDiv.innerHTML = '<div class="no-results">Enter a search term</div>';
+    return;
+  }
+
+  let results = [];
+  
+  topics.forEach(topic => {
+    if (topic.title.toLowerCase().includes(query) || topic.category.toLowerCase().includes(query)) {
+      results.push({ ...topic, type: 'category' });
+    }
+    
+    topic.questions.forEach(q => {
+      if (q.toLowerCase().includes(query)) {
+        results.push({ emoji: topic.emoji, title: q, category: topic.title, type: 'question' });
+      }
+    });
+  });
+
+  if (results.length === 0) {
+    resultsDiv.innerHTML = `<div class="no-results">No results for "${query}"</div>`;
+    return;
+  }
+
+  resultsDiv.innerHTML = results.map(result => `
+    <div class="result-card" onclick="askQuestion('${result.title}')">
+      <h3>${result.emoji} ${result.title}</h3>
+      <p>${result.category}</p>
+    </div>
+  `).join('');
+}
+
+function askQuestion(question) {
+  sessionStorage.setItem('preFilled', question);
+  location.href = 'chat.html';
+}
+
+document.getElementById('searchInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') {
+    performSearch();
+  }
+});
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
