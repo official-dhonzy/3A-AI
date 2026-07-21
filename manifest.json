@@ -1,16 +1,61 @@
 {
-  "name": "3A AI",
+  "name": "3A AI - African AI Assistant",
   "short_name": "3A AI",
-  "description": "Accessible Affordable African AI assistant",
-  "start_url": "index.html",
+  "description": "Accessible Affordable African AI assistant for Agriculture, Education, Health, Business, Sanitation, and Technology",
+  "start_url": "/3A-AI/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#008000",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "logo.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["productivity", "education", "business"],
+  "screenshots": [
+    {
+      "src": "logo.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Start Chatting",
+      "short_name": "Chat",
+      "description": "Open the AI chat",
+      "url": "/3A-AI/chat.html",
+      "icons": [
+        {
+          "src": "logo.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Agriculture",
+      "short_name": "Farm",
+      "description": "Agriculture AI assistant",
+      "url": "/3A-AI/agriculture.html",
+      "icons": [
+        {
+          "src": "logo.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
