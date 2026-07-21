@@ -6,9 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>3A AI Menu</title>
+<title>Menu</title>
 
 <link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
 
 </head>
 
@@ -16,120 +19,67 @@
 <body>
 
 
-<div class="menu">
-
-
-<h1>
-🌍
-<span class="red">3</span>
-<span class="yellow">A</span>
-<span class="green">AI</span>
-</h1>
-
-
-<div id="userStatus" style="background: #1e1e1e; padding: 12px; border-radius: 10px; margin-bottom: 15px; font-size: 14px; text-align: center;">
-Guest
-</div>
-
+<header class="top-bar">
 
 <button onclick="location.href='home.html'">
-🏠 Home
+←
 </button>
 
+<h1>
+Menu
+</h1>
 
-
-<button onclick="location.href='chat.html'">
-➕ New Chat
+<button onclick="location.href='home.html'">
+✕
 </button>
 
+</header>
 
 
+<div class="page" style="padding-top: 20px;">
 
-<button onclick="location.href='history.html'">
+<button class="menu-button" onclick="location.href='search.html'">
+🔍 Search
+</button>
+
+<button class="menu-button" onclick="location.href='favorites.html'">
+⭐ Favorites
+</button>
+
+<button class="menu-button" onclick="location.href='premium.html'">
+💎 Go Premium
+</button>
+
+<button class="menu-button" onclick="location.href='affiliates.html'">
+💰 Earn Money
+</button>
+
+<button class="menu-button" onclick="location.href='history.html'">
 📜 History
 </button>
 
-
-
-<hr>
-
-
-
-
-<h3>
-Explore
-</h3>
-
-
-<button onclick="location.href='agriculture.html'">
-🌱 Agriculture
-</button>
-
-
-
-<button onclick="location.href='education.html'">
-📚 Education
-</button>
-
-
-
-<button onclick="location.href='health.html'">
-🏥 Health
-</button>
-
-
-
-<button onclick="location.href='sanitation.html'">
-🚰 Sanitation
-</button>
-
-
-
-<button onclick="location.href='business.html'">
-💼 Business
-</button>
-
-
-
-<button onclick="location.href='technology.html'">
-💻 Technology
-</button>
-
-
-
-
-<hr>
-
-
-
-<h3>
-Account
-</h3>
-
-
-
-<button onclick="location.href='profile.html'">
+<button class="menu-button" onclick="location.href='profile.html'">
 👤 Profile
 </button>
 
-
-
-<button onclick="location.href='settings.html'">
+<button class="menu-button" onclick="location.href='settings.html'">
 ⚙️ Settings
 </button>
 
-
-
-<button onclick="logout()" style="background: #e63946;">
+<button class="menu-button" onclick="logout()">
 🚪 Logout
 </button>
-
-
 
 </div>
 
 
 <script type="module" src="firebase.js"></script>
+
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
 
 
 </body>
