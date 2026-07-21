@@ -6,62 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>3A AI Health</title>
+<title>3A AI - Health</title>
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-.quick-btn {
-  background: #1e1e1e;
-  border: 1px solid #e63946;
-  color: white;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.quick-btn:hover {
-  background: #2a2a2a;
-  border-color: #e63946;
-  transform: translateX(4px);
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.feature-box {
-  background: #1e1e1e;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  border-left: 3px solid #e63946;
-}
-
-.feature-box p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #ccc;
-}
-
-.disclaimer {
-  background: #1e1e1e;
-  border-left: 3px solid #f1c40f;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 12px;
-  color: #ccc;
-  margin-top: 15px;
-}
-</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
 
 </head>
 
@@ -71,23 +21,93 @@
 
 <header class="top-bar">
 
-
-<button onclick="location.href='home.html'">
+<button onclick="location.href='menu.html'">
 ☰
 </button>
 
-
 <h1>
-🌍
-<span class="red">3</span>
-<span class="yellow">A</span>
-<span class="green">AI</span>
+🏥 Health
 </h1>
 
+<button onclick="location.href='home.html'">
+✕
+</button>
 
 </header>
 
 
-
-
 <div class="page">
+
+<h2>Health & Wellness</h2>
+
+<p>Get health information and wellness tips</p>
+
+<div class="quick-asks">
+
+<button onclick="askQuestion('What are common symptoms of malaria and how can I prevent it?')">
+🦟 Malaria Prevention
+</button>
+
+<button onclick="askQuestion('How can I maintain good nutrition on a tight budget?')">
+🍎 Budget Nutrition
+</button>
+
+<button onclick="askQuestion('What are basic first aid steps for common injuries?')">
+🩹 First Aid Tips
+</button>
+
+<button onclick="askQuestion('How can I improve my mental health and manage stress?')">
+🧠 Mental Wellness
+</button>
+
+<button onclick="askQuestion('What vaccinations do children need and when?')">
+💉 Child Vaccines
+</button>
+
+<button onclick="askQuestion('How can I stay healthy during pregnancy?')">
+🤰 Pregnancy Health
+</button>
+
+</div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+function askQuestion(question) {
+  sessionStorage.setItem('preFilled', question);
+  location.href = 'chat.html';
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
