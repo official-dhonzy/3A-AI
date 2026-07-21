@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>3A AI - Favorites</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+
+<style>
+.favorite-card {
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  border-left: 4px solid #f1c40f;
+}
+
+.favorite-card h3 {
+  margin: 0 0 5px 0;
+  font-size: 14px;
+  color: #fff;
+}
+
+.favorite-card p {
+  margin: 0 0 10px 0;
+  font-size: 12px;
+  color: #999;
+}
+
+.favorite-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.favorite-actions button {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.use-btn {
+  background: #2ecc71;
+  color: black;
+}
+
+.delete-btn {
+  background: #e63946;
+  color: white;
+}
+
+.no-favorites {
+  text-align: center;
+  color: #999;
+  padding: 40px 20px;
+}
+
+.clear-all-btn {
+  width: 100%;
+  padding: 12px;
+  background: #e63946;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 20px;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+<button onclick="location.href='menu.html'">
+☰
+</button>
+
+<h1>
+⭐ Favorites
+</h1>
+
+<button onclick="location.href='home.html'">
+✕
+</button>
+
+</header>
+
+
+<div class="page">
+
+<h2>Saved Responses</h2>
+
+<p>Your favorite answers and tips</p>
+
+<div id="favoritesContainer"></div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+function loadFavorites() {
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  const container = document.getElementById('favoritesContainer');
+  
+  if (favorites.length === 0) {
+    container.innerHTML = '<div class="no-favorites">No favorites yet. Save responses in chat! ⭐</div>';
+    return;
+  }
+
+  container.innerHTML = favorites.map((fav, index) => `
+    <div class="favorite-card">
+      <h3>Q: ${fav.question}</h3>
+      <p>Saved on ${new Date(fav.date).toLocaleDateString()}</p>
+      <div class="favorite-actions">
+        <button class="use-btn" onclick="useFavorite('${fav.question.replace(/'/g, "\\'")}')">Use</button>
+        <button class="delete-btn" onclick="deleteFavorite(${index})">Delete</button>
+      </div>
+    </div>
+  `).join('');
+  
+  if (favorites.length > 0) {
+    container.innerHTML += '<button class="clear-all-btn" onclick="clearAllFavorites()">Clear All Favorites</button>';
+  }
+}
+
+function useFavorite(question) {
+  sessionStorage.setItem('preFilled', question);
+  location.href = 'chat.html';
+}
+
+function deleteFavorite(index) {
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  favorites.splice(index, 1);
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  loadFavorites();
+}
+
+function clearAllFavorites() {
+  if (confirm('Clear all favorites? This cannot be undone.')) {
+    localStorage.setItem('favorites', JSON.stringify([]));
+    loadFavorites();
+  }
+}
+
+window.addEventListener('load', loadFavorites);
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
