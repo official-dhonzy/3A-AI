@@ -10,6 +10,13 @@
 
 <link rel="stylesheet" href="style.css">
 
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="3A AI">
+
 </head>
 
 
@@ -17,6 +24,7 @@
 
 
 <header class="top-bar">
+
 
 <button onclick="location.href='menu.html'">
 ☰
@@ -35,7 +43,10 @@
 +
 </button>
 
+
 </header>
+
+
 
 
 
@@ -81,6 +92,7 @@ Ask me anything about:
 
 
 
+
 <footer class="chat-input">
 
 
@@ -89,7 +101,7 @@ Ask me anything about:
 </button>
 
 
-<button onclick="startVoice()">
+<button>
 🎤
 </button>
 
@@ -106,92 +118,50 @@ placeholder="Ask 3A AI anything..."
 >
 
 
-
 <button onclick="sendMessage()">
 ➤
 </button>
+
 
 
 </footer>
 
 
 
+<nav class="bottom-nav">
 
-<script type="module">
+<button onclick="location.href='home.html'">
+🏠
+</button>
 
-import { saveChat } from "./firebase.js";
+<button onclick="location.href='chat.html'">
+💬
+</button>
 
+<button onclick="location.href='profile.html'">
+👤
+</button>
 
-window.sendMessage = async function(){
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
 
-
-const input =
-document.getElementById("question");
-
-
-const question =
-input.value;
-
-
-if(!question) return;
-
-
-
-const chatBox =
-document.getElementById("chat-box");
+</nav>
 
 
 
-chatBox.innerHTML += `
-
-<div class="user-message">
-
-${question}
-
-</div>
-
-`;
-
-
-
-input.value = "";
-
-
-
-const answer =
-await window.ask3AAI(question);
-
-
-
-chatBox.innerHTML += `
-
-<div class="ai-message">
-
-${answer}
-
-</div>
-
-`;
-
-
-
-await saveChat(question, answer);
-
-
-chatBox.scrollTop = chatBox.scrollHeight;
-
-
-};
-
-
-</script>
-
-
-
-
+<!-- Firebase AI module -->
 <script type="module" src="ai.js"></script>
 
+<!-- Chat functions -->
 <script src="script.js"></script>
+
+<!-- Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+</script>
 
 
 </body>
