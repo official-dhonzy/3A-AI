@@ -6,52 +6,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>3A AI Sanitation</title>
+<title>3A AI - Sanitation</title>
 
 <link rel="stylesheet" href="style.css">
 
-<style>
-.quick-btn {
-  background: #1e1e1e;
-  border: 1px solid #f1c40f;
-  color: white;
-  padding: 12px;
-  margin: 8px 0;
-  border-radius: 10px;
-  cursor: pointer;
-  width: 100%;
-  text-align: left;
-  font-size: 14px;
-  transition: all 0.2s ease;
-}
-
-.quick-btn:hover {
-  background: #2a2a2a;
-  border-color: #f1c40f;
-  transform: translateX(4px);
-}
-
-.feature-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 15px 0;
-}
-
-.feature-box {
-  background: #1e1e1e;
-  padding: 15px;
-  border-radius: 10px;
-  text-align: center;
-  border-left: 3px solid #f1c40f;
-}
-
-.feature-box p {
-  font-size: 12px;
-  margin-top: 5px;
-  color: #ccc;
-}
-</style>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
 
 </head>
 
@@ -61,27 +21,93 @@
 
 <header class="top-bar">
 
-
-<button onclick="location.href='home.html'">
+<button onclick="location.href='menu.html'">
 ☰
 </button>
 
-
 <h1>
-🌍
-<span class="red">3</span>
-<span class="yellow">A</span>
-<span class="green">AI</span>
+🚰 Sanitation
 </h1>
 
+<button onclick="location.href='home.html'">
+✕
+</button>
 
 </header>
 
 
-
-
 <div class="page">
 
+<h2>Clean Communities</h2>
 
-<h2>
-🚰
+<p>Sanitation and water access for healthy communities</p>
+
+<div class="quick-asks">
+
+<button onclick="askQuestion('How can communities access clean drinking water?')">
+💧 Clean Water Access
+</button>
+
+<button onclick="askQuestion('What are best practices for proper waste disposal?')">
+♻️ Waste Management
+</button>
+
+<button onclick="askQuestion('How do I build a simple but effective latrine?')">
+🚽 Latrine Construction
+</button>
+
+<button onclick="askQuestion('What is the importance of handwashing and hygiene?')">
+🧼 Hygiene Practices
+</button>
+
+<button onclick="askQuestion('How can we prevent water-borne diseases in communities?')">
+🦠 Disease Prevention
+</button>
+
+<button onclick="askQuestion('What are low-cost sanitation solutions for rural areas?')">
+🏘️ Rural Sanitation
+</button>
+
+</div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+function askQuestion(question) {
+  sessionStorage.setItem('preFilled', question);
+  location.href = 'chat.html';
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
