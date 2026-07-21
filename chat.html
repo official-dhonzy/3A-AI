@@ -21,11 +21,9 @@
 
 <header class="top-bar">
 
-
 <button onclick="location.href='menu.html'">
 ☰
 </button>
-
 
 <h1>
 🌍
@@ -34,11 +32,9 @@
 <span class="green">AI</span>
 </h1>
 
-
 <button onclick="newChat()">
 +
 </button>
-
 
 </header>
 
@@ -46,7 +42,6 @@
 
 
 <main id="chat-box">
-
 
 <div class="ai-message">
 
@@ -81,7 +76,6 @@ Ask me anything about:
 
 </div>
 
-
 </main>
 
 
@@ -89,17 +83,13 @@ Ask me anything about:
 
 <footer class="chat-input">
 
-
 <button>
 📎
 </button>
 
-
 <button>
 🎤
 </button>
-
-
 
 <input
 
@@ -111,14 +101,23 @@ placeholder="Ask 3A AI anything..."
 
 >
 
-
 <button onclick="sendMessage()">
 ➤
 </button>
 
-
-
 </footer>
+
+<div style="padding: 15px; display: flex; gap: 10px;">
+
+<button onclick="saveCurrentToFavorites()" style="flex: 1; padding: 12px; background: #f1c40f; color: black; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+⭐ Save to Favorites
+</button>
+
+<button onclick="location.href='search.html'" style="flex: 1; padding: 12px; background: #2ecc71; color: black; border: none; border-radius: 8px; cursor: pointer; font-weight: 600;">
+🔍 Search
+</button>
+
+</div>
 
 
 
@@ -164,6 +163,32 @@ window.addEventListener('load', function() {
     sessionStorage.removeItem('preFilled');
   }
 });
+
+// Save current question to favorites
+window.saveCurrentToFavorites = function() {
+  const question = document.getElementById('question').value.trim();
+  
+  if (!question) {
+    alert('⚠️ Enter a question first');
+    return;
+  }
+  
+  const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+  
+  const duplicate = favorites.find(fav => fav.question.toLowerCase() === question.toLowerCase());
+  if (duplicate) {
+    alert('Already in favorites!');
+    return;
+  }
+  
+  favorites.push({
+    question: question,
+    date: new Date().toISOString()
+  });
+  
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+  alert('⭐ Saved to favorites!');
+};
 </script>
 
 
