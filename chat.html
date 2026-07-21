@@ -10,12 +10,8 @@
 
 <link rel="stylesheet" href="style.css">
 
-<!-- PWA Meta Tags -->
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#008000">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="3A AI">
 
 </head>
 
@@ -45,7 +41,6 @@
 
 
 </header>
-
 
 
 
@@ -88,7 +83,6 @@ Ask me anything about:
 
 
 </main>
-
 
 
 
@@ -161,6 +155,15 @@ placeholder="Ask 3A AI anything..."
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
+
+// Handle pre-filled questions from feature pages
+window.addEventListener('load', function() {
+  const preFilled = sessionStorage.getItem('preFilled');
+  if (preFilled) {
+    document.getElementById('question').value = preFilled;
+    sessionStorage.removeItem('preFilled');
+  }
+});
 </script>
 
 
