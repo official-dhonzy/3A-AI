@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>3A AI - Premium</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+
+<style>
+.premium-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.premium-card {
+  background: linear-gradient(135deg, #f1c40f 0%, #2ecc71 100%);
+  color: black;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.premium-card h2 {
+  font-size: 28px;
+  margin: 0 0 10px 0;
+}
+
+.premium-card p {
+  font-size: 14px;
+  margin: 0 0 20px 0;
+  opacity: 0.9;
+}
+
+.price {
+  font-size: 36px;
+  font-weight: bold;
+  margin: 20px 0;
+}
+
+.features {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.features h3 {
+  margin-top: 0;
+  color: #2ecc71;
+}
+
+.feature-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #333;
+  text-align: left;
+}
+
+.feature-item:last-child {
+  border-bottom: none;
+}
+
+.feature-item:before {
+  content: "✅ ";
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+.subscribe-btn {
+  width: 100%;
+  padding: 15px;
+  background: #2ecc71;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.free-btn {
+  width: 100%;
+  padding: 15px;
+  background: transparent;
+  color: #999;
+  border: 1px solid #999;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.comparison {
+  background: #222;
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.comparison table {
+  width: 100%;
+  text-align: left;
+  font-size: 12px;
+}
+
+.comparison td {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+}
+
+.comparison td:first-child {
+  font-weight: 600;
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<header class="top-bar">
+
+<button onclick="location.href='menu.html'">
+☰
+</button>
+
+<h1>
+⭐ Premium
+</h1>
+
+<button onclick="location.href='home.html'">
+✕
+</button>
+
+</header>
+
+
+<div class="page">
+
+<div class="premium-container">
+
+<div class="premium-card">
+
+<h2>🌟 Go Premium</h2>
+
+<p>Unlock unlimited power</p>
+
+<div class="price">$2.99/month</div>
+
+<button class="subscribe-btn" onclick="subscribePremium()">
+Subscribe Now
+</button>
+
+<button class="free-btn" onclick="location.href='home.html'">
+Maybe Later
+</button>
+
+</div>
+
+<div class="features">
+
+<h3>What You Get</h3>
+
+<div class="feature-item">Unlimited chats per day</div>
+<div class="feature-item">No ads</div>
+<div class="feature-item">Save unlimited favorites</div>
+<div class="feature-item">Offline mode</div>
+<div class="feature-item">Priority support</div>
+<div class="feature-item">Early access to new features</div>
+
+</div>
+
+<div class="comparison">
+
+<h3>Free vs Premium</h3>
+
+<table>
+<tr>
+<td></td>
+<td>Free</td>
+<td>Premium</td>
+</tr>
+<tr>
+<td>Chats/day</td>
+<td>5</td>
+<td>Unlimited ✅</td>
+</tr>
+<tr>
+<td>Ads</td>
+<td>Yes</td>
+<td>No ✅</td>
+</tr>
+<tr>
+<td>Favorites</td>
+<td>5</td>
+<td>Unlimited ✅</td>
+</tr>
+<tr>
+<td>Search</td>
+<td>Yes</td>
+<td>Yes ✅</td>
+</tr>
+<tr>
+<td>Offline</td>
+<td>Basic</td>
+<td>Full ✅</td>
+</tr>
+</table>
+
+</div>
+
+</div>
+
+</div>
+
+
+<nav class="bottom-nav">
+
+<button onclick="location.href='home.html'">
+🏠
+</button>
+
+<button onclick="location.href='chat.html'">
+💬
+</button>
+
+<button onclick="location.href='profile.html'">
+👤
+</button>
+
+<button onclick="location.href='settings.html'">
+⚙️
+</button>
+
+</nav>
+
+
+<script>
+
+function subscribePremium() {
+  // For now, simulate premium with localStorage
+  // In real app, integrate Stripe/PayPal
+  localStorage.setItem('isPremium', 'true');
+  localStorage.setItem('premiumDate', new Date().toISOString());
+  alert('✅ Welcome to Premium! Enjoy unlimited chats!');
+  location.href = 'chat.html';
+}
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+
+</body>
+
+</html>
