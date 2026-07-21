@@ -6,83 +6,125 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>3A AI Login</title>
+<title>3A AI - Login & Signup</title>
 
 <link rel="stylesheet" href="style.css">
 
-</head>
+<style>
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #111 0%, #1e1e1e 100%);
+  padding: 20px;
+}
 
+.auth-box {
+  background: #181818;
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
 
-<body>
+.auth-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
 
+.auth-header h1 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
 
-<div class="login-box">
+.auth-header p {
+  color: #999;
+  font-size: 14px;
+}
 
+.auth-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+  background: #222;
+  padding: 5px;
+  border-radius: 10px;
+}
 
-<h1>
-🌍 
-<span class="red">3</span>
-<span class="yellow">A</span>
-<span class="green">AI</span>
-</h1>
+.auth-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
 
+.auth-tab.active {
+  background: #2ecc71;
+  color: black;
+}
 
-<h2>
-Welcome Back
-</h2>
+.auth-form {
+  display: none;
+}
 
+.auth-form.active {
+  display: block;
+}
 
-<p>
-Sign in to continue
-</p>
+.form-group {
+  margin-bottom: 15px;
+}
 
+.form-group label {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
 
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #333;
+  background: #222;
+  color: white;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
 
-<input 
-id="email"
-type="email"
-placeholder="Email"
->
+.form-group input:focus {
+  outline: none;
+  border-color: #2ecc71;
+}
 
+.password-toggle {
+  position: relative;
+}
 
+.password-toggle button {
+  position: absolute;
+  right: 12px;
+  top: 35px;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 0;
+}
 
-<input 
-id="password"
-type="password"
-placeholder="Password"
->
-
-
-
-<p id="message"></p>
-
-
-
-<button onclick="login()">
-Login
-</button>
-
-
-
-<button onclick="signUp()">
-Create Account
-</button>
-
-
-
-<button onclick="location.href='home.html'">
-Continue as Guest
-</button>
-
-
-
-</div>
-
-
-
-<script type="module" src="firebase.js"></script>
-
-
-</body>
-
-</html>
+.error-message {
+  background: #e63946;
+  color: white;
+  padding: 10px;
+  bo
