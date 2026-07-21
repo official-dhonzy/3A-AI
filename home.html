@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#008000">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="3A AI">
+
 <head>
 
 <meta charset="UTF-8">
@@ -13,6 +9,13 @@
 <title>3A AI Home</title>
 
 <link rel="stylesheet" href="style.css">
+
+<!-- PWA Meta Tags -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#008000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="3A AI">
 
 </head>
 
@@ -212,16 +215,16 @@ Tech support
 
 
 </nav>
-  
 
 
-
-
-</body>
-
-</html>
+<!-- Service Worker Registration -->
 <script>
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 </script>
+
+
+</body>
+
+</html>
