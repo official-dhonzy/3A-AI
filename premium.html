@@ -154,7 +154,7 @@
 
 <p>Unlock unlimited power</p>
 
-<div class="price">$2.99/month</div>
+<div class="price">GH₵ 17.99/month</div>
 
 <button class="subscribe-btn" onclick="subscribePremium()">
 Subscribe Now
@@ -244,15 +244,41 @@ Maybe Later
 </nav>
 
 
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
 <script>
 
 function subscribePremium() {
-  // For now, simulate premium with localStorage
-  // In real app, integrate Stripe/PayPal
-  localStorage.setItem('isPremium', 'true');
-  localStorage.setItem('premiumDate', new Date().toISOString());
-  alert('✅ Welcome to Premium! Enjoy unlimited chats!');
-  location.href = 'chat.html';
+  const userEmail = localStorage.getItem('userEmail') || 'user@example.com';
+  const userName = localStorage.getItem('userName') || 'Premium User';
+  
+  // Your Paystack Public Key
+  const paystackKey = 'pk_test_f152a60f37b7870457adb32e04df92868548b4e0';
+  
+  const handler = PaystackPop.setup({
+    key: paystackKey,
+    email: userEmail,
+    amount: 1799 * 100, // GH₵ 17.99 in pesewas (multiply by 100)
+    ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+    currency: 'GHS',
+    onClose: function() {
+      alert('Payment window closed.');
+    },
+    callback: function(response) {
+      console.log(response);
+      if (response.status === 'success') {
+        // Payment successful
+        localStorage.setItem('isPremium', 'true');
+        localStorage.setItem('premiumDate', new Date().toISOString());
+        localStorage.setItem('transactionRef', response.reference);
+        alert('✅ Welcome to Premium! Enjoy unlimited chats!');
+        location.href = 'chat.html';
+      } else {
+        alert('❌ Payment failed. Please try again.');
+      }
+    }
+  });
+  handler.openIframe();
 }
 
 if ('serviceWorker' in navigator) {
